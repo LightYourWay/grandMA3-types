@@ -4,7 +4,7 @@ type Sequences = Obj<DataPool, Sequence> &
 type Sequence = Obj<Sequences, Cue> &
 	(Cue | null)[] & { [index: string]: Cue | null } & {
 		CurrentChild: () => LuaMultiReturn<[Cue | undefined, string]>;
-		appearance: Appearance | null
+		appearance: Appearance | null;
 	};
 
 type Cue = Obj<Sequence, Part> &

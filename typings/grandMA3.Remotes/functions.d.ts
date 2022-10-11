@@ -17,12 +17,12 @@ type DCRemote = Obj<RemoteType<DCRemote>, null> & null[] & { [index: string]: nu
 
 type MIDIRemote = Obj<RemoteType<MIDIRemote>, null> &
 	null[] & { [index: string]: null } & {
-		target: Sequence
-		fader: string
-		key: string
-		midichannel: number
-		midiindex: number
-		miditype: number
+		target: Sequence;
+		fader: string;
+		key: string;
+		midichannel: number;
+		midiindex: number;
+		miditype: number;
 	};
 
 type DMXRemote = Obj<RemoteType<DMXRemote>, null> & null[] & { [index: string]: null } & {};
