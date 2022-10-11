@@ -84,7 +84,7 @@ interface Obj<ParentType, ChildType> {
 	GridSetColumnSize(...args: any): any;
 	GridsGetExpandHeaderCell(...args: any): any;
 	GridsGetLevelButtonWidth(...args: any): any;
-	HasActivePlayback(...args: any): any;
+	HasActivePlayback(): boolean;
 	HasParent(...args: any): any;
 	HookDelete(...args: any): any;
 	Import(...args: any): any;
