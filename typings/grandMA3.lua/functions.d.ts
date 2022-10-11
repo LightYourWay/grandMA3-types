@@ -78,7 +78,12 @@ declare function GetVar(...args: any): any;
 declare function GlobalVars(...args: any): any;
 declare function HandleToInt(...args: any): any;
 declare function HandleToStr(...args: any): any;
-declare function HookObjectChange(...args: any): any;
+declare function HookObjectChange<T>(
+	callback: (obj: T) => void,
+	obj: T,
+	plugin: Plugin,
+	target?: Obj<any, any>,
+): void;
 declare function HostOS(...args: any): any;
 declare function HostSubType(...args: any): any;
 declare function HostType(...args: any): any;

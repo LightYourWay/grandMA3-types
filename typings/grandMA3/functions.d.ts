@@ -1,5 +1,14 @@
-interface Obj<ParentType, ChildType> {
+type ObjDef<ChildType> = {
+	count: number;
+	ignorenetwork: boolean | 'UNKNOWN_VALUE';
+	index: number;
+	memoryfootprint: number;
 	name: string;
+	no: number;
+	structurelocked: boolean;
+} & ChildType[] & { [index: string]: ChildType };
+
+interface Obj<ParentType, ChildType> {
 	AddListChildren(...args: any): any;
 	AddListChildrenNames(...args: any): any;
 	AddListLuaItem(...args: any): any;
@@ -75,7 +84,7 @@ interface Obj<ParentType, ChildType> {
 	GridSetColumnSize(...args: any): any;
 	GridsGetExpandHeaderCell(...args: any): any;
 	GridsGetLevelButtonWidth(...args: any): any;
-	HasActivePlayback(...args: any): any;
+	HasActivePlayback(): boolean;
 	HasParent(...args: any): any;
 	HookDelete(...args: any): any;
 	Import(...args: any): any;
