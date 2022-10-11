@@ -11,6 +11,8 @@
  * // to load the FTP module and any libraries it requires run:
  * import ftp = require('ftp')
  * ```
+ *
+ * @noResolution
  */
 declare module 'ftp' {
 	/**
