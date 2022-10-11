@@ -1,5 +1,14 @@
-interface Obj<ParentType, ChildType> {
+type ObjDef<ChildType> = {
+	count: number;
+	ignorenetwork: boolean | 'UNKNOWN_VALUE';
+	index: number;
+	memoryfootprint: number;
 	name: string;
+	no: number;
+	structurelocked: boolean;
+} & ChildType[] & { [index: string]: ChildType };
+
+interface Obj<ParentType, ChildType> {
 	AddListChildren(...args: any): any;
 	AddListChildrenNames(...args: any): any;
 	AddListLuaItem(...args: any): any;
