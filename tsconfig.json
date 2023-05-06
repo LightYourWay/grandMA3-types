@@ -1,15 +1,17 @@
 {
 	"compilerOptions": {
-		"rootDir": "src",
+		"rootDir": "./",
 		"target": "esnext",
 		"lib": ["esnext"],
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"types": ["@typescript-to-lua/language-extensions"],
-		"strict": true
+		"types": ["@typescript-to-lua/language-extensions", "lua-types/5.4"],
+		"strict": true,
+		"declaration": true
 	},
 	"tstl": {
 		"luaTarget": "5.4",
-		"noImplicitSelf": true
+		"noImplicitSelf": true,
+		"buildMode": "library"
 	}
 }
