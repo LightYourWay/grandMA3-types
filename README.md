@@ -6,7 +6,7 @@ TypeScript definitions for grandMA3 Lua API.
 
 ## install for production
 ```bash
-npm install -D grandMA3-tstl-plugin
+npm install -D grandMA3-types
 ```
 
 ## install for development
@@ -27,6 +27,8 @@ npm link ../grandMA3-types
 }
 ```
 
-## developers
+## Contributors
 
-If you have something to contribute / add to the type declarations - **AWESOME** :tada: feel free to [create a **GitHub Issue**](https://github.com/LightYourWay/grandMA3-types/issues/new/choose) for it.
+If you have something to contribute / add to the type declarations - **AWESOME** :tada: feel free to:
+- [create a **GitHub Issue**](https://github.com/LightYourWay/grandMA3-types/issues/new/choose) for it.
+- Or better yet, fork and create a PR with your changes.

@@ -1,5 +1,22 @@
-interface Obj<ParentType, ChildType> {
+type GenericObj = Obj<GenericObj, GenericObj> & { [key: string]: GenericObj };
+
+type ObjProps = {
 	name: string;
+	nameAndApp: string;
+	index: number;
+};
+
+interface Obj<
+	ParentType = Obj<any, any>,
+	ChildType = Obj<any, any> | undefined,
+	Props extends ObjProps & { [key: string]: any } = ObjProps & { [key: string]: any },
+	Clazz extends string = string,
+> {
+	readonly lock: '' | 'Yes' | 'SS';
+	name: string;
+	nameAndApp: string;
+	index: number;
+
 	AddListChildren(...args: any): any;
 	AddListChildrenNames(...args: any): any;
 	AddListLuaItem(...args: any): any;
@@ -13,13 +30,18 @@ interface Obj<ParentType, ChildType> {
 	AddListStringItem(...args: any): any;
 	AddListStringItems(...args: any): any;
 	Addr(...args: any): any;
-	AddrNative(...args: any): any;
-	Append(...args: any): any;
-	Aquire(...args: any): any;
+	AddrNative(): string;
+	/** Adds a child to the end of this object childrens list */
+	Append(clazz?: string, undo?: UndoHandle, count?: number): any;
+	Aquire(clazz?: string, undo?: UndoHandle): ChildType;
 	Changed(...args: any): any;
 	Children(): ChildType[];
 	ClearList(...args: any): any;
 	ClearUIChildren(...args: any): any;
+	/**
+	 * Sometimes when Children() returns no result, then CmdlineChildren will.
+	 */
+	CmdlineChildren(): ChildType[];
 	CommandAt(...args: any): any;
 	CommandCall(...args: any): any;
 	CommandCreateDefaults(...args: any): any;
@@ -28,23 +50,43 @@ interface Obj<ParentType, ChildType> {
 	Compare(...args: any): any;
 	Copy(...args: any): any;
 	Count(...args: any): any;
-	Create(...args: any): any;
-	CurrentChild(...args: any): LuaMultiReturn<[any, any]>;
-	Delete(...args: any): any;
+	/**
+	 * Create a child at the given index
+	 * @param childIndex 1-based
+	 * @param clazz class of child
+	 * @param undo
+	 */
+	Create(childIndex: number, clazz?: string, undo?: UndoHandle): ChildType;
+	CurrentChild(): ChildType | undefined;
+	Delete(childIndex: number, undo?: UndoHandle): void;
+	Dump(): string;
 	Export(...args: any): any;
 	Find(...args: any): any;
 	FindListItemByName(...args: any): any;
 	FindListItemByValueStr(...args: any): any;
 	FindParent(...args: any): any;
-	FindRecursive(...args: any): any;
-	Get(...args: any): any;
+	/**
+	 * Find recursivly an object by name an/or class
+	 * @param name exact name of object. If undefined then only class will be matched.
+	 * @param clazz partial name of the class
+	 */
+	FindRecursive(name: string | undefined, clazz?: string): Obj<any, any>;
+	FindWild(search: string): any;
+	Get(propName: keyof Props, role?: Enums.Roles): any;
 	GetAssignedObj(...args: any): any;
-	GetChildClass(...args: any): any;
-	GetClass: () => string;
-	GetDisplay(...args: any): any;
-	GetDisplayIndex(...args: any): any;
+	/** Get the child class name */
+	GetChildClass(): string;
+	GetClass: () => Clazz;
+	GetDisplay(): Display;
+	GetDisplayIndex(index: number): Display;
 	GetExportFileName(...args: any): any;
-	GetFader(...args: any): any;
+	/**
+	 * Get Fader value
+	 * If the object is an executor, then the options param can be empty, it does nothing.
+	 * If the object is a sequence, then the options.token is used to select which fader's value wil be retrieved.
+	 * @return double 0-100
+	 */
+	GetFader(options: GetFaderOptions): number;
 	GetFaderText(...args: any): any;
 	GetListItemAppearance(...args: any): any;
 	GetListItemButton(...args: any): any;
@@ -78,13 +120,14 @@ interface Obj<ParentType, ChildType> {
 	HasActivePlayback(...args: any): any;
 	HasParent(...args: any): any;
 	HookDelete(...args: any): any;
-	Import(...args: any): any;
+	Import(filePath: string, fileName: string): boolean;
 	Index: () => number;
 	InputRun(...args: any): any;
 	InputSetAdditionalParameter(...args: any): any;
 	InputSetEditTitle(...args: any): any;
 	InputSetTitle(...args: any): any;
-	Insert(...args: any): any;
+	/** Insert a child at a given 1-based index, pushing all other children forward */
+	Insert(childIndex: number, clazz?: string, undo?: UndoHandle, count?: number): any;
 	IsClass(...args: any): any;
 	IsEmpty(...args: any): any;
 	IsListItemEmpty(...args: any): any;
@@ -92,13 +135,36 @@ interface Obj<ParentType, ChildType> {
 	IsValid(...args: any): any;
 	Load(...args: any): any;
 	MaxCount(...args: any): any;
-	OverlaySetCloseCallback(...args: any): any;
+	/**
+	 *  Set a callback that is called when the overlay is closed by one of the following:
+	 * - overlay.Close() was called
+	 * - CloseAllOverlays() was called
+	 * - The user pressed Escape, or clicked a CloseButton.
+	 *
+	 * General Note: signalId-s should be prefixed by a ":",
+	 * but when added to the signalTable we don't use the ":".
+	 * e.g.
+	 *  OverlaySetCloseCallback(":myHandler")
+	 *  signalTable.myHandler = ()=>{}
+	 *
+	 * The callback signature is:
+	 *
+	 *  (modalResult: Enums.ModalResult, modalValue: number, ctx: any) => void
+	 *
+	 * IMPORTANT: When calling overlay.Close(), the Close returns immediatly, and the callback runs in another coroutine.
+	 */
+	OverlaySetCloseCallback(signalId: string, ctx?: any): any;
 	Parent(): ParentType;
 	PropertyCount(...args: any): any;
 	PropertyName(...args: any): any;
 	PropertyType(...args: any): any;
 	Ptr(...args: any): any;
-	Remove(...args: any): any;
+	/**
+	 * Remove child object
+	 * @param childIndex 1-based
+	 * @param undo
+	 */
+	Remove(childIndex: number, undo?: UndoHandle): void;
 	RemoveListItem(...args: any): any;
 	Resize(...args: any): any;
 	Save(...args: any): any;
@@ -111,16 +177,21 @@ interface Obj<ParentType, ChildType> {
 	SelectListItemByIndex(...args: any): any;
 	SelectListItemByName(...args: any): any;
 	SelectListItemByValue(...args: any): any;
-	Set(...args: any): any;
+	Set(propName: keyof Props, value: any): any;
 	SetChildren(...args: any): any;
 	SetEmptyListItem(...args: any): any;
 	SetEnabledListItem(...args: any): any;
-	SetFader(...args: any): any;
+	SetFader(options: { value?: number; faderDisabled?: boolean; token?: string }): void;
 	SetListItemAppearance(...args: any): any;
 	SetListItemName(...args: any): any;
 	SetPositionHint(...args: any): any;
-	ShowModal(...args: any): any;
-	ToAddr(...args: any): any;
+	/**
+	 * Darkens the screen.
+	 * Can be executed on a Popup object which is appended to a ScreenOverlay or ModalOverlay.
+	 * @param callback Unknown
+	 */
+	ShowModal(callback?: (...args: any) => void): void;
+	ToAddr(): FixtureAddress;
 	UIChildren(...args: any): any;
 	UILGGetColumnAbsXLeft(...args: any): any;
 	UILGGetColumnAbsXRight(...args: any): any;
@@ -131,3 +202,8 @@ interface Obj<ParentType, ChildType> {
 	WaitChildren(...args: any): any;
 	WaitInit(...args: any): any;
 }
+
+type GetFaderOptions = {
+	token?: 'FaderMaster' | 'FaderTemp';
+	index?: number;
+};

@@ -1,2 +1,1 @@
-import './types';
 import './functions';
