@@ -26,11 +26,11 @@
 	},
 	"homepage": "https://github.com/LightYourWay/grandMA3-types#readme",
 	"devDependencies": {
-		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
-		"lua-types": "^2.13.1",
-		"prettier": "^3.6.2",
-		"typescript": "5.8.2",
-		"typescript-to-lua": "1.32.0"
+		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
+		"lua-types": "^2.14.1",
+		"prettier": "^3.8.3",
+		"typescript": "6.0.2",
+		"typescript-to-lua": "1.36.0"
 	},
 	"keywords": [
 		"grandma3",
