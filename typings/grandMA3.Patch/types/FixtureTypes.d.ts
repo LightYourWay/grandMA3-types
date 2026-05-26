@@ -34,7 +34,8 @@ type DMXChannelProps = ObjProps & {
 };
 
 type DMXChannel = Obj<DMXChannels, LogicalChannel, DMXChannelProps> &
-DMXChannelProps& LogicalChannel[] & { [index: string]: LogicalChannel };
+	DMXChannelProps &
+	LogicalChannel[] & { [index: string]: LogicalChannel };
 
 type LogicalChannelProps = ObjProps & {
 	attribute: string;
@@ -42,7 +43,6 @@ type LogicalChannelProps = ObjProps & {
 	master: any;
 	physicalFrom: number;
 	physicalTo: number;
-	
 };
 type LogicalChannel = Obj<DMXChannel, ChannelFunction, LogicalChannelProps> &
 	LogicalChannelProps & {

@@ -121,7 +121,7 @@ type PartProps = ObjProps & {
 	sync: boolean;
 };
 
-type Part = Obj<Cue, Recipe, PartProps> & PartProps &{};
+type Part = Obj<Cue, Recipe, PartProps> & PartProps & {};
 
 declare namespace MA3_v2_0_2 {
 	type SequenceProps = ObjProps & {

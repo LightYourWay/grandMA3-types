@@ -21,10 +21,10 @@ type MAColor = Obj & {
 	RGBA: string;
 };
 
-type ColorGroupPoolDefault= ColorGroup & {
+type ColorGroupPoolDefault = ColorGroup & {
 	// TODO: Add all pools
 	MATricks: MAColor;
-}
+};
 
 type ColorGroupGlobal = ColorGroup & {
 	Disabled: MAColor;

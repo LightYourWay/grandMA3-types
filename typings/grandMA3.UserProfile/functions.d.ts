@@ -46,6 +46,6 @@ type UserEnvironment = Obj<Environments, UserEnvironmentChildTypes> & {
 type Selection = Obj<UserEnvironment, any>;
 type Programmer = Obj<UserEnvironment, ProgPart>;
 type ProgPart = Obj<Programmer, any>;
-type AtFilterProps = ObjProps & { filterRef: Filter }
+type AtFilterProps = ObjProps & { filterRef: Filter };
 type AtFilter = Obj<UserEnvironment, any, AtFilterProps>;
 type LivePatch3dSelection = Obj<UserEnvironment, any>;
