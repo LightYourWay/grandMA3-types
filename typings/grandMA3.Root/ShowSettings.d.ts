@@ -1,7 +1,7 @@
-type ShowSettings = Obj<ShowData, Obj> & {
+type ShowSettings = Obj<string, ShowData, Obj> & {
 	AddonVariables: AddonVariables;
 };
 
-type AddonVariables = Obj<ShowSettings, Variables> & Record<string, Variables>;
+type AddonVariables = Obj<string, ShowSettings, Variables> & Record<string, Variables>;
 
-type Variables = Obj<AddonVariables, null>;
+type Variables = Obj<string, AddonVariables, null>;

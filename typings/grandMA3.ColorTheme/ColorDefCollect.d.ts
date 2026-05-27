@@ -1,4 +1,4 @@
-type ColorDefCollect = Obj<Root> & {
+type ColorDefCollect = Obj<string, Root> & {
 	Global: ColorDefGroupGlobal;
 	SheetColor: ColorDefGroup;
 	Playback: ColorDefGroup;

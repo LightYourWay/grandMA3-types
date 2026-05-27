@@ -2,7 +2,7 @@ type UILayoutGrid = UIObject &
 	UILayoutGridProps & {
 		1: ItemCollectRows; // Rows
 		2: ItemCollectColumns; // Columns
-	} & Obj<any, any>;
+	} & Obj<string, any, any>;
 
 type UILayoutGridProps = UIObjectProps & {
 	columns: number;

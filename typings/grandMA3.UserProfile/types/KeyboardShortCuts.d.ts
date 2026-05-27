@@ -2,4 +2,4 @@ type KeyboardShortCutsProps = ObjProps & {
 	keyboardShortcutsActive: boolean;
 };
 
-type KeyboardShortCuts = Obj<UserProfile, any> & KeyboardShortCutsProps;
+type KeyboardShortCuts = Obj<string, UserProfile, any> & KeyboardShortCutsProps;

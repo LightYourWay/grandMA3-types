@@ -1,7 +1,7 @@
 /*
  * Pool can be renamed !! So better
  */
-type DataPoolClass = Obj<DataPools, any> & {
+type DataPoolClass = Obj<string, DataPools, any> & {
 	index: DataPoolIndex;
 } & {
 	2: Filters; // Filters
@@ -16,10 +16,10 @@ type DataPoolClass = Obj<DataPools, any> & {
 	14: Timecodes; // Timecodes
 };
 
-type Groups = Obj<DataPoolClass, Group> & {
+type Groups = Obj<string, DataPoolClass, Group> & {
 	Resize: (size: number) => void;
 };
-type Group = Obj<Groups, any> & {
+type Group = Obj<string, Groups, any> & {
 	selectionData: FixtureSelectionData[];
 };
 type FixtureSelectionData = {
@@ -35,30 +35,30 @@ type FixtureSelectionData = {
 	sf_index: number;
 };
 
-type Filters = Obj<DataPoolClass, Filter>;
+type Filters = Obj<string, DataPoolClass, Filter>;
 type FilterProps = ObjProps & {};
-type Filter = Obj<Filters, any, FilterProps>;
+type Filter = Obj<string, Filters, any, FilterProps>;
 
 type RecipeProps = ObjProps & {};
 
-type Recipe = Obj<Part, undefined, RecipeProps> & {
+type Recipe = Obj<string, Part, undefined, RecipeProps> & {
 	selection: Group;
 	values: Preset;
 	matricks: Obj;
 	filter: Obj;
 };
 
-type Timecodes = Obj<DataPoolClass, Timecode> & { [key: string]: Timecode };
-type Timecode = Obj<Timecodes, Triggers> & { Triggers: Triggers };
+type Timecodes = Obj<string, DataPoolClass, Timecode> & { [key: string]: Timecode };
+type Timecode = Obj<string, Timecodes, Triggers> & { Triggers: Triggers };
 
-type Triggers = Obj<Timecode, Track> & { [key: string]: Track };
-type Track = Obj<Triggers, TimeRange>;
-type TimeRange = Obj<Track, CmdSubTrack>;
-type CmdSubTrack = Obj<TimeRange, CmdSubTrackEvent>;
+type Triggers = Obj<string, Timecode, Track> & { [key: string]: Track };
+type Track = Obj<string, Triggers, TimeRange>;
+type TimeRange = Obj<string, Track, CmdSubTrack>;
+type CmdSubTrack = Obj<string, TimeRange, CmdSubTrackEvent>;
 type CmdSubTrackEventProps = ObjProps & {
 	rawTime: number;
 };
-type CmdSubTrackEvent = Obj<TimeRange, undefined, CmdSubTrackEventProps>;
+type CmdSubTrackEvent = Obj<string, TimeRange, undefined, CmdSubTrackEventProps>;
 
 declare namespace MA3_v2_0_2 {
 	type FilterProps = ObjProps & {
