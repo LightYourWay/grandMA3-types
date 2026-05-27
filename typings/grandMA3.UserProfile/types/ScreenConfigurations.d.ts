@@ -12,7 +12,7 @@ type ScreenConfiguration = Obj<string, ScreenConfigurations, ScreenContents | Vi
 type ScreenNumber = number;
 type ScreenContentKey = `ScreenContent ${ScreenNumber}`;
 type ScreenContents = Obj<string, ScreenConfiguration, ScreenContent> &
-	Record<number, ScreenContent>;
+	Record<ScreenContentKey, ScreenContent>;
 
 type ScreenContent = Obj<string, ScreenContents, WindowBase>;
 

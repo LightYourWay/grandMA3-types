@@ -249,7 +249,7 @@ declare interface MessageBoxStateOptions {
 declare interface MessageBoxSelectorOptions {
 	name: string;
 	selectedValue: number;
-	values: { [key: string]: number };
+	values: Record<string, number>;
 	type?: 0 | 1; //  0-swipe, 1-radio
 }
 declare interface MessageBoxOptions {
@@ -271,9 +271,9 @@ declare interface MessageBoxOptions {
 declare interface MessageBoxResult {
 	success: boolean;
 	result: number;
-	inputs: { [key: string]: string };
-	selectors: { [key: string]: number };
-	states: { [key: string]: boolean };
+	inputs: Record<string, string>;
+	selectors: Record<string, number>;
+	states: Record<string, boolean>;
 }
 declare function MessageBox(options: MessageBoxOptions): MessageBoxResult;
 declare function Mouse(...args: any): any;
@@ -297,7 +297,7 @@ declare interface PopupInputOptions {
 		right_icon: any;
 	};
 	useTopLeft?: boolean;
-	properties?: { [key: string]: number };
+	properties?: Record<string, number>;
 }
 declare function PopupInput(options: PopupInputOptions): LuaMultiReturn<[number, string]>;
 /**
@@ -490,7 +490,7 @@ type FixtureAddress = FixtureAddressStandard | FixtureAddressRaw;
  * This corresponds to the IDType in an exported Group XML.
  * NOTE: The IDType of keyword "Stage" is 0  (same as Fixture), this might be an MA BUG. (MA3 v2.0.2.0)
  */
-type FixtureIDType = 0 | 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type FixtureIDType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 type FixtureIDTypeKeyword =
 	| 'Fixture'
 	| 'Channel'
@@ -524,16 +524,7 @@ type FixtureRawRelativeAddressType =
 	| `${number}.${number}.${number}`
 	| `${number}.${number}.${number}.${number}`
 	| `${number}.${number}.${number}.${number}.${number}`;
-type FixtureIDTypeKeywordNoFixture =
-	| 'Channel'
-	| 'Universal'
-	| 'HouseLights'
-	| 'NonDim'
-	| 'Media'
-	| 'Fog'
-	| 'Effect'
-	| 'Pyro'
-	| 'MArker';
+type FixtureIDTypeKeywordNoFixture = Exclude<FixtureIDTypeKeyword, 'Fixture' | 'Stage'>;
 
 /**
  *

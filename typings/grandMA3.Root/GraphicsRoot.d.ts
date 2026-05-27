@@ -21,5 +21,5 @@ type PultCollect = Obj<string, GraphicsRoot, Pult> & {
 	[name: string]: Pult;
 };
 type Pult = Obj<string, PultCollect, Devices | DisplayCollect, PultProps> & PultProps;
-type PultProps = ObjProps & {};
-type Devices = Obj<string, Pult, any> & {};
+type PultProps = ObjProps;
+type Devices = Obj<string, Pult, any>;

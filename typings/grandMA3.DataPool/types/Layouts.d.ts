@@ -46,7 +46,7 @@ declare namespace MA3_V1_8 {
 		borderColor: string;
 		customText: string;
 		/** 8 character hex string RGBA */
-		fontSize: 'Default' | 10 | 12 | 14 | 16 | 18 | 20 | 24 | 28 | 32;
+		fontSize: LayoutElementCustomTextSize;
 		id: number;
 		positionH: number;
 		positionW: number;

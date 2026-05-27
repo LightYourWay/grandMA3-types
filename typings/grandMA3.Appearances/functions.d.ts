@@ -22,7 +22,7 @@ type ScribbleProps = ObjProps & {
 type Scribbles = Obj<string, ShowData, Scribble> & Scribble[] & { [index: string]: Scribble };
 type Scribble = Obj<string, Appearances, undefined, ScribbleProps> & ScribbleProps;
 
-type TagProps = ObjProps & {};
+type TagProps = ObjProps;
 
 type Tags = Obj<string, ShowData, Tag> & Tag[] & { [index: string]: Tag };
 type Tag = Obj<string, Tags, undefined, TagProps> & TagProps;
