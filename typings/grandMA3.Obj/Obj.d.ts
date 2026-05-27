@@ -1,5 +1,5 @@
-type GenericObj = Obj<string, GenericObj, GenericObj | undefined> & {
-	[key: string]: GenericObj | undefined;
+type GenericObj = Obj<string, GenericObj, GenericObj> & {
+	[key: string]: GenericObj;
 };
 
 type ObjProps = {
