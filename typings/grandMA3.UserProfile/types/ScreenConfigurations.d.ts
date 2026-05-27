@@ -54,8 +54,7 @@ type WindowScrollPositions = Obj<string, WindowBase, undefined> & {
 
 interface WindowLayoutView extends WindowBase {
 	name: 'WindowLayoutView';
-	// LayoutViewSettings: LayoutViewSettings; // Sometimes the name could be "LayoutViewSettings 1", but it should be always first
-	[1]: LayoutViewSettings;
+	LayoutViewSettings: LayoutViewSettings;
 }
 
 interface LayoutViewSettingsProps {
