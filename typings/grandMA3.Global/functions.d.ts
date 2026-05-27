@@ -129,7 +129,7 @@ declare function FixtureType(...args: any): any;
  * This function should be called FromNativeAddr.
  * I acccepts the result of AddrNative() function.
  */
-declare function FromAddr(nativeAddr: string): Obj<any, any>;
+declare function FromAddr(nativeAddr: string): Obj<string, any, any>;
 declare function GetAttributeByUIChannel(uiChannel: number): Attribute;
 declare function GetAttributeCount(): number;
 declare function GetAttributeIndex(attrName: string): number;
@@ -202,7 +202,7 @@ declare type HookIndex = number;
  * @param obj
  * @param pluginHandle
  */
-declare function HookObjectChange<T extends Obj<any, any>>(
+declare function HookObjectChange<T extends Obj<string, any, any>>(
 	callback: (obj: T, changeType: number) => void,
 	obj: T,
 	pluginHandle: any,
@@ -262,7 +262,7 @@ declare interface MessageBoxOptions {
 	titleTextColor?: string;
 	messageTextColor?: string;
 	message?: string;
-	display?: number | Obj<any, any>;
+	display?: number | Obj<string, any, any>;
 	commands: { value: number; name: string }[];
 	inputs?: MessageBoxInputOptions[];
 	states?: MessageBoxStateOptions[];
@@ -279,7 +279,7 @@ declare function MessageBox(options: MessageBoxOptions): MessageBoxResult;
 declare function Mouse(...args: any): any;
 declare function MouseObj(...args: any): any;
 declare const MultiLanguage: Array<[string, string]>;
-declare const Obj: Obj<any, any>;
+declare const Obj: Obj<string, any, any>;
 declare function ObjectList<T extends Obj>(address: string): T[];
 declare function OverallDeviceCertificate(...args: any): any;
 declare function Patch(): Patch;
@@ -360,7 +360,7 @@ declare function Unhook(hookIndex: HookIndex): any;
  * @param obj
  * @return The number of removed hooks
  */
-declare function UnhookMultiple(callbackFn?: () => any, obj?: Obj<any, any>): number;
+declare function UnhookMultiple(callbackFn?: () => any, obj?: Obj<string, any, any>): number;
 declare function UserVars(...args: any): any;
 type MAVersionString = `${number}.${number}.${number}.${number}`;
 /**

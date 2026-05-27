@@ -7,23 +7,27 @@ type MediaPoolsChildren = {
 	Sounds: Sounds;
 };
 
-type MediaPools = Obj<ShowData, GoboImages | Symbols | Images | MeshImagePool | Videos | Sounds> &
+type MediaPools = Obj<
+	string,
+	ShowData,
+	GoboImages | Symbols | Images | MeshImagePool | Videos | Sounds
+> &
 	MediaPoolsChildren;
 
 type MediaObj = GoboImage | SymbolImage | UserImage | MeshImage | Video | Sound;
-type GoboImages = Obj<MediaPools, GoboImage>;
+type GoboImages = Obj<string, MediaPools, GoboImage>;
 type GoboImage = Obj;
 
-type Symbols = Obj<MediaPools, SymbolImage>;
+type Symbols = Obj<string, MediaPools, SymbolImage>;
 type SymbolImage = Obj;
 
-type Images = Obj<MediaPools, UserImage> & UserImage[] & { [index: string]: UserImage };
-type UserImage = Obj<Images, undefined> & { note: string };
+type Images = Obj<string, MediaPools, UserImage> & UserImage[] & { [index: string]: UserImage };
+type UserImage = Obj<string, Images, undefined> & { note: string };
 
-type MeshImagePool = Obj<MediaPools, MeshImage>;
+type MeshImagePool = Obj<string, MediaPools, MeshImage>;
 type MeshImage = Obj;
 
-type Videos = Obj<MediaPools, Video>;
+type Videos = Obj<string, MediaPools, Video>;
 type Video = Obj;
-type Sounds = Obj<MediaPools, Sound>;
+type Sounds = Obj<string, MediaPools, Sound>;
 type Sound = Obj;

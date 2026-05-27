@@ -2,7 +2,12 @@ type OverlayBaseProps = ObjProps & {
 	autoClose: boolean;
 };
 
-type OverlayBase<Clazz extends string = string> = Obj<PlaceHolder, any, OverlayBaseProps, Clazz> &
+type OverlayBase<ClassName extends string = string> = Obj<
+	ClassName,
+	PlaceHolder,
+	any,
+	OverlayBaseProps
+> &
 	UILayoutGrid &
 	OverlayBaseProps & {
 		3: ModalPlaceholder;

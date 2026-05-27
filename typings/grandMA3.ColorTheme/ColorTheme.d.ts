@@ -1,9 +1,9 @@
-type ColorTheme = Obj<Root, ColorDefCollect | ColorGroups> & {
+type ColorTheme = Obj<string, Root, ColorDefCollect | ColorGroups> & {
 	ColorDefCollect: ColorDefCollect;
 	ColorGroups: ColorGroups;
 };
 
-type ColorGroups = Obj<ColorTheme, ColorGroup> & {
+type ColorGroups = Obj<string, ColorTheme, ColorGroup> & {
 	Global: ColorGroupGlobal;
 	PoolDefault: ColorGroupPoolDefault;
 	[name: string]: ColorGroup;

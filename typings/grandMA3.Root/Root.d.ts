@@ -1,4 +1,4 @@
-type Root = Obj<undefined, any> & { [index: string]: any } & {
+type Root = Obj<string, undefined, any> & { [index: string]: any } & {
 	ShowData: ShowData;
 	ColorTheme: ColorTheme;
 	DeviceConfigurations: DeviceConfigurations;
@@ -8,30 +8,30 @@ type Root = Obj<undefined, any> & { [index: string]: any } & {
 	Temp: RootTemp;
 };
 
-type UsbNotifier = Obj<Root, StorageDevice> & {
+type UsbNotifier = Obj<string, Root, StorageDevice> & {
 	StorageDevice: StorageDevice;
 };
-type StorageDevice = Obj<UsbNotifier, USBDeviceStorage> & USBDeviceStorage[];
+type StorageDevice = Obj<string, UsbNotifier, USBDeviceStorage> & USBDeviceStorage[];
 type USBDeviceStorageProps = ObjProps & {
 	connected: boolean;
 	connectedCount: any;
 	ip: any;
 	mountPoint: any;
 };
-type USBDeviceStorage = Obj<USBDeviceStorage, undefined, USBDeviceStorageProps, 'USBDeviceStorage'>;
+type USBDeviceStorage = Obj<'USBDeviceStorage', USBDeviceStorage, undefined, USBDeviceStorageProps>;
 
-type RootTemp = Obj<Root, any> & {
+type RootTemp = Obj<string, Root, any> & {
 	DriveCollect: DriveCollect;
 };
 
-type DriveCollect = Obj<RootTemp, Drive>;
-type Drive = Obj<DriveCollect, undefined, DriveProps, 'Drive'> & DriveProps;
+type DriveCollect = Obj<string, RootTemp, Drive>;
+type Drive = Obj<'Drive', DriveCollect, undefined, DriveProps> & DriveProps;
 type DriveProps = ObjProps & {
 	driveType: 'Removeable' | 'Internal' | 'OldVersion';
 	path: string;
 };
 
-type MANetSocket = Obj<Root, undefined, MANetSocketProps, 'MAnetSocket'> & MANetSocketProps;
+type MANetSocket = Obj<'MAnetSocket', Root, undefined, MANetSocketProps> & MANetSocketProps;
 type MANetSocketProps = ObjProps & {
 	hostName: string;
 	readonly primaryIp: string;

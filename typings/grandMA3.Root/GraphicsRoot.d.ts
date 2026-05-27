@@ -1,13 +1,13 @@
-type GraphicsRoot = Obj<Root, any> &
+type GraphicsRoot = Obj<string, Root, any> &
 	any[] & { [index: string]: any } & {
 		TextureCollect: TextureCollect;
 		PultCollect: PultCollect;
 	};
 
-type TextureCollect = Obj<GraphicsRoot, Textures> & {
+type TextureCollect = Obj<string, GraphicsRoot, Textures> & {
 	Textures: Textures;
 };
-type Textures = Obj<TextureCollect, Texture> & {
+type Textures = Obj<string, TextureCollect, Texture> & {
 	[name: string]: Texture;
 };
 type TextureProps = ObjProps & {
@@ -15,11 +15,11 @@ type TextureProps = ObjProps & {
 	textureRect: { h: number; w: number; x: number; y: number };
 	textureIndex: number;
 };
-type Texture = Obj<Textures, undefined, TextureProps> & TextureProps;
+type Texture = Obj<string, Textures, undefined, TextureProps> & TextureProps;
 
-type PultCollect = Obj<GraphicsRoot, Pult> & {
+type PultCollect = Obj<string, GraphicsRoot, Pult> & {
 	[name: string]: Pult;
 };
-type Pult = Obj<PultCollect, Devices | DisplayCollect, PultProps> & PultProps;
+type Pult = Obj<string, PultCollect, Devices | DisplayCollect, PultProps> & PultProps;
 type PultProps = ObjProps;
-type Devices = Obj<Pult, any>;
+type Devices = Obj<string, Pult, any>;

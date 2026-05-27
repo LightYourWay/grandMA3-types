@@ -1,23 +1,23 @@
-type ScreenConfigurations = Obj<UserProfile, ScreenConfiguration> &
+type ScreenConfigurations = Obj<string, UserProfile, ScreenConfiguration> &
 	ScreenConfiguration[] & {
 		Default: ScreenConfiguration;
 		[index: string]: ScreenConfiguration;
 	};
 
-type ScreenConfiguration = Obj<ScreenConfigurations, ScreenContents | ViewButtonScreens> & {
+type ScreenConfiguration = Obj<string, ScreenConfigurations, ScreenContents | ViewButtonScreens> & {
 	ScreenContents: ScreenContents;
 	'ViewButtonScreens 2': ViewButtonScreens;
 };
 
 type ScreenNumber = number;
 type ScreenContentKey = `ScreenContent ${ScreenNumber}`;
-type ScreenContents = Obj<ScreenConfiguration, ScreenContent> &
+type ScreenContents = Obj<string, ScreenConfiguration, ScreenContent> &
 	Record<ScreenContentKey, ScreenContent>;
 
-type ScreenContent = Obj<ScreenContents, WindowBase>;
+type ScreenContent = Obj<string, ScreenContents, WindowBase>;
 
 type WindowBaseProps = ObjProps & {
-	appearance: Obj<any, any>;
+	appearance: Obj<string, any, any>;
 	minH: number;
 	minW: number;
 	note: string;
@@ -30,13 +30,14 @@ type WindowBaseProps = ObjProps & {
 	presetPoolType: number;
 };
 
-interface WindowBase extends Obj<ScreenContent | View, any, WindowBaseProps>, WindowBaseProps {
+interface WindowBase
+	extends Obj<string, ScreenContent | View, any, WindowBaseProps>, WindowBaseProps {
 	WindowAppearance: WindowAppearance;
 	WindowScrollPositions: WindowScrollPositions;
 }
 
-type WindowAppearance = Obj<WindowBase, undefined>;
-type WindowScrollPositions = Obj<WindowBase, undefined> & {
+type WindowAppearance = Obj<string, WindowBase, undefined>;
+type WindowScrollPositions = Obj<string, WindowBase, undefined> & {
 	/**
 	 * A string with 2 integer numbers separated by a comma.
 	 * The first number is the vertical scroll position.
@@ -53,8 +54,7 @@ type WindowScrollPositions = Obj<WindowBase, undefined> & {
 
 interface WindowLayoutView extends WindowBase {
 	name: 'WindowLayoutView';
-	// LayoutViewSettings: LayoutViewSettings; // Sometimes the name could be "LayoutViewSettings 1", but it should be always first
-	[1]: LayoutViewSettings;
+	LayoutViewSettings: LayoutViewSettings;
 }
 
 interface LayoutViewSettingsProps {
@@ -67,15 +67,15 @@ interface LayoutViewSettingsProps {
 	PaddingBottom: number;
 	PaddingTop: number;
 }
-type LayoutViewSettings = Obj<WindowBase, undefined> & LayoutViewSettingsProps;
+type LayoutViewSettings = Obj<string, WindowBase, undefined> & LayoutViewSettingsProps;
 
 type ViewButtonScreenKey = `ViewButtonScreen ${number}`;
-type ViewButtonScreens = Obj<ScreenConfiguration, ViewButtonScreen> &
+type ViewButtonScreens = Obj<string, ScreenConfiguration, ViewButtonScreen> &
 	Record<ViewButtonScreenKey, ViewButtonScreen>;
 
-type ViewButtonScreen = Obj<ViewButtonScreens, ViewButton>;
+type ViewButtonScreen = Obj<string, ViewButtonScreens, ViewButton>;
 
-type ViewButton = Obj<ViewButtonScreen, undefined>;
+type ViewButton = Obj<string, ViewButtonScreen, undefined>;
 
 interface WindowEncoderBar extends WindowBase {
 	name: 'WindowEncoderBar';
@@ -84,4 +84,4 @@ interface WindowEncoderBar extends WindowBase {
 interface EncoderBarWindowSettingsProps {
 	fadeEncoder: boolean;
 }
-type EncoderBarWindowSettings = Obj<WindowBase, undefined> & EncoderBarWindowSettingsProps;
+type EncoderBarWindowSettings = Obj<string, WindowBase, undefined> & EncoderBarWindowSettingsProps;

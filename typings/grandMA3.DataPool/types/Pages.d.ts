@@ -1,7 +1,8 @@
-type Pages = Obj<DataPoolClass, Page> &
-	(Page | undefined)[] & { [index: string]: Page | undefined };
+type Pages = Obj<string, DataPoolClass, Page> &
+	(Page | undefined)[] &
+	Record<string, Page | undefined>;
 
-type Page = Obj<Pages, Executor | ExecutorProxy>;
+type Page = Obj<string, Pages, Executor | ExecutorProxy>;
 
 type ExecutorBaseProps = {
 	fader: 'Master' | 'Temp'; //...
@@ -12,7 +13,7 @@ type ExecutorProps = ObjProps &
 		width: number;
 		height: number;
 	};
-type Executor = Obj<Page, undefined, ExecutorProps, 'Exec'>;
+type Executor = Obj<'Exec', Page, undefined, ExecutorProps>;
 
 type ExecutorProxyProps = ObjProps & ExecutorBaseProps;
-type ExecutorProxy = Obj<Page, undefined, ExecutorProxyProps, 'Proxy'> & ExecutorProxyProps;
+type ExecutorProxy = Obj<'Proxy', Page, undefined, ExecutorProxyProps> & ExecutorProxyProps;

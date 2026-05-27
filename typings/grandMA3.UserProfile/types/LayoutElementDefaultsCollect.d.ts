@@ -1,7 +1,7 @@
-type LayoutElementDefaultsCollect = Obj<UserProfile, LayoutDefault> &
+type LayoutElementDefaultsCollect = Obj<string, UserProfile, LayoutDefault> &
 	LayoutDefault[] & { [index: string]: LayoutDefault };
 
-type LayoutDefault = Obj<LayoutElementDefaultsCollect, undefined> & {
+type LayoutDefault = Obj<string, LayoutElementDefaultsCollect, undefined> & {
 	ElementType: string;
 	Action: string;
 };

@@ -1,4 +1,4 @@
-type Sequences = Obj<DataPoolClass, Sequence> &
+type Sequences = Obj<string, DataPoolClass, Sequence> &
 	(Sequence | undefined)[] & { [index: string]: Sequence | undefined };
 
 type SequenceRateMaster =
@@ -85,14 +85,14 @@ type SequenceProps = ObjProps & {
 	xFadeReload: boolean;
 };
 
-type Sequence = Obj<Sequences, Cue> &
+type Sequence = Obj<string, Sequences, Cue> &
 	SequenceProps &
 	(Cue | undefined)[] & { [index: string]: Cue | undefined } & {
 		CurrentChild: () => LuaMultiReturn<[Cue | undefined, string]>;
 		name: string;
 	};
 
-type Cue = Obj<Sequence, Part> &
+type Cue = Obj<string, Sequence, Part> &
 	(Part | undefined)[] & { [index: string]: Part | undefined } & {
 		name: string;
 		/**
@@ -121,7 +121,7 @@ type PartProps = ObjProps & {
 	sync: boolean;
 };
 
-type Part = Obj<Cue, Recipe, PartProps> & PartProps;
+type Part = Obj<string, Cue, Recipe, PartProps> & PartProps;
 
 declare namespace MA3_v2_0_2 {
 	type SequenceProps = ObjProps & {
