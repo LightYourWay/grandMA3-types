@@ -1,1 +1,2 @@
-type UserProfiles = Obj<ShowData, UserProfile> & UserProfile[] & { [index: string]: UserProfile };
+type UserProfiles = Obj<string, ShowData, UserProfile> &
+	UserProfile[] & { [index: string]: UserProfile };

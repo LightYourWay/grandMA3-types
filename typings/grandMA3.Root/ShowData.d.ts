@@ -1,4 +1,4 @@
-type ShowData = Obj<Root, any> &
+type ShowData = Obj<string, Root, any> &
 	any[] & { [index: string]: any } & {
 		DataPools: DataPools;
 		LivePatch: LivePatch;

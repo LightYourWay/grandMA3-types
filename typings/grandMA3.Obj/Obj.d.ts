@@ -1,4 +1,4 @@
-type GenericObj = Obj<GenericObj, GenericObj> & { [key: string]: GenericObj };
+type GenericObj = Obj<string, GenericObj, GenericObj> & { [key: string]: GenericObj };
 
 type ObjProps = {
 	name: string;
@@ -7,10 +7,10 @@ type ObjProps = {
 };
 
 interface Obj<
-	ParentType = Obj<any, any>,
-	ChildType = Obj<any, any> | undefined,
+	ClassName extends string = string,
+	ParentType = any,
+	ChildType = any | undefined,
 	Props extends ObjProps & { [key: string]: any } = ObjProps & { [key: string]: any },
-	Clazz extends string = string,
 > {
 	readonly lock: '' | 'Yes' | 'SS';
 	name: string;
@@ -70,13 +70,13 @@ interface Obj<
 	 * @param name exact name of object. If undefined then only class will be matched.
 	 * @param clazz partial name of the class
 	 */
-	FindRecursive(name: string | undefined, clazz?: string): Obj<any, any>;
+	FindRecursive(name: string | undefined, clazz?: string): Obj<string, any, any>;
 	FindWild(search: string): any;
 	Get(propName: keyof Props, role?: Enums.Roles): any;
 	GetAssignedObj(...args: any): any;
 	/** Get the child class name */
 	GetChildClass(): string;
-	GetClass: () => Clazz;
+	GetClass: () => ClassName;
 	GetDisplay(): Display;
 	GetDisplayIndex(index: number): Display;
 	GetExportFileName(...args: any): any;

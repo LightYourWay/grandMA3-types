@@ -1,15 +1,15 @@
-type Plugins = Obj<DataPoolClass, Plugin> & { [index: string]: Plugin | undefined };
+type Plugins = Obj<string, DataPoolClass, Plugin> & { [index: string]: Plugin | undefined };
 
 type PluginProps = ObjProps & {
-	scribble: Obj<any, any>;
-	appearance: Obj<any, any>;
+	scribble: Obj<string, any, any>;
+	appearance: Obj<string, any, any>;
 	author: string;
 	version: string;
 	path: string;
 	userRights: string;
 };
 
-type Plugin = Obj<Plugins, LuaComponent, PluginProps> &
+type Plugin = Obj<string, Plugins, LuaComponent, PluginProps> &
 	PluginProps & { note: string } & { [index: string]: LuaComponent | undefined };
 
 type LuaComponentProps = ObjProps & {
@@ -20,4 +20,6 @@ type LuaComponentProps = ObjProps & {
 	inStream: boolean;
 	installed: boolean;
 };
-type LuaComponent = Obj<Plugin, undefined, LuaComponentProps> & { [index: string]: undefined };
+type LuaComponent = Obj<string, Plugin, undefined, LuaComponentProps> & {
+	[index: string]: undefined;
+};

@@ -1,6 +1,6 @@
-type Layouts = Obj<DataPoolClass, Layout> & Layout[] & { [index: string]: Layout };
+type Layouts = Obj<string, DataPoolClass, Layout> & Layout[] & { [index: string]: Layout };
 
-type Layout = Obj<Layouts, Element> & Element[] & { [index: string]: Element };
+type Layout = Obj<string, Layouts, Element> & Element[] & { [index: string]: Element };
 
 type LayoutElementCustomTextSize = 'Default' | 10 | 12 | 14 | 16 | 18 | 20 | 24 | 28 | 32;
 type ElementProps = ObjProps & {
@@ -71,13 +71,13 @@ declare namespace MA3_V1_8 {
 		textColor: string;
 	};
 
-	type Element = Obj<Layout, undefined> &
+	type Element = Obj<string, Layout, undefined> &
 		ElementProps & {
 			object: Obj;
 		};
 }
 
-type Element = Obj<Layout, undefined> &
+type Element = Obj<string, Layout, undefined> &
 	ElementProps & {
 		object: Obj;
 		note: string;

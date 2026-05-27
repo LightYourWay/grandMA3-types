@@ -1,4 +1,4 @@
-type MAtricks = Obj<DataPoolClass, MAtrick> & MAtrick[] & { [index: string]: MAtrick };
+type MAtricks = Obj<string, DataPoolClass, MAtrick> & MAtrick[] & { [index: string]: MAtrick };
 
 type MAtrickProps = ObjProps & MAtrickOnlyProps;
 type MAtrickTransform = 'None' | 'Mirror';
@@ -62,7 +62,7 @@ type MAtrickOnlyProps = {
 
 type MAtrickOnlyPropName = keyof MAtrickOnlyProps;
 
-type MAtrick = Obj<MAtricks, undefined> &
+type MAtrick = Obj<string, MAtricks, undefined> &
 	MAtrickProps & {
 		appearance: Appearance;
 	};

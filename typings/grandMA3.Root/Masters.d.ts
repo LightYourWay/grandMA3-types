@@ -1,25 +1,25 @@
-type Masters = Obj<ShowData, any> & {
+type Masters = Obj<string, ShowData, any> & {
 	Grand: Grand;
 	Playback: Playback;
 	Speed: Speed;
 	Timing: Timing;
 };
 
-type Playback = Obj<Masters, MasterPlayback>;
+type Playback = Obj<string, Masters, MasterPlayback>;
 
-type MasterPlayback = Obj<Playback, undefined> & {};
+type MasterPlayback = Obj<string, Playback, undefined> & {};
 
-type Speed = Obj<Masters, MasterSpeed>;
+type Speed = Obj<string, Masters, MasterSpeed>;
 
-type MasterSpeed = Obj<Speed, undefined, MasterSpeedProps> & MasterSpeedProps & {};
+type MasterSpeed = Obj<string, Speed, undefined, MasterSpeedProps> & MasterSpeedProps & {};
 
-type Grand = Obj<Masters, MasterGrand>;
+type Grand = Obj<string, Masters, MasterGrand>;
 
-type MasterGrand = Obj<Grand, undefined> & {};
+type MasterGrand = Obj<string, Grand, undefined> & {};
 
-type Timing = Obj<Masters, MasterTiming>;
+type Timing = Obj<string, Masters, MasterTiming>;
 
-type MasterTiming = Obj<Timing, undefined> & {};
+type MasterTiming = Obj<string, Timing, undefined> & {};
 
 type MasterSpeedProps = ObjProps & {
 	/**
