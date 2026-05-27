@@ -16,9 +16,9 @@ type UserProfile = Obj<UserProfiles, any, UserProfileProps> &
 
 type Environments = Obj<Environments, UserEnvironment> & {
 	/** Main Programmer Environment */
-	Main: UserEnvironment;
+	1: UserEnvironment;
 	/** Preview Programmer Environment */
-	Preview: UserEnvironment;
+	2: UserEnvironment;
 };
 
 type Views = Obj<UserProfiles, View>;
@@ -34,7 +34,6 @@ type UserAttribute = Obj<UserAttributePreferences, void> & {
 type UserEnvironmentChildTypes = Selection | Programmer | AtFilter | LivePatch3dSelection;
 type UserEnvironment = Obj<Environments, UserEnvironmentChildTypes> & {
 	Selection: Selection;
-	SelectionGrid: Selection;
 	Programmer: Programmer;
 	AtFilter: AtFilter;
 	LivePatch3dSelection: LivePatch3dSelection;

@@ -14,7 +14,6 @@ type DataPoolChild =
 	| Timecodes;
 
 type DataPoolClass = Obj<DataPools, DataPoolChild> & {
-	index: DataPoolIndex;
 	Filters: Filters;
 	PresetPools: PresetPools;
 	Groups: Groups;

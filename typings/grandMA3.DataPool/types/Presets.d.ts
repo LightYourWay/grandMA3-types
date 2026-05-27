@@ -10,11 +10,11 @@ type PresetPools = Obj<DataPoolClass, Presets> & {
 	Control: Presets;
 	Shapers: Presets;
 	Video: Presets;
-	All1: Presets;
-	All2: Presets;
-	All3: Presets;
-	All4: Presets;
-	Dynamic: Presets;
+	'All 1': Presets;
+	'All 2': Presets;
+	'All 3': Presets;
+	'All 4': Presets;
+	'All 5': Presets;
 };
 type Presets = Obj<PresetPools, Preset>;
 type PresetMode = 'Universal' | 'Global' | 'Selective';
