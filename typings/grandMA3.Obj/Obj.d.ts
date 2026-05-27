@@ -1,4 +1,6 @@
-type GenericObj = Obj<any, any> & Record<string, any>;
+type GenericObj = Obj<string, GenericObj, GenericObj | undefined> & {
+	[key: string]: GenericObj | undefined;
+};
 
 type ObjProps = {
 	name: string;
