@@ -1,5 +1,5 @@
 type Pages = Obj<DataPoolClass, Page> &
-	(Sequence | undefined)[] & { [index: string]: Sequence | undefined };
+	(Page | undefined)[] & { [index: string]: Page | undefined };
 
 type Page = Obj<Pages, Executor | ExecutorProxy>;
 

@@ -18,34 +18,25 @@ type USBDeviceStorageProps = ObjProps & {
 	ip: any;
 	mountPoint: any;
 };
-type USBDeviceStorage = Obj<USBDeviceStorage, void, USBDeviceStorageProps, 'USBDeviceStorage'>;
+type USBDeviceStorage = Obj<USBDeviceStorage, undefined, USBDeviceStorageProps, 'USBDeviceStorage'>;
 
 type RootTemp = Obj<Root, any> & {
 	DriveCollect: DriveCollect;
 };
 
 type DriveCollect = Obj<RootTemp, Drive>;
-type Drive = Obj<DriveCollect, void, DriveProps, 'Drive'> & DriveProps;
+type Drive = Obj<DriveCollect, undefined, DriveProps, 'Drive'> & DriveProps;
 type DriveProps = ObjProps & {
 	driveType: 'Removeable' | 'Internal' | 'OldVersion';
 	path: string;
 };
 
-type MANetSocket = Obj<Root, void, MANetSocketProps, 'MAnetSocket'> & MANetSocketProps;
+type MANetSocket = Obj<Root, undefined, MANetSocketProps, 'MAnetSocket'> & MANetSocketProps;
 type MANetSocketProps = ObjProps & {
 	hostName: string;
-	/**
-	 * Readonly
-	 */
-	primaryIp: string;
+	readonly primaryIp: string;
 	session: string;
 	showfile: string;
-	/**
-	 * Readonly
-	 */
-	status: 'IdleMaster' | string;
-	/**
-	 * Readonly
-	 */
-	sessionManager: 'Yes' | 'No';
+	readonly status: 'IdleMaster' | string;
+	readonly sessionManager: 'Yes' | 'No';
 };

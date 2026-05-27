@@ -1,4 +1,4 @@
-type GenericObj = Obj<GenericObj, GenericObj> & { [key: string]: GenericObj };
+type GenericObj = Obj<any, any> & Record<string, any>;
 
 type ObjProps = {
 	name: string;
@@ -9,7 +9,7 @@ type ObjProps = {
 interface Obj<
 	ParentType = Obj<any, any>,
 	ChildType = Obj<any, any> | undefined,
-	Props extends ObjProps & { [key: string]: any } = ObjProps & { [key: string]: any },
+	Props extends ObjProps = ObjProps,
 	Clazz extends string = string,
 > {
 	readonly lock: '' | 'Yes' | 'SS';
@@ -72,7 +72,10 @@ interface Obj<
 	 */
 	FindRecursive(name: string | undefined, clazz?: string): Obj<any, any>;
 	FindWild(search: string): any;
-	Get(propName: keyof Props, role?: Enums.Roles): any;
+	Get<K extends string>(
+		propName: K,
+		role?: Enums.Roles,
+	): K extends keyof Props ? Props[K] : unknown;
 	GetAssignedObj(...args: any): any;
 	/** Get the child class name */
 	GetChildClass(): string;
@@ -177,7 +180,7 @@ interface Obj<
 	SelectListItemByIndex(...args: any): any;
 	SelectListItemByName(...args: any): any;
 	SelectListItemByValue(...args: any): any;
-	Set(propName: keyof Props, value: any): any;
+	Set<K extends string>(propName: K, value: K extends keyof Props ? Props[K] : unknown): any;
 	SetChildren(...args: any): any;
 	SetEmptyListItem(...args: any): any;
 	SetEnabledListItem(...args: any): any;

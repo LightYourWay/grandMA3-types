@@ -31,7 +31,7 @@ type View = Obj<Views, WindowBase>;
 
 type UserAttributePreferences = Obj<UserProfile, UserAttribute>;
 
-type UserAttribute = Obj<UserAttributePreferences, void> & {
+type UserAttribute = Obj<UserAttributePreferences, undefined> & {
 	EncoderResolution: Enums.AttriebuteEncoderResolution;
 };
 

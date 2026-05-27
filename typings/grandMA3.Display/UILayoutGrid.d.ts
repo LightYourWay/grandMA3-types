@@ -10,13 +10,9 @@ type UILayoutGridProps = UIObjectProps & {
 	defaultMargin: `${number}`;
 };
 
-type ItemCollectColumns = GenericObj & {
-	[key: number]: Item;
-};
+type ItemCollectColumns = GenericObj & Record<number, Item>;
 
-type ItemCollectRows = GenericObj & {
-	[key: number]: Item;
-};
+type ItemCollectRows = GenericObj & Record<number, Item>;
 
 type ItemPropsFixed = {
 	sizePolicy: 'Fixed';

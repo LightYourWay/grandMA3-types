@@ -36,10 +36,10 @@ type FixtureSelectionData = {
 };
 
 type Filters = Obj<DataPoolClass, Filter>;
-type FilterProps = ObjProps & {};
+type FilterProps = ObjProps;
 type Filter = Obj<Filters, any, FilterProps>;
 
-type RecipeProps = ObjProps & {};
+type RecipeProps = ObjProps;
 
 type Recipe = Obj<Part, undefined, RecipeProps> & {
 	selection: Group;
@@ -48,10 +48,10 @@ type Recipe = Obj<Part, undefined, RecipeProps> & {
 	filter: Obj;
 };
 
-type Timecodes = Obj<DataPoolClass, Timecode> & { [key: string]: Timecode };
+type Timecodes = Obj<DataPoolClass, Timecode> & Record<string, Timecode>;
 type Timecode = Obj<Timecodes, Triggers> & { Triggers: Triggers };
 
-type Triggers = Obj<Timecode, Track> & { [key: string]: Track };
+type Triggers = Obj<Timecode, Track> & Record<string, Track>;
 type Track = Obj<Triggers, TimeRange>;
 type TimeRange = Obj<Track, CmdSubTrack>;
 type CmdSubTrack = Obj<TimeRange, CmdSubTrackEvent>;

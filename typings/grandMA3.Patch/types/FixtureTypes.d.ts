@@ -87,7 +87,7 @@ type AttributeDefinitions = Obj<FixtureTypeObj, any> & {
 type FeatureGroups = Obj<AttributeDefinitions, FeatureGroup>;
 type FeatureGroup = Obj<FeatureGroups, Feature> & { [key: string]: Feature };
 
-type Feature = Obj<FeatureGroup, any> & {};
+type Feature = Obj<FeatureGroup, any>;
 
 /**
  * NOTE: Using attributes.Children() doesn't give all attributes.
