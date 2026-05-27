@@ -54,6 +54,7 @@ type SequencePriority = 'Lowest' | 'Low' | 'LTP' | 'High' | 'Highest' | 'HTP' | 
 type SequenceMib = 'Enabled' | 'Never' | 'Force Early' | 'Force UnpoGo' | 'Force Late';
 type SequenceMibMode = 'None' | 'Early' | 'UponGo' | 'Late';
 type SequenceProps = ObjProps & {
+	appearance: Appearance | null;
 	autoStart: boolean;
 	autoStop: boolean;
 	autoFix: boolean;

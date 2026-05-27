@@ -10,6 +10,7 @@ import './grandMA3.Remotes';
 import './grandMA3.Root';
 import './grandMA3.UserProfile';
 import './lua.ftp';
+import './lua.gma3_helpers';
 import './lua.json';
 import './lua.lfs';
 import './lua.socket';

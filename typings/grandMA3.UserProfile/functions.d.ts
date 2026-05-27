@@ -11,6 +11,7 @@ type UserProfile = Obj<UserProfiles, any, UserProfileProps> &
 		ScreenConfigurations: ScreenConfigurations;
 		LayoutElementDefaultsCollect: LayoutElementDefaultsCollect;
 		UserAttributePreferences: UserAttributePreferences;
+		SelectedPage: number;
 		Name: string;
 	};
 
