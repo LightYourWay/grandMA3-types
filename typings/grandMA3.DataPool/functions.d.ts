@@ -1,19 +1,29 @@
 /*
  * Pool can be renamed !! So better
  */
-type DataPoolClass = Obj<DataPools, any> & {
-	index: DataPoolIndex;
-} & {
-	2: Filters; // Filters
-	4: PresetPools; // PresetPools
-	5: Groups; // Groups
-	6: Sequences; // Sequences
-	7: Plugins; // Plugins
-	8: Macros; // default name: Macros
-	10: MAtricks; // MATricks
-	12: Pages; // Pages
-	13: Layouts; // Layouts
-	14: Timecodes; // Timecodes
+type DataPoolChild =
+	| Filters
+	| PresetPools
+	| Groups
+	| Sequences
+	| Plugins
+	| Macros
+	| MAtricks
+	| Pages
+	| Layouts
+	| Timecodes;
+
+type DataPoolClass = Obj<DataPools, DataPoolChild> & {
+	Filters: Filters;
+	PresetPools: PresetPools;
+	Groups: Groups;
+	Sequences: Sequences;
+	Plugins: Plugins;
+	Macros: Macros;
+	MAtricks: MAtricks;
+	Pages: Pages;
+	Layouts: Layouts;
+	Timecodes: Timecodes;
 };
 
 type Groups = Obj<DataPoolClass, Group> & {

@@ -15,13 +15,9 @@ type UserProfile = Obj<UserProfiles, any, UserProfileProps> &
 	};
 
 type Environments = Obj<Environments, UserEnvironment> & {
-	/**
-	 * Main Programmer Environment
-	 */
+	/** Main Programmer Environment */
 	1: UserEnvironment;
-	/**
-	 * Preview Programmer Environment
-	 */
+	/** Preview Programmer Environment */
 	2: UserEnvironment;
 };
 
@@ -35,13 +31,12 @@ type UserAttribute = Obj<UserAttributePreferences, void> & {
 	EncoderResolution: Enums.AttriebuteEncoderResolution;
 };
 
-type UserEnvironmentChildTypes = Selection;
+type UserEnvironmentChildTypes = Selection | Programmer | AtFilter | LivePatch3dSelection;
 type UserEnvironment = Obj<Environments, UserEnvironmentChildTypes> & {
-	1: Selection;
-	2: Selection;
-	3: Programmer;
-	4: AtFilter;
-	6: LivePatch3dSelection;
+	Selection: Selection;
+	Programmer: Programmer;
+	AtFilter: AtFilter;
+	LivePatch3dSelection: LivePatch3dSelection;
 };
 type Selection = Obj<UserEnvironment, any>;
 type Programmer = Obj<UserEnvironment, ProgPart>;
