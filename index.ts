@@ -1,6 +1,6 @@
 /** @noSelfInFile **/
 
-enum ApiVersion {
+export enum ApiVersion {
     v1_8,
     v1_9
 }
