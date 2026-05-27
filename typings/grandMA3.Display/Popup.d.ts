@@ -5,8 +5,8 @@ type OverlayBaseProps = ObjProps & {
 type OverlayBase<Clazz extends string = string> = Obj<PlaceHolder, any, OverlayBaseProps, Clazz> &
 	UILayoutGrid &
 	OverlayBaseProps & {
-		3: ModalPlaceholder;
-		4: PopupPlaceholder;
+		ModalPlaceholder: ModalPlaceholder;
+		PopupPlaceholder: PopupPlaceholder;
 	} & {
 		Close(): void;
 		CloseCancel(): void;
