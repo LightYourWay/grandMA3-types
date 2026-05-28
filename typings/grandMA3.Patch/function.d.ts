@@ -3,7 +3,7 @@ type Patch = Obj<string, ShowData, any> &
 		FixtureTypes: FixtureTypes;
 	};
 
-type LivePatch = Obj<string, ShowData, any> &
+type LivePatch = Obj<'LivePatch', ShowData, any> &
 	any[] & { [index: string]: any } & {
 		AttributeDefinitions: AttributeDefinitions;
 		FixtureTypes: FixtureTypes;
@@ -49,12 +49,11 @@ type SubFixture = Obj<string, Fixtures, SubFixture> & {
 
 type UIChannels = Obj<string, LivePatch | Patch, UIChannel> & UIChannel[];
 
-/**
- * This is a LUA table (not user_data type)
- */
-type UIChannel = {
+type UIChannelProps = ObjProps & {
 	logical_channel: LogicalChannel;
 	attr_index: number;
 	rt_index: number;
 	subAttribute: AttributeName;
 };
+
+type UIChannel = Obj<string, UIChannels, never, UIChannelProps> & UIChannelProps;

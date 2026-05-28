@@ -22,7 +22,7 @@ type UIObjectProps = ObjProps & {
 	hideFocusFrame: YesNo;
 	interactive: YesNo;
 	visible: BooleanString;
-	mixInBackColor: Obj;
+	mixInBackColor: unknown;
 
 	// Text Props
 	alignmentH: AlignmentH;
@@ -37,7 +37,7 @@ type UIObjectProps = ObjProps & {
 	textAlignmentH: AlignmentH;
 	textColor: MAColor | string;
 	textShadow: number;
-	textShadowColor: Obj;
+	textShadowColor: unknown;
 	/**
 	 * Scales down the text to fit the box. Also enabled text wrapping.
 	 */
@@ -57,7 +57,8 @@ type UIObjectSignals = {
 	focusGet: SignalId;
 	focusLost: SignalId;
 };
-type UIObject = Obj &
+
+type UIObject = Obj<string, never, never, UIObjectProps> &
 	UIObjectProps &
 	UIObjectSignals & {
 		readonly absRect: Rect;
@@ -65,7 +66,7 @@ type UIObject = Obj &
 		GetOverlay(): Popup;
 	};
 
-type ScrollBox = Obj &
+type ScrollBox = Obj<string, never, never, UIObjectProps> &
 	UIObjectProps &
 	UIObjectSignals & {
 		readonly absRect: Rect;

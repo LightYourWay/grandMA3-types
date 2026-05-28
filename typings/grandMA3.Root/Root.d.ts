@@ -1,4 +1,4 @@
-type Root = Obj<string, undefined, any> & { [index: string]: any } & {
+type Root = Obj<string, never, any> & { [index: string]: any } & {
 	ShowData: ShowData;
 	ColorTheme: ColorTheme;
 	DeviceConfigurations: DeviceConfigurations;
@@ -18,20 +18,20 @@ type USBDeviceStorageProps = ObjProps & {
 	ip: any;
 	mountPoint: any;
 };
-type USBDeviceStorage = Obj<'USBDeviceStorage', USBDeviceStorage, undefined, USBDeviceStorageProps>;
+type USBDeviceStorage = Obj<'USBDeviceStorage', USBDeviceStorage, never, USBDeviceStorageProps>;
 
 type RootTemp = Obj<string, Root, any> & {
 	DriveCollect: DriveCollect;
 };
 
 type DriveCollect = Obj<string, RootTemp, Drive>;
-type Drive = Obj<'Drive', DriveCollect, undefined, DriveProps> & DriveProps;
+type Drive = Obj<'Drive', DriveCollect, never, DriveProps> & DriveProps;
 type DriveProps = ObjProps & {
 	driveType: 'Removeable' | 'Internal' | 'OldVersion';
 	path: string;
 };
 
-type MANetSocket = Obj<'MAnetSocket', Root, undefined, MANetSocketProps> & MANetSocketProps;
+type MANetSocket = Obj<'MAnetSocket', Root, never, MANetSocketProps> & MANetSocketProps;
 type MANetSocketProps = ObjProps & {
 	hostName: string;
 	readonly primaryIp: string;

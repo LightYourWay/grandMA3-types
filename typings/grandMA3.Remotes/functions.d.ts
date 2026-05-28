@@ -67,7 +67,7 @@ type MIDIRemoteProps = ObjProps & {
 	midiType: MIDIMidiType;
 };
 
-type MIDIRemote = Obj<string, MIDIRemotes, undefined, MIDIRemoteProps>;
+type MIDIRemote = Obj<string, MIDIRemotes, never, MIDIRemoteProps>;
 
 type DmxRemoteResolution = '8bit' | '16bit' | '24bit';
 type DmxRemoteProps = ObjProps & {
@@ -88,4 +88,4 @@ type DmxRemoteProps = ObjProps & {
 	resolution: DmxRemoteResolution;
 };
 
-type DmxRemote = Obj<string, DmxRemotes, undefined, DmxRemoteProps>;
+type DmxRemote = Obj<string, DmxRemotes, never, DmxRemoteProps>;

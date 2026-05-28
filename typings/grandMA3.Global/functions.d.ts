@@ -97,12 +97,12 @@ declare type IsFixedFn = (exec: Executor) => 1 | 0;
 declare function Confirm(...args: any): any;
 
 declare function CreateUndo(...args: any): UndoHandle;
-declare function CurrentEnvironment(): Obj;
+declare function CurrentEnvironment(): UserEnvironment;
 declare function CurrentExecPage(...args: any): Page;
 declare function CurrentProfile(): UserProfile;
 declare function CurrentScreenConfig(): ScreenConfiguration;
 declare function CurrentUser(...args: any): any;
-declare function DataPool(): DataPoolClass;
+declare function DataPool(): DataPool;
 declare function DefaultDisplayPositions(...args: any): any;
 declare function DeleteIPAddress(...args: any): any;
 declare function DelVar(...args: any): any;
@@ -121,7 +121,7 @@ declare function ExportCSV(...args: any): any;
 declare function ExportJson(...args: any): any;
 declare function FileExists(...args: any): any;
 declare function FindBestDMXPatchAddr(...args: any): any;
-declare function FindBestFocus(uiObject: Obj): any;
+declare function FindBestFocus(uiObject: UIObject): any;
 declare function FindNextFocus(...args: any): any;
 declare function FindTexture(...args: any): any;
 declare function FixtureType(...args: any): any;
@@ -143,7 +143,7 @@ declare function GetDMXValue(...args: any): any;
 declare function GetExecutor(...args: any): any;
 declare function GetFocus(...args: any): any;
 declare function GetFocusDisplay(): Display;
-declare function GetObject<T extends Obj = Obj>(address: string): T | undefined;
+declare function GetObject<T extends GenericObj>(address: string): T | undefined;
 declare function GetPath(...args: any): any;
 declare function GetPathOverrideFor(...args: any): any;
 declare function GetPathSeparator(): string;
@@ -190,8 +190,8 @@ declare function GetUIChannels(
 declare function GetUIObjectAtPosition(...args: any): any;
 declare function GetVar(...args: any): string | undefined;
 declare function GlobalVars(...args: any): any;
-declare function HandleToInt(obj: Obj): number;
-declare function HandleToStr(obj: Obj): MAObjectHandleStr;
+declare function HandleToInt(obj: Obj<string, any, any>): number;
+declare function HandleToStr(obj: Obj<string, any, any>): MAObjectHandleStr;
 declare type HookIndex = number;
 /**
  * Register a listener for object changes.
@@ -280,7 +280,7 @@ declare function Mouse(...args: any): any;
 declare function MouseObj(...args: any): any;
 declare const MultiLanguage: Array<[string, string]>;
 declare const Obj: Obj<string, any, any>;
-declare function ObjectList<T extends Obj>(address: string): T[];
+declare function ObjectList<T extends GenericObj>(address: string): T[];
 declare function OverallDeviceCertificate(...args: any): any;
 declare function Patch(): Patch;
 declare function PluginVars(...args: any): any;
@@ -339,7 +339,9 @@ declare function ShowData(): ShowData;
 declare function ShowSettings(): any;
 declare function StartProgress(...args: any): any;
 declare function StopProgress(...args: any): any;
-declare function StrToHandle<T extends Obj = Obj>(strHandle: MAObjectHandleStr): T;
+declare function StrToHandle<T extends Obj<string, any, any> = Obj<string, any, any>>(
+	strHandle: MAObjectHandleStr,
+): T;
 declare function SyncFS(...args: any): any;
 declare function TextInput(...args: any): string;
 declare function Time(): number;
@@ -368,7 +370,7 @@ type MAVersionString = `${number}.${number}.${number}.${number}`;
  */
 declare function Version(): MAVersionString;
 declare function WaitModal(...args: any): any;
-declare function WaitObjectDelete(obj: Obj, secondsToWait?: number): true | undefined;
+declare function WaitObjectDelete(obj: UIObject, secondsToWait?: number): true | undefined;
 
 type AttributeName =
 	| 'Dimmer'

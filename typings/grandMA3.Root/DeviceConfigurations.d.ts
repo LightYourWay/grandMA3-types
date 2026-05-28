@@ -23,7 +23,7 @@ type ArtNetDataProps = ObjProps & {
 	localUniverse: DMXUniverseNumber;
 	mode: Enums.ArtNetDataMode;
 };
-type ArtNetData = Obj<string, ArtNetDataCollect, undefined, ArtNetDataProps> & ArtNetDataProps;
+type ArtNetData = Obj<string, ArtNetDataCollect, never, ArtNetDataProps> & ArtNetDataProps;
 
 type ArtNetNodeCollect = Obj<string, ArtNet, ArtNetData>;
 
@@ -33,6 +33,6 @@ type sACNDataProps = ObjProps & {
 	localUniverse: number;
 	mode: Enums.SacnDataMode;
 };
-type sACNData = Obj<string, sACNDataCollect, undefined, sACNDataProps> & sACNDataProps;
+type sACNData = Obj<string, sACNDataCollect, never, sACNDataProps> & sACNDataProps;
 
-type sACNDiscoveryCollect = Obj<string, sACN, undefined>;
+type sACNDiscoveryCollect = Obj<string, sACN, never>;

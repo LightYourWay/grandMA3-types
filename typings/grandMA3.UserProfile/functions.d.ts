@@ -27,7 +27,7 @@ type View = Obj<string, Views, WindowBase>;
 
 type UserAttributePreferences = Obj<string, UserProfile, UserAttribute>;
 
-type UserAttribute = Obj<string, UserAttributePreferences, undefined> & {
+type UserAttribute = Obj<string, UserAttributePreferences, never> & {
 	EncoderResolution: Enums.AttriebuteEncoderResolution;
 };
 

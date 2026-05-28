@@ -1,7 +1,7 @@
 type Appearances = Obj<string, ShowData, Appearance> &
 	Appearance[] & { [index: string]: Appearance };
 
-type Appearance = Obj<string, Appearances, undefined, AppearanceProps> & AppearanceProps;
+type Appearance = Obj<string, Appearances, never, AppearanceProps> & AppearanceProps;
 
 type AppearanceProps = ObjProps & {
 	BACKR: number;
@@ -20,9 +20,9 @@ type ScribbleProps = ObjProps & {
 };
 
 type Scribbles = Obj<string, ShowData, Scribble> & Scribble[] & { [index: string]: Scribble };
-type Scribble = Obj<string, Appearances, undefined, ScribbleProps> & ScribbleProps;
+type Scribble = Obj<string, Appearances, never, ScribbleProps> & ScribbleProps;
 
 type TagProps = ObjProps;
 
 type Tags = Obj<string, ShowData, Tag> & Tag[] & { [index: string]: Tag };
-type Tag = Obj<string, Tags, undefined, TagProps> & TagProps;
+type Tag = Obj<string, Tags, never, TagProps> & TagProps;

@@ -5,11 +5,9 @@ type ColorDefCollect = Obj<string, Root> & {
 	PoolDefault: ColorDefGroup;
 };
 
-type ColorDefGroup = Obj & {
-	[name: string]: ColorDef;
-};
+type ColorDefGroup = Obj<string, ColorDefCollect, ColorDef>;
 
-type ColorDef = Obj & {
+type ColorDef = Obj<string, ColorDefGroup, never> & {
 	RGBA: string;
 };
 

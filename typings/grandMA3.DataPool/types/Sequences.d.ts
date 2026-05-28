@@ -1,4 +1,4 @@
-type Sequences = Obj<string, DataPoolClass, Sequence> &
+type Sequences = Obj<'Sequences', DataPool, Sequence> &
 	(Sequence | undefined)[] & { [index: string]: Sequence | undefined };
 
 type SequenceRateMaster =
@@ -85,12 +85,9 @@ type SequenceProps = ObjProps & {
 	xFadeReload: boolean;
 };
 
-type Sequence = Obj<string, Sequences, Cue> &
+type Sequence = Obj<string, Sequences, Cue, SequenceProps> &
 	SequenceProps &
-	(Cue | undefined)[] & { [index: string]: Cue | undefined } & {
-		CurrentChild: () => LuaMultiReturn<[Cue | undefined, string]>;
-		name: string;
-	};
+	(Cue | undefined)[] & { [index: string]: Cue | undefined };
 
 type Cue = Obj<string, Sequence, Part> &
 	(Part | undefined)[] & { [index: string]: Part | undefined } & {
@@ -104,7 +101,7 @@ type Cue = Obj<string, Sequence, Part> &
 		no: number;
 	};
 type PartProps = ObjProps & {
-	appearance: Obj;
+	appearance: Appearance;
 	command: string;
 	note: string;
 	part: number;
@@ -122,37 +119,3 @@ type PartProps = ObjProps & {
 };
 
 type Part = Obj<string, Cue, Recipe, PartProps> & PartProps;
-
-declare namespace MA3_v2_0_2 {
-	type SequenceProps = ObjProps & {
-		autoStart: boolean;
-		autoStop: boolean;
-		autoFix: boolean;
-		autoStomp: boolean;
-		autoPrePos: boolean;
-		commandEnable: boolean;
-		executorDisplayMode: SequenceExecutorDisplayMode;
-		includeLinkLastGo: boolean;
-		killProtect: boolean;
-		masterGoMode: SequenceMasterGoMode;
-		offWhenOverridden: boolean;
-		playbackMaster: SequencePlaybackMaster;
-		preferCueAppearance: boolean;
-		priority: SequencePriority;
-		rateMaster: SequenceRateMaster;
-		rateScale: SequenceSpeedScale;
-		releaseFirstCue: boolean;
-		restartMode: SequenceRestartMode;
-		sequMib?: SequenceMib;
-		sequMibMode?: SequenceMibMode;
-		softLTP: boolean;
-		speedFromRate: boolean;
-		speedMaster: SequenceSpeedMaster;
-		speedScale: SequenceSpeedScale;
-		swapProtect: boolean;
-		useExecutorTime: boolean;
-		wrapAround: boolean;
-		xFadeMode: boolean;
-		xFadeReload: boolean;
-	};
-}

@@ -15,7 +15,7 @@ type TextureProps = ObjProps & {
 	textureRect: { h: number; w: number; x: number; y: number };
 	textureIndex: number;
 };
-type Texture = Obj<string, Textures, undefined, TextureProps> & TextureProps;
+type Texture = Obj<string, Textures, never, TextureProps> & TextureProps;
 
 type PultCollect = Obj<string, GraphicsRoot, Pult> & {
 	[name: string]: Pult;

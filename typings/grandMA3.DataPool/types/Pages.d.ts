@@ -1,19 +1,18 @@
-type Pages = Obj<string, DataPoolClass, Page> &
-	(Page | undefined)[] &
-	Record<string, Page | undefined>;
+type Pages = Obj<'Pages', DataPool, Page> & (Page | undefined)[] & Record<string, Page | undefined>;
 
-type Page = Obj<string, Pages, Executor | ExecutorProxy>;
+type Page = Obj<'Page', Pages, Executor | Proxy>;
 
-type ExecutorBaseProps = {
+type ExecutorProxyProps = {
 	fader: 'Master' | 'Temp'; //...
 };
+
 type ExecutorProps = ObjProps &
-	ExecutorBaseProps & {
-		object: Obj;
+	ExecutorProxyProps & {
+		object: GenericObj;
 		width: number;
 		height: number;
 	};
-type Executor = Obj<'Exec', Page, undefined, ExecutorProps>;
+type Executor = Obj<'Executor', Page, never, ExecutorProps> & ExecutorProps;
 
-type ExecutorProxyProps = ObjProps & ExecutorBaseProps;
-type ExecutorProxy = Obj<'Proxy', Page, undefined, ExecutorProxyProps> & ExecutorProxyProps;
+type ProxyProps = ObjProps & ExecutorProxyProps;
+type Proxy = Obj<'Proxy', Page, never, ProxyProps> & ProxyProps;

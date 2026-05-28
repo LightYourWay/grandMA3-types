@@ -7,19 +7,19 @@ type Masters = Obj<string, ShowData, any> & {
 
 type Playback = Obj<string, Masters, MasterPlayback>;
 
-type MasterPlayback = Obj<string, Playback, undefined>;
+type MasterPlayback = Obj<string, Playback, never>;
 
 type Speed = Obj<string, Masters, MasterSpeed>;
 
-type MasterSpeed = Obj<string, Speed, undefined, MasterSpeedProps> & MasterSpeedProps;
+type MasterSpeed = Obj<string, Speed, never, MasterSpeedProps> & MasterSpeedProps;
 
 type Grand = Obj<string, Masters, MasterGrand>;
 
-type MasterGrand = Obj<string, Grand, undefined>;
+type MasterGrand = Obj<string, Grand, never>;
 
 type Timing = Obj<string, Masters, MasterTiming>;
 
-type MasterTiming = Obj<string, Timing, undefined>;
+type MasterTiming = Obj<string, Timing, never>;
 
 type MasterSpeedProps = ObjProps & {
 	/**

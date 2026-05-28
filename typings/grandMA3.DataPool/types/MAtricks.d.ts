@@ -1,6 +1,5 @@
-type MAtricks = Obj<string, DataPoolClass, MAtrick> & MAtrick[] & { [index: string]: MAtrick };
+type MAtricks = Obj<string, DataPool, MAtrick> & MAtrick[] & { [index: string]: MAtrick };
 
-type MAtrickProps = ObjProps & MAtrickOnlyProps;
 type MAtrickTransform = 'None' | 'Mirror';
 type MAtrickInvertStyle = 'Pan' | 'Tilt' | 'P+T' | 'All';
 
@@ -60,9 +59,9 @@ type MAtrickOnlyProps = {
 	phaseToZ: number | 'None';
 };
 
-type MAtrickOnlyPropName = keyof MAtrickOnlyProps;
-
-type MAtrick = Obj<string, MAtricks, undefined> &
-	MAtrickProps & {
+type MAtrickProps = ObjProps &
+	MAtrickOnlyProps & {
 		appearance: Appearance;
 	};
+
+type MAtrick = Obj<'MAtrick', MAtricks, never, MAtrickProps> & MAtrickProps;

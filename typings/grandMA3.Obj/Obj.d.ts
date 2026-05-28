@@ -1,20 +1,19 @@
-type GenericObj = Obj<string, GenericObj, GenericObj> & {
-	[key: string]: GenericObj;
-};
+type GenericObj = Obj<string, unknown, unknown> &
+	unknown[] & { [index: string]: unknown } & ObjProps;
 
 type ObjProps = {
 	name: string;
 	nameAndApp: string;
 	index: number;
 };
-
 interface Obj<
-	ClassName extends string = string,
-	ParentType = any,
-	ChildType = any | undefined,
+	ClassName extends string,
+	ParentType extends Obj<string, any, any> | unknown | never = never,
+	ChildType extends Obj<string, any, any> | unknown | never = never,
 	Props extends ObjProps = ObjProps,
 > {
 	readonly lock: '' | 'Yes' | 'SS';
+
 	name: string;
 	nameAndApp: string;
 	index: number;
@@ -34,8 +33,8 @@ interface Obj<
 	Addr(...args: any): any;
 	AddrNative(): string;
 	/** Adds a child to the end of this object childrens list */
-	Append(clazz?: string, undo?: UndoHandle, count?: number): any;
-	Aquire(clazz?: string, undo?: UndoHandle): ChildType;
+	Append(className?: string, undo?: UndoHandle, count?: number): any;
+	Aquire(className?: string, undo?: UndoHandle): ChildType;
 	Changed(...args: any): any;
 	Children(): ChildType[];
 	ClearList(...args: any): any;
@@ -55,10 +54,10 @@ interface Obj<
 	/**
 	 * Create a child at the given index
 	 * @param childIndex 1-based
-	 * @param clazz class of child
+	 * @param className class of child
 	 * @param undo
 	 */
-	Create(childIndex: number, clazz?: string, undo?: UndoHandle): ChildType;
+	Create(childIndex: number, className?: string, undo?: UndoHandle): ChildType;
 	CurrentChild(): ChildType | undefined;
 	Delete(childIndex: number, undo?: UndoHandle): void;
 	Dump(): string;
@@ -70,14 +69,11 @@ interface Obj<
 	/**
 	 * Find recursivly an object by name an/or class
 	 * @param name exact name of object. If undefined then only class will be matched.
-	 * @param clazz partial name of the class
+	 * @param className partial name of the class
 	 */
-	FindRecursive(name: string | undefined, clazz?: string): Obj<string, any, any>;
+	FindRecursive(name: string | undefined, className?: string): Obj<string, any, any>;
 	FindWild(search: string): any;
-	Get<K extends string>(
-		propName: K,
-		role?: Enums.Roles,
-	): K extends keyof Props ? Props[K] : unknown;
+	Get<K extends keyof Props>(propName: K, role?: Enums.Roles): Props[K];
 	GetAssignedObj(...args: any): any;
 	/** Get the child class name */
 	GetChildClass(): string;
@@ -132,7 +128,7 @@ interface Obj<
 	InputSetEditTitle(...args: any): any;
 	InputSetTitle(...args: any): any;
 	/** Insert a child at a given 1-based index, pushing all other children forward */
-	Insert(childIndex: number, clazz?: string, undo?: UndoHandle, count?: number): any;
+	Insert(childIndex: number, className?: string, undo?: UndoHandle, count?: number): any;
 	IsClass(...args: any): any;
 	IsEmpty(...args: any): any;
 	IsListItemEmpty(...args: any): any;
@@ -182,7 +178,7 @@ interface Obj<
 	SelectListItemByIndex(...args: any): any;
 	SelectListItemByName(...args: any): any;
 	SelectListItemByValue(...args: any): any;
-	Set<K extends string>(propName: K, value: K extends keyof Props ? Props[K] : unknown): any;
+	Set<K extends keyof Props>(propName: K, value: Props[K]): any;
 	SetChildren(...args: any): any;
 	SetEmptyListItem(...args: any): any;
 	SetEnabledListItem(...args: any): any;

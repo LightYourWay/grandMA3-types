@@ -9,11 +9,9 @@ type ColorGroups = Obj<string, ColorTheme, ColorGroup> & {
 	[name: string]: ColorGroup;
 };
 
-type ColorGroup = Obj & {
-	[name: string]: MAColor;
-};
+type ColorGroup = Obj<string, ColorGroups, MAColor>;
 
-type MAColor = Obj & {
+type MAColor = Obj<string, ColorGroup, never> & {
 	/**
 	 * HEX string without a leading '#'
 	 * HEX string must include 8 characters

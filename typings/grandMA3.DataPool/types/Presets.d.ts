@@ -1,6 +1,6 @@
 type PresetFamilyType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 21 | 22 | 23 | 24 | 25;
 
-type PresetPools = Obj<string, DataPoolClass, Presets> & {
+type PresetPools = Obj<string, DataPool, Presets> & {
 	Dimmer: Presets;
 	Position: Presets;
 	Gobo: Presets;

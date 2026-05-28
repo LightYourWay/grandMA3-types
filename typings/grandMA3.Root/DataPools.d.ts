@@ -1,4 +1,4 @@
-type DataPools = Obj<string, ShowData, DataPoolClass> &
-	DataPoolClass[] & { [index: string]: DataPoolClass } & {
-		Default: DataPoolClass;
+type DataPools = Obj<'DataPools', ShowData, DataPool> &
+	DataPool[] & { [index: string]: DataPool } & {
+		Default: DataPool;
 	};

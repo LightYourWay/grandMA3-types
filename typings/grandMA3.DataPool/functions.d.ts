@@ -1,7 +1,4 @@
-/*
- * Pool can be renamed !! So better
- */
-type DataPoolChild =
+type DataPoolChildren =
 	| Filters
 	| PresetPools
 	| Groups
@@ -13,7 +10,7 @@ type DataPoolChild =
 	| Layouts
 	| Timecodes;
 
-type DataPoolClass = Obj<string, DataPools, DataPoolChild> & {
+type DataPool = Obj<string, DataPools, DataPoolChildren> & {
 	Filters: Filters;
 	PresetPools: PresetPools;
 	Groups: Groups;
@@ -26,7 +23,7 @@ type DataPoolClass = Obj<string, DataPools, DataPoolChild> & {
 	Timecodes: Timecodes;
 };
 
-type Groups = Obj<string, DataPoolClass, Group> & {
+type Groups = Obj<string, DataPool, Group> & {
 	Resize: (size: number) => void;
 };
 type Group = Obj<string, Groups, any> & {
@@ -45,20 +42,20 @@ type FixtureSelectionData = {
 	sf_index: number;
 };
 
-type Filters = Obj<string, DataPoolClass, Filter>;
+type Filters = Obj<string, DataPool, Filter>;
 type FilterProps = ObjProps;
 type Filter = Obj<string, Filters, any, FilterProps>;
 
 type RecipeProps = ObjProps;
 
-type Recipe = Obj<string, Part, undefined, RecipeProps> & {
+type Recipe = Obj<string, Part, never, RecipeProps> & {
 	selection: Group;
 	values: Preset;
-	matricks: Obj;
-	filter: Obj;
+	matricks?: MAtrick;
+	filter: Filter;
 };
 
-type Timecodes = Obj<string, DataPoolClass, Timecode> & Record<string, Timecode>;
+type Timecodes = Obj<string, DataPool, Timecode> & Record<string, Timecode>;
 type Timecode = Obj<string, Timecodes, Triggers> & { Triggers: Triggers };
 
 type Triggers = Obj<string, Timecode, Track> & Record<string, Track>;
@@ -68,13 +65,7 @@ type CmdSubTrack = Obj<string, TimeRange, CmdSubTrackEvent>;
 type CmdSubTrackEventProps = ObjProps & {
 	rawTime: number;
 };
-type CmdSubTrackEvent = Obj<string, TimeRange, undefined, CmdSubTrackEventProps>;
-
-declare namespace MA3_v2_0_2 {
-	type FilterProps = ObjProps & {
-		active: boolean;
-	};
-}
+type CmdSubTrackEvent = Obj<string, TimeRange, never, CmdSubTrackEventProps> & ObjProps;
 
 type DataPoolIndex =
 	| 1

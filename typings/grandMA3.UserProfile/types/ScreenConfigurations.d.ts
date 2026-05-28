@@ -36,8 +36,8 @@ interface WindowBase
 	WindowScrollPositions: WindowScrollPositions;
 }
 
-type WindowAppearance = Obj<string, WindowBase, undefined>;
-type WindowScrollPositions = Obj<string, WindowBase, undefined> & {
+type WindowAppearance = Obj<string, WindowBase, never>;
+type WindowScrollPositions = Obj<string, WindowBase, never> & {
 	/**
 	 * A string with 2 integer numbers separated by a comma.
 	 * The first number is the vertical scroll position.
@@ -67,7 +67,7 @@ interface LayoutViewSettingsProps {
 	PaddingBottom: number;
 	PaddingTop: number;
 }
-type LayoutViewSettings = Obj<string, WindowBase, undefined> & LayoutViewSettingsProps;
+type LayoutViewSettings = Obj<string, WindowBase, never> & LayoutViewSettingsProps;
 
 type ViewButtonScreenKey = `ViewButtonScreen ${number}`;
 type ViewButtonScreens = Obj<string, ScreenConfiguration, ViewButtonScreen> &
@@ -75,7 +75,7 @@ type ViewButtonScreens = Obj<string, ScreenConfiguration, ViewButtonScreen> &
 
 type ViewButtonScreen = Obj<string, ViewButtonScreens, ViewButton>;
 
-type ViewButton = Obj<string, ViewButtonScreen, undefined>;
+type ViewButton = Obj<string, ViewButtonScreen, never>;
 
 interface WindowEncoderBar extends WindowBase {
 	name: 'WindowEncoderBar';
@@ -84,4 +84,4 @@ interface WindowEncoderBar extends WindowBase {
 interface EncoderBarWindowSettingsProps {
 	fadeEncoder: boolean;
 }
-type EncoderBarWindowSettings = Obj<string, WindowBase, undefined> & EncoderBarWindowSettingsProps;
+type EncoderBarWindowSettings = Obj<string, WindowBase, never> & EncoderBarWindowSettingsProps;

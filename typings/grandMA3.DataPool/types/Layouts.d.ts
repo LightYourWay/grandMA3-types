@@ -1,4 +1,4 @@
-type Layouts = Obj<string, DataPoolClass, Layout> & Layout[] & { [index: string]: Layout };
+type Layouts = Obj<string, DataPool, Layout> & Layout[] & { [index: string]: Layout };
 
 type Layout = Obj<string, Layouts, Element> & Element[] & { [index: string]: Element };
 
@@ -37,48 +37,8 @@ type ElementProps = ObjProps & {
 	width: number;
 };
 
-declare namespace MA3_V1_8 {
-	type ElementProps = {
-		action: number;
-		assignType: number;
-		appearance: Appearance;
-		borderSize: number;
-		borderColor: string;
-		customText: string;
-		/** 8 character hex string RGBA */
-		fontSize: LayoutElementCustomTextSize;
-		id: number;
-		positionH: number;
-		positionW: number;
-		paddingLeft: number;
-		paddingRight: number;
-		paddingTop: number;
-		paddingBottom: number;
-		posX: number;
-		posY: number;
-		visibilityElement: boolean;
-		visibilityBar: boolean;
-		visibilityObjectName: boolean;
-		visibilityID: boolean;
-		visibilityCID: boolean;
-		visibilityBorder: boolean;
-		visibilityValue: boolean;
-		visibilityIndicatorBar: boolean;
-		visibilitySelectionRelevance: boolean;
-		textAlignmentH: 'Center' | 'Left' | 'Right';
-		textAlignmentV: 'Center' | 'Top' | 'Bottom' | 'Above';
-		/** 8 character hex string RGBA */
-		textColor: string;
-	};
-
-	type Element = Obj<string, Layout, undefined> &
-		ElementProps & {
-			object: Obj;
-		};
-}
-
-type Element = Obj<string, Layout, undefined> &
+type Element = Obj<string, Layout, never> &
 	ElementProps & {
-		object: Obj;
+		object: GenericObj;
 		note: string;
 	};
