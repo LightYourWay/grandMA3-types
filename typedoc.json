@@ -4,8 +4,11 @@
 	"entryPoints": ["typings"],
 	"entryPointStrategy": "expand",
 	"out": "docs",
-	"plugin": ["typedoc-rhineai-theme"],
+	"plugin": ["typedoc-rhineai-theme", "./scripts/typedoc-navigation-groups.cjs"],
 	"theme": "typedoc-rhineai-theme",
+	"navigation": {
+		"includeGroups": true
+	},
 	"readme": "README.md",
 	"tsconfig": "tsconfig.json"
 }
