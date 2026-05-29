@@ -6,7 +6,8 @@
 	"scripts": {
 		"lint:check": "prettier --check \"typings/**/*.ts\"",
 		"lint:fix": "prettier --write \"typings/**/*.ts\"",
-		"tsc": "tsc --watch"
+		"tsc": "tsc --watch",
+		"docs": "typedoc"
 	},
 	"prettier": {
 		"printWidth": 100,
@@ -29,6 +30,8 @@
 		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
 		"lua-types": "^2.14.1",
 		"prettier": "^3.8.3",
+		"typedoc": "~0.28.15",
+		"typedoc-rhineai-theme": "^1.2.0",
 		"typescript": "6.0.2",
 		"typescript-to-lua": "1.36.0"
 	},

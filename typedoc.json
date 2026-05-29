@@ -1,0 +1,11 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"name": "grandMA3-types",
+	"entryPoints": ["typings"],
+	"entryPointStrategy": "expand",
+	"out": "docs",
+	"plugin": ["typedoc-rhineai-theme"],
+	"theme": "typedoc-rhineai-theme",
+	"readme": "README.md",
+	"tsconfig": "tsconfig.json"
+}

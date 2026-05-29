@@ -27,6 +27,14 @@ npm link ../grandMA3-types
 }
 ```
 
+## generate documentation
+
+```bash
+npm run docs
+```
+
+The generated TypeDoc site is written to `docs/` using `typedoc-rhineai-theme`.
+
 ## Contributors
 
 If you have something to contribute / add to the type declarations - **AWESOME** :tada: feel free to:
