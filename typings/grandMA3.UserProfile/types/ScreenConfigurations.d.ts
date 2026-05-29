@@ -25,10 +25,8 @@ type ScreenConfig = Obj<
 	ScreenConfigChildren[keyof ScreenConfigChildren][] &
 	ScreenConfigChildren;
 
-// ScreenNumber
 type ScreenNumber = number;
 
-// ScreenContentKey
 type ScreenContentKey = `ScreenContent ${ScreenNumber}`;
 
 // ScreenContents
@@ -99,7 +97,6 @@ type WindowScrollPositions = Obj<
 > &
 	WindowScrollPositionsProperties;
 
-// WindowLayoutView
 interface WindowLayoutView extends ViewWidget {
 	name: 'WindowLayoutView';
 	LayoutViewSettings: LayoutViewSettings;
@@ -124,7 +121,6 @@ type LayoutViewSettings = Obj<
 > &
 	LayoutViewSettingsProperties;
 
-// ViewButtonScreenKey
 type ViewButtonScreenKey = `ViewButtonScreen ${number}`;
 
 // ViewButtonScreens
@@ -140,7 +136,6 @@ type ViewButtonScreen = Obj<'ViewButtonScreen', ViewButtonScreens, ViewButton> &
 // ViewButton
 type ViewButton = Obj<'ViewButton', ViewButtonScreen, never>;
 
-// WindowEncoderBar
 interface WindowEncoderBar extends ViewWidget {
 	name: 'WindowEncoderBar';
 	EncoderBarWindowSettings: EncoderBarWindowSettings;

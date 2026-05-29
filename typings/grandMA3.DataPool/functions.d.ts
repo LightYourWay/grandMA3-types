@@ -26,7 +26,6 @@ type GroupProperties = ObjProps & {
 };
 type Group = Obj<'Group', Groups, never, GroupProperties> & GroupProperties;
 
-// FixtureSelectionData
 type FixtureSelectionData = {
 	grid: {
 		inv: number;

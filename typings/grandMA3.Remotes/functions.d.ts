@@ -31,10 +31,8 @@ type MIDIRemotes = Obj<'MIDIRemotes', Remotes, MIDIRemote, MIDIRemotesProperties
 	Record<string, MIDIRemote | undefined> &
 	MIDIRemotesProperties;
 
-// RemoteFaderType
 type RemoteFaderType = '' | 'Master' | 'X' | 'XA' | 'XB' | 'Temp' | 'Rate' | 'Speed' | 'Time';
 
-// RemoteKeyType
 type RemoteKeyType =
 	| ''
 	| '>>>'
@@ -61,10 +59,8 @@ type RemoteKeyType =
 	| 'Toggle'
 	| 'Top';
 
-// MIDIMidiType
 type MIDIMidiType = 'Note' | 'NoteAttack' | 'NoteAttackDecay' | 'Control';
 
-// RemoteLockType
 type RemoteLockType = '' | 'Yes';
 
 // MIDIRemote
@@ -89,7 +85,6 @@ type MIDIRemoteProperties = ObjProps & {
 type MIDIRemote = Obj<'MIDIRemote', MIDIRemotes, never, MIDIRemoteProperties> &
 	MIDIRemoteProperties;
 
-// DmxRemoteResolution
 type DmxRemoteResolution = '8bit' | '16bit' | '24bit';
 
 // DmxRemote

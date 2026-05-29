@@ -3,10 +3,8 @@ type MAtricks = Obj<'MAtricks', Pool, MAtrick> &
 	(MAtrick | undefined)[] &
 	Record<string, MAtrick | undefined>;
 
-// MAtrickTransform
 type MAtrickTransform = 'None' | 'Mirror';
 
-// MAtrickInvertStyle
 type MAtrickInvertStyle = 'Pan' | 'Tilt' | 'P+T' | 'All';
 
 // MAtrick

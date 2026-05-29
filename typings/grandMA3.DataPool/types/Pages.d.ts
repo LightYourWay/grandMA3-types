@@ -6,7 +6,6 @@ type Page = Obj<'Page', Pages, Executor | Proxy> &
 	(Executor | Proxy | undefined)[] &
 	Record<string, Executor | Proxy | undefined>;
 
-// ExecutorProxy
 type ExecutorProxyProperties = {
 	fader: 'Master' | 'Temp'; //...
 };

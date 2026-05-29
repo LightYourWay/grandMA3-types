@@ -45,7 +45,6 @@ type Fixtures = Obj<'Fixtures', Stage, Fixture> &
 	(Fixture | undefined)[] &
 	Record<string, Fixture | undefined>;
 
-// DMXMultiAddrString
 type DMXMultiAddrString =
 	| DMXAddrString
 	| `${DMXAddrString},${DMXAddrString}`

@@ -11,7 +11,6 @@ type MediaPools = Obj<'MediaPools', ShowData, MediaPoolsChildren[keyof MediaPool
 	MediaPoolsChildren[keyof MediaPoolsChildren][] &
 	MediaPoolsChildren;
 
-// MediaObj
 type MediaObj = GoboImage | SymbolImage | UserImage | MeshImage | Video | Sound;
 
 // GoboImages
