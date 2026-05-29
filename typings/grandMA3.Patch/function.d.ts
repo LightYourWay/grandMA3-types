@@ -1,3 +1,4 @@
+// Patch
 type PatchChildren = {
 	FixtureTypes: FixtureTypes;
 };
@@ -6,6 +7,7 @@ type Patch = Obj<'Patch', ShowData, PatchChildren[keyof PatchChildren]> &
 	Record<string, PatchChildren[keyof PatchChildren] | undefined> &
 	PatchChildren;
 
+// LivePatch
 type LivePatchChildren = {
 	AttributeDefinitions: AttributeDefinitions;
 	FixtureTypes: FixtureTypes;
@@ -17,10 +19,12 @@ type LivePatch = Obj<'Patch', ShowData, LivePatchChildren[keyof LivePatchChildre
 	Record<string, LivePatchChildren[keyof LivePatchChildren] | undefined> &
 	LivePatchChildren;
 
+// Stages
 type Stages = Obj<'Stages', LivePatch | Patch, Stage> &
 	(Stage | undefined)[] &
 	Record<number, Stage | undefined>;
 
+// Stage
 type StageChildren = {
 	Spaces: Spaces;
 	Fixtures: Fixtures;
@@ -32,14 +36,22 @@ type Stage = Obj<'Stage', Stages, StageChildren[keyof StageChildren], StagePrope
 	StageChildren[keyof StageChildren][] &
 	StageChildren &
 	StageProperties;
+
+// Spaces
 type Spaces = Obj<'Spaces', Stage, never>;
+
+// Fixtures
 type Fixtures = Obj<'Fixtures', Stage, Fixture> &
 	(Fixture | undefined)[] &
 	Record<string, Fixture | undefined>;
+
+// DMXMultiAddrString
 type DMXMultiAddrString =
 	| DMXAddrString
 	| `${DMXAddrString},${DMXAddrString}`
 	| `${DMXAddrString},${DMXAddrString},${DMXAddrString}`; // May be more ?
+
+// Fixture
 type FixtureProperties = ObjProps & {
 	/**
 	 * If the fixture has a CID, then the index is the CID.
@@ -59,21 +71,23 @@ type FixtureProperties = ObjProps & {
 };
 type Fixture = Obj<'Fixture', Fixtures, any, FixtureProperties> & FixtureProperties;
 
+// SubFixture
 type SubFixtureProperties = ObjProps & {
 	fixture: Fixture;
 	stage: Stage;
 };
 type SubFixture = Obj<'SubFixture', Fixtures, any, SubFixtureProperties> & SubFixtureProperties;
 
+// UIChannels
 type UIChannels = Obj<'UIChannels', LivePatch | Patch, UIChannel> &
 	(UIChannel | undefined)[] &
 	Record<string, UIChannel | undefined>;
 
+// UIChannel
 type UIChannelProperties = ObjProps & {
 	logical_channel: LogicalChannel;
 	attr_index: number;
 	rt_index: number;
 	subAttribute: AttributeName;
 };
-
 type UIChannel = Obj<'UIChannel', UIChannels, never, UIChannelProperties> & UIChannelProperties;

@@ -1,3 +1,4 @@
+// Remotes
 type RemotesChildren = {
 	DCRemotes: DCRemotes;
 	MIDIRemotes: MIDIRemotes;
@@ -7,28 +8,33 @@ type Remotes = Obj<'Remotes', ShowData, RemotesChildren[keyof RemotesChildren]> 
 	RemotesChildren[keyof RemotesChildren][] &
 	RemotesChildren;
 
+// DCRemotes
+type DCRemotes = Obj<'DCRemotes', Remotes, never>;
+
+// DmxRemotes
 type DmxRemotesProperties = ObjProps & {
 	enabled: boolean;
 };
-
-type DCRemotes = Obj<'DCRemotes', Remotes, never>;
 type DmxRemotes = Obj<'DmxRemotes', Remotes, DmxRemote, DmxRemotesProperties> &
 	(DmxRemote | undefined)[] &
 	Record<string, DmxRemote | undefined> &
 	DmxRemotesProperties;
 
+// MIDIRemotes
 type MIDIRemotesProperties = ObjProps & {
 	enabled: boolean;
 	feedbackInput: boolean;
 	Image: UserImage;
 };
-
 type MIDIRemotes = Obj<'MIDIRemotes', Remotes, MIDIRemote, MIDIRemotesProperties> &
 	(MIDIRemote | undefined)[] &
 	Record<string, MIDIRemote | undefined> &
 	MIDIRemotesProperties;
 
+// RemoteFaderType
 type RemoteFaderType = '' | 'Master' | 'X' | 'XA' | 'XB' | 'Temp' | 'Rate' | 'Speed' | 'Time';
+
+// RemoteKeyType
 type RemoteKeyType =
 	| ''
 	| '>>>'
@@ -54,8 +60,14 @@ type RemoteKeyType =
 	| 'Temp'
 	| 'Toggle'
 	| 'Top';
+
+// MIDIMidiType
 type MIDIMidiType = 'Note' | 'NoteAttack' | 'NoteAttackDecay' | 'Control';
+
+// RemoteLockType
 type RemoteLockType = '' | 'Yes';
+
+// MIDIRemote
 type MIDIRemoteProperties = ObjProps & {
 	lock: RemoteLockType;
 	target: GenericObj;
@@ -74,11 +86,13 @@ type MIDIRemoteProperties = ObjProps & {
 	midiIndex: number;
 	midiType: MIDIMidiType;
 };
-
 type MIDIRemote = Obj<'MIDIRemote', MIDIRemotes, never, MIDIRemoteProperties> &
 	MIDIRemoteProperties;
 
+// DmxRemoteResolution
 type DmxRemoteResolution = '8bit' | '16bit' | '24bit';
+
+// DmxRemote
 type DmxRemoteProperties = ObjProps & {
 	lock: RemoteLockType;
 	target: GenericObj;
@@ -96,5 +110,4 @@ type DmxRemoteProperties = ObjProps & {
 	address: number;
 	resolution: DmxRemoteResolution;
 };
-
 type DmxRemote = Obj<'DmxRemote', DmxRemotes, never, DmxRemoteProperties> & DmxRemoteProperties;

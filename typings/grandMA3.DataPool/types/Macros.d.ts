@@ -1,7 +1,9 @@
+// Macros
 type Macros = Obj<'Macros', Pool, Macro> &
 	(Macro | undefined)[] &
 	Record<string, Macro | undefined>;
 
+// Macro
 type MacroProperties = ObjProps & {
 	appearance: Appearance;
 };
@@ -10,6 +12,7 @@ type Macro = Obj<'Macro', Macros, MacroLine, MacroProperties> &
 	Record<string, MacroLine | undefined> &
 	MacroProperties;
 
+// MacroLine
 type MacroLineProperties = ObjProps & {
 	wait: number;
 	command: string;

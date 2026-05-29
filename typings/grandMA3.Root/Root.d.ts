@@ -1,3 +1,4 @@
+// Root
 type RootChildren = {
 	ShowData: ShowData;
 	ColorTheme: ColorTheme;
@@ -12,15 +13,20 @@ type Root = Obj<'Root', never, RootChildren[keyof RootChildren]> &
 	Record<string, RootChildren[keyof RootChildren] | undefined> &
 	RootChildren;
 
+// UsbNotifier
 type UsbNotifierChildren = {
 	StorageDevice: Storage;
 };
 type UsbNotifier = Obj<'UsbNotifier', Root, UsbNotifierChildren[keyof UsbNotifierChildren]> &
 	UsbNotifierChildren[keyof UsbNotifierChildren][] &
 	UsbNotifierChildren;
+
+// Storage
 type Storage = Obj<'Storage', UsbNotifier, USBDeviceStorage> &
 	(USBDeviceStorage | undefined)[] &
 	Record<string, USBDeviceStorage | undefined>;
+
+// USBDeviceStorage
 type USBDeviceStorageProperties = ObjProps & {
 	connected: boolean;
 	connectedCount: any;
@@ -30,6 +36,7 @@ type USBDeviceStorageProperties = ObjProps & {
 type USBDeviceStorage = Obj<'USBDeviceStorage', Storage, never, USBDeviceStorageProperties> &
 	USBDeviceStorageProperties;
 
+// Temp
 type TempChildren = {
 	DriveCollect: DriveCollect;
 };
@@ -37,16 +44,19 @@ type Temp = Obj<'Temp', Root, TempChildren[keyof TempChildren]> &
 	TempChildren[keyof TempChildren][] &
 	TempChildren;
 
+// DriveCollect
 type DriveCollect = Obj<'DriveCollect', Temp, Drive> &
 	(Drive | undefined)[] &
 	Record<string, Drive | undefined>;
-type Drive = Obj<'Drive', DriveCollect, never, DriveProperties> & DriveProperties;
+
+// Drive
 type DriveProperties = ObjProps & {
 	driveType: 'Removeable' | 'Internal' | 'OldVersion';
 	path: string;
 };
+type Drive = Obj<'Drive', DriveCollect, never, DriveProperties> & DriveProperties;
 
-type MANetSocket = Obj<'MAnetSocket', Root, never, MANetSocketProperties> & MANetSocketProperties;
+// MANetSocket
 type MANetSocketProperties = ObjProps & {
 	hostName: string;
 	readonly primaryIp: string;
@@ -55,3 +65,4 @@ type MANetSocketProperties = ObjProps & {
 	readonly status: 'IdleMaster' | string;
 	readonly sessionManager: 'Yes' | 'No';
 };
+type MANetSocket = Obj<'MAnetSocket', Root, never, MANetSocketProperties> & MANetSocketProperties;

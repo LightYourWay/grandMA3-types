@@ -1,5 +1,7 @@
+// PresetFamilyType
 type PresetFamilyType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 21 | 22 | 23 | 24 | 25;
 
+// PresetPools
 type PresetPoolsChildren = {
 	Dimmer: Presets;
 	Position: Presets;
@@ -20,10 +22,15 @@ type PresetPools = Obj<'PresetPools', Pool, PresetPoolsChildren[keyof PresetPool
 	PresetPoolsChildren[keyof PresetPoolsChildren][] &
 	PresetPoolsChildren;
 
+// Presets
 type Presets = Obj<'Presets', PresetPools, Preset> &
 	(Preset | undefined)[] &
 	Record<string, Preset | undefined>;
+
+// PresetMode
 type PresetMode = 'Universal' | 'Global' | 'Selective';
+
+// Preset
 type PresetProperties = ObjProps & {
 	appearance: Appearance;
 	scribble: Scribble;

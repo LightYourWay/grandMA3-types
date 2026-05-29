@@ -1,11 +1,14 @@
+// Layouts
 type Layouts = Obj<'Layouts', Pool, Layout> &
 	(Layout | undefined)[] &
 	Record<string, Layout | undefined>;
 
+// Layout
 type Layout = Obj<'Layout', Layouts, Element> &
 	(Element | undefined)[] &
 	Record<string, Element | undefined>;
 
+// Element
 type ElementProperties = ObjProps & {
 	assignType: number;
 	action: Enums.AssignmentButtonFunctionsSequence;

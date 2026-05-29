@@ -1,10 +1,15 @@
+// MAtricks
 type MAtricks = Obj<'MAtricks', Pool, MAtrick> &
 	(MAtrick | undefined)[] &
 	Record<string, MAtrick | undefined>;
 
+// MAtrickTransform
 type MAtrickTransform = 'None' | 'Mirror';
+
+// MAtrickInvertStyle
 type MAtrickInvertStyle = 'Pan' | 'Tilt' | 'P+T' | 'All';
 
+// MAtrick
 type MAtrickOnlyProperties = {
 	invertStyle: MAtrickInvertStyle;
 	invertX: boolean;
@@ -60,10 +65,8 @@ type MAtrickOnlyProperties = {
 	phaseFromZ: number | 'None';
 	phaseToZ: number | 'None';
 };
-
 type MAtrickProperties = ObjProps &
 	MAtrickOnlyProperties & {
 		appearance: Appearance;
 	};
-
 type MAtrick = Obj<'MAtrick', MAtricks, never, MAtrickProperties> & MAtrickProperties;

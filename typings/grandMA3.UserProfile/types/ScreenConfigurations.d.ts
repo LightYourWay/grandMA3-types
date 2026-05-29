@@ -1,3 +1,4 @@
+// ScreenConfigurations
 type ScreenConfigurationsProperties = ObjProps & {
 	Default: ScreenConfig;
 };
@@ -11,6 +12,7 @@ type ScreenConfigurations = Obj<
 	Record<string, ScreenConfig | undefined> &
 	ScreenConfigurationsProperties;
 
+// ScreenConfig
 type ScreenConfigChildren = {
 	ScreenContents: ScreenContents;
 	'ViewButtonScreens 2': ViewButtonScreens;
@@ -23,16 +25,23 @@ type ScreenConfig = Obj<
 	ScreenConfigChildren[keyof ScreenConfigChildren][] &
 	ScreenConfigChildren;
 
+// ScreenNumber
 type ScreenNumber = number;
+
+// ScreenContentKey
 type ScreenContentKey = `ScreenContent ${ScreenNumber}`;
+
+// ScreenContents
 type ScreenContents = Obj<'ScreenContents', ScreenConfig, ScreenContent> &
 	(ScreenContent | undefined)[] &
 	Record<ScreenContentKey, ScreenContent | undefined>;
 
+// ScreenContent
 type ScreenContent = Obj<'ScreenContent', ScreenContents, ViewWidget> &
 	(ViewWidget | undefined)[] &
 	Record<string, ViewWidget | undefined>;
 
+// ViewWidget
 type ViewWidgetChildren = {
 	SelectionViewSettings: SelectionViewSettings;
 	WindowAppearance: WindowAppearance;
@@ -61,8 +70,13 @@ type ViewWidget = Obj<
 	ViewWidgetChildren &
 	ViewWidgetProperties;
 
+// SelectionViewSettings
 type SelectionViewSettings = Obj<'SelectionViewSettings', ViewWidget, never>;
+
+// WindowAppearance
 type WindowAppearance = Obj<'WindowAppearance', ViewWidget, never>;
+
+// WindowScrollPositions
 type WindowScrollPositionsProperties = ObjProps & {
 	/**
 	 * A string with 2 integer numbers separated by a comma.
@@ -85,11 +99,13 @@ type WindowScrollPositions = Obj<
 > &
 	WindowScrollPositionsProperties;
 
+// WindowLayoutView
 interface WindowLayoutView extends ViewWidget {
 	name: 'WindowLayoutView';
 	LayoutViewSettings: LayoutViewSettings;
 }
 
+// LayoutViewSettings
 type LayoutViewSettingsProperties = ObjProps & {
 	Layout: Layout;
 	FitType: 'Elements' | 'Canvas' | 'Both';
@@ -108,21 +124,29 @@ type LayoutViewSettings = Obj<
 > &
 	LayoutViewSettingsProperties;
 
+// ViewButtonScreenKey
 type ViewButtonScreenKey = `ViewButtonScreen ${number}`;
+
+// ViewButtonScreens
 type ViewButtonScreens = Obj<'ViewButtonScreens', ScreenConfig, ViewButtonScreen> &
 	(ViewButtonScreen | undefined)[] &
 	Record<ViewButtonScreenKey, ViewButtonScreen | undefined>;
 
+// ViewButtonScreen
 type ViewButtonScreen = Obj<'ViewButtonScreen', ViewButtonScreens, ViewButton> &
 	(ViewButton | undefined)[] &
 	Record<string, ViewButton | undefined>;
 
+// ViewButton
 type ViewButton = Obj<'ViewButton', ViewButtonScreen, never>;
 
+// WindowEncoderBar
 interface WindowEncoderBar extends ViewWidget {
 	name: 'WindowEncoderBar';
 	EncoderBarWindowSettings: EncoderBarWindowSettings;
 }
+
+// EncoderBarWindowSettings
 type EncoderBarWindowSettingsProperties = ObjProps & {
 	fadeEncoder: boolean;
 };

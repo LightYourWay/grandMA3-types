@@ -20,11 +20,13 @@ type Groups = Obj<'Groups', Pool, Group> &
 	(Group | undefined)[] &
 	Record<string, Group | undefined>;
 
+// Group
 type GroupProperties = ObjProps & {
 	selectionData: FixtureSelectionData[];
 };
 type Group = Obj<'Group', Groups, never, GroupProperties> & GroupProperties;
 
+// FixtureSelectionData
 type FixtureSelectionData = {
 	grid: {
 		inv: number;
@@ -38,11 +40,15 @@ type FixtureSelectionData = {
 	sf_index: number;
 };
 
+// Filters
 type Filters = Obj<'Filters', Pool, Filter> &
 	(Filter | undefined)[] &
 	Record<string, Filter | undefined>;
+
+// Filter
 type Filter = Obj<'Filter', Filters, never>;
 
+// Recipe
 type RecipeProperties = ObjProps & {
 	selection: Group;
 	values: Preset;

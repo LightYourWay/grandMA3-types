@@ -1,3 +1,4 @@
+// UserProfile
 type UserProfileChildren = {
 	Environments: Environments;
 	Views: Views;
@@ -11,7 +12,6 @@ type UserProfileProperties = ObjProps & {
 	autoRemoveGaps: boolean;
 	Name: string;
 };
-
 type UserProfile = Obj<
 	'UserProfile',
 	UserProfiles,
@@ -23,6 +23,7 @@ type UserProfile = Obj<
 	UserProfileChildren &
 	UserProfileProperties;
 
+// Environments
 type EnvironmentsProperties = ObjProps & {
 	/** Main Programmer Environment */
 	1: UserEnvironment;
@@ -34,18 +35,22 @@ type Environments = Obj<'Environments', UserProfile, UserEnvironment, Environmen
 	Record<string, UserEnvironment | undefined> &
 	EnvironmentsProperties;
 
+// Views
 type Views = Obj<'Views', UserProfile, View> &
 	(View | undefined)[] &
 	Record<string, View | undefined>;
 
+// View
 type View = Obj<'View', Views, ViewWidget> &
 	(ViewWidget | undefined)[] &
 	Record<string, ViewWidget | undefined>;
 
+// UserAttributePreferences
 type UserAttributePreferences = Obj<'UserAttributePreferences', UserProfile, UserAttribute> &
 	(UserAttribute | undefined)[] &
 	Record<string, UserAttribute | undefined>;
 
+// UserAttribute
 type UserAttributeProperties = ObjProps & {
 	EncoderResolution: Enums.AttriebuteEncoderResolution;
 };
@@ -57,6 +62,7 @@ type UserAttribute = Obj<
 > &
 	UserAttributeProperties;
 
+// UserEnvironment
 type UserEnvironmentChildren = {
 	Selection: Selection;
 	Programmer: Programmer;
@@ -70,11 +76,21 @@ type UserEnvironment = Obj<
 > &
 	UserEnvironmentChildren[keyof UserEnvironmentChildren][] &
 	UserEnvironmentChildren;
+
+// Selection
 type Selection = Obj<'Selection', UserEnvironment, never>;
+
+// Programmer
 type Programmer = Obj<'Programmer', UserEnvironment, ProgPart> &
 	(ProgPart | undefined)[] &
 	Record<string, ProgPart | undefined>;
+
+// ProgPart
 type ProgPart = Obj<'ProgPart', Programmer, never>;
+
+// AtFilter
 type AtFilterProperties = ObjProps & { filterRef: Filter };
 type AtFilter = Obj<'AtFilter', UserEnvironment, never, AtFilterProperties> & AtFilterProperties;
+
+// LivePatch3dSelection
 type LivePatch3dSelection = Obj<'LivePatch3dSelection', UserEnvironment, never>;

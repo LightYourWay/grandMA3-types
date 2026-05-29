@@ -1,7 +1,9 @@
+// Plugins
 type Plugins = Obj<'Plugins', Pool, UserPlugin> &
 	(UserPlugin | undefined)[] &
 	Record<string, UserPlugin | undefined>;
 
+// UserPlugin
 type UserPluginProperties = ObjProps & {
 	scribble: Scribble;
 	appearance: Appearance;
@@ -16,6 +18,7 @@ type UserPlugin = Obj<'UserPlugin', Plugins, LuaComponent, UserPluginProperties>
 	Record<string, LuaComponent | undefined> &
 	UserPluginProperties;
 
+// LuaComponent
 type LuaComponentProperties = ObjProps & {
 	fileName: string;
 	filePath: string;

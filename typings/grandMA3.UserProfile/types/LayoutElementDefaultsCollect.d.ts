@@ -1,3 +1,4 @@
+// LayoutElementDefaultsCollect
 type LayoutElementDefaultsCollect = Obj<
 	'LayoutElementDefaultsCollect',
 	UserProfile,
@@ -6,6 +7,7 @@ type LayoutElementDefaultsCollect = Obj<
 	(LayoutElementDefaults | undefined)[] &
 	Record<string, LayoutElementDefaults | undefined>;
 
+// LayoutElementDefaults
 type LayoutElementDefaultsProperties = ObjProps & {
 	ElementType: string;
 	Action: string;
