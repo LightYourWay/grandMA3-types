@@ -31,8 +31,5 @@ type PultCollect = Obj<'PultCollect', GraphicsRoot, Pult> &
 	(Pult | undefined)[] &
 	Record<string, Pult | undefined>;
 type PultChildren = Devices | DisplayCollect;
-type PultProperties = ObjProps;
-type Pult = Obj<'Pult', PultCollect, PultChildren, PultProperties> &
-	PultChildren[] &
-	PultProperties;
+type Pult = Obj<'Pult', PultCollect, PultChildren> & PultChildren[];
 type Devices = Obj<'Devices', Pult, never>;

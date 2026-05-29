@@ -25,7 +25,5 @@ type Scribbles = Obj<'Scribbles', ShowData, Scribble> &
 	Record<string, Scribble | undefined>;
 type Scribble = Obj<'Scribble', Scribbles, never, ScribbleProperties> & ScribbleProperties;
 
-type TagProperties = ObjProps;
-
 type Tags = Obj<'Tags', ShowData, Tag> & (Tag | undefined)[] & Record<string, Tag | undefined>;
-type Tag = Obj<'Tag', Tags, never, TagProperties> & TagProperties;
+type Tag = Obj<'Tag', Tags, never>;

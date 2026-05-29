@@ -41,8 +41,7 @@ type FixtureSelectionData = {
 type Filters = Obj<'Filters', Pool, Filter> &
 	(Filter | undefined)[] &
 	Record<string, Filter | undefined>;
-type FilterProperties = ObjProps;
-type Filter = Obj<'Filter', Filters, never, FilterProperties> & FilterProperties;
+type Filter = Obj<'Filter', Filters, never>;
 
 type RecipeProperties = ObjProps & {
 	selection: Group;
@@ -53,18 +52,14 @@ type RecipeProperties = ObjProps & {
 type Recipe = Obj<'Recipe', Part, never, RecipeProperties> & RecipeProperties;
 
 // Timecodes
-type TimecodesProperties = ObjProps;
-type Timecodes = Obj<'Timecodes', Pool, Timecode, TimecodesProperties> &
+type Timecodes = Obj<'Timecodes', Pool, Timecode> &
 	(Timecode | undefined)[] &
-	Record<string, Timecode | undefined> &
-	TimecodesProperties;
+	Record<string, Timecode | undefined>;
 
 // Timecode
-type TimecodeProperties = ObjProps;
-type Timecode = Obj<'Timecode', Timecodes, TrackGroup, TimecodeProperties> &
+type Timecode = Obj<'Timecode', Timecodes, TrackGroup> &
 	(TrackGroup | undefined)[] &
-	Record<string, TrackGroup | undefined> &
-	TimecodeProperties;
+	Record<string, TrackGroup | undefined>;
 
 // TrackGroup
 type TrackGroupProperties = ObjProps & {
@@ -76,35 +71,27 @@ type TrackGroup = Obj<'TrackGroup', Timecode, MarkerTrack | Track, TrackGroupPro
 	TrackGroupProperties;
 
 // MarkerTrack
-type MarkerTrackProperties = ObjProps;
-type MarkerTrack = Obj<'MarkerTrack', TrackGroup, Marker, MarkerTrackProperties> &
+type MarkerTrack = Obj<'MarkerTrack', TrackGroup, Marker> &
 	(Marker | undefined)[] &
-	Record<string, Marker | undefined> &
-	MarkerTrackProperties;
+	Record<string, Marker | undefined>;
 
 // Marker
 type Marker = Obj<'Marker', MarkerTrack, never>;
 
 // Track
-type TrackProperties = ObjProps;
-type Track = Obj<'Track', TrackGroup, TimeRange, TrackProperties> &
+type Track = Obj<'Track', TrackGroup, TimeRange> &
 	(TimeRange | undefined)[] &
-	Record<string, TimeRange | undefined> &
-	TrackProperties;
+	Record<string, TimeRange | undefined>;
 
 // TimeRange
-type TimeRangeProperties = ObjProps;
-type TimeRange = Obj<'TimeRange', Track, CmdSubTrack, TimeRangeProperties> &
+type TimeRange = Obj<'TimeRange', Track, CmdSubTrack> &
 	(CmdSubTrack | undefined)[] &
-	Record<string, CmdSubTrack | undefined> &
-	TimeRangeProperties;
+	Record<string, CmdSubTrack | undefined>;
 
 // CmdSubTrack
-type CmdSubTrackProperties = ObjProps;
-type CmdSubTrack = Obj<'CmdSubTrack', TimeRange, CmdEvent, CmdSubTrackProperties> &
+type CmdSubTrack = Obj<'CmdSubTrack', TimeRange, CmdEvent> &
 	(CmdEvent | undefined)[] &
-	Record<string, CmdEvent | undefined> &
-	CmdSubTrackProperties;
+	Record<string, CmdEvent | undefined>;
 
 // CmdEvent
 type CmdEventProperties = ObjProps & {
