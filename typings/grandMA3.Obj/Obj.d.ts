@@ -118,7 +118,7 @@ interface Obj<
 	GridSetColumnSize(...args: any): any;
 	GridsGetExpandHeaderCell(...args: any): any;
 	GridsGetLevelButtonWidth(...args: any): any;
-	HasActivePlayback(...args: any): any;
+	HasActivePlayback(): boolean;
 	HasParent(...args: any): any;
 	HookDelete(...args: any): any;
 	Import(filePath: string, fileName: string): boolean;

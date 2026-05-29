@@ -3,6 +3,7 @@ type Sequences = Obj<'Sequences', Pool, Sequence> &
 	Record<string, Sequence | undefined>;
 
 type SequenceProps = ObjProps & {
+	appearance: Appearance | null;
 	autoStart: boolean;
 	autoStop: boolean;
 	autoFix: boolean;
