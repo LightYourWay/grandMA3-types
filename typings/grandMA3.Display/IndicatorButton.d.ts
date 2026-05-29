@@ -1,5 +1,5 @@
 type IndicatorButtonProps = ButtonProps & {
-	colorIndicator: string | MAColor;
+	colorIndicator: string | Color;
 	textLeftCorner: string;
 };
 type IndicatorButton = UIObject & IndicatorButtonProps & ButtonSignals;

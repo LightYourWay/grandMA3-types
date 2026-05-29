@@ -1,6 +1,6 @@
 type PlaceHolderProps = ObjProps;
 
-type PlaceHolder = Obj<string, Display> &
+type PlaceHolder = Obj<'PlaceHolder', Display> &
 	UIObject &
 	PlaceHolderProps & {
 		ClearUIChildren(): void;

@@ -1,6 +1,6 @@
 type PresetFamilyType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 21 | 22 | 23 | 24 | 25;
 
-type PresetPools = Obj<string, DataPool, Presets> & {
+type PresetPools = Obj<'PresetPools', Pool, Presets> & {
 	Dimmer: Presets;
 	Position: Presets;
 	Gobo: Presets;
@@ -16,7 +16,7 @@ type PresetPools = Obj<string, DataPool, Presets> & {
 	'All 4': Presets;
 	'All 5': Presets;
 };
-type Presets = Obj<string, PresetPools, Preset>;
+type Presets = Obj<'Presets', PresetPools, Preset>;
 type PresetMode = 'Universal' | 'Global' | 'Selective';
 type PresetProps = ObjProps & {
 	appearance: Appearance;
@@ -25,4 +25,4 @@ type PresetProps = ObjProps & {
 	readonly presetMode: Enums.PresetMode;
 	presetModeInternal: PresetMode;
 } & MAtrickOnlyProps;
-type Preset = Obj<string, PresetPools, Recipe, PresetProps> & PresetProps;
+type Preset = Obj<'Preset', PresetPools, Recipe, PresetProps> & PresetProps;

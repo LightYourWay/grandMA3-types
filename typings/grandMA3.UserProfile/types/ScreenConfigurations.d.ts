@@ -1,23 +1,35 @@
-type ScreenConfigurations = Obj<string, UserProfile, ScreenConfiguration> &
-	ScreenConfiguration[] & {
-		Default: ScreenConfiguration;
-		[index: string]: ScreenConfiguration;
+type ScreenConfigurations = Obj<'ScreenConfigurations', UserProfile, ScreenConfig> &
+	ScreenConfig[] & {
+		Default: ScreenConfig;
+		[index: string]: ScreenConfig;
 	};
 
-type ScreenConfiguration = Obj<string, ScreenConfigurations, ScreenContents | ViewButtonScreens> & {
+type ScreenConfig = Obj<
+	'ScreenConfig',
+	ScreenConfigurations,
+	ScreenContents | ViewButtonScreens
+> & {
 	ScreenContents: ScreenContents;
 	'ViewButtonScreens 2': ViewButtonScreens;
 };
 
 type ScreenNumber = number;
 type ScreenContentKey = `ScreenContent ${ScreenNumber}`;
-type ScreenContents = Obj<string, ScreenConfiguration, ScreenContent> &
-	Record<ScreenContentKey, ScreenContent>;
+type ScreenContents = Obj<'ScreenContents', ScreenConfig, ScreenContent> &
+	(ScreenContent | undefined)[] &
+	Record<ScreenContentKey, ScreenContent | undefined>;
 
-type ScreenContent = Obj<string, ScreenContents, WindowBase>;
+type ScreenContent = Obj<'ScreenContent', ScreenContents, ViewWidget> &
+	(ViewWidget | undefined)[] &
+	Record<string, ViewWidget | undefined>;
 
-type WindowBaseProps = ObjProps & {
-	appearance: Obj<string, any, any>;
+type ViewWidgetChildren = {
+	SelectionViewSettings: SelectionViewSettings;
+	WindowAppearance: WindowAppearance;
+	WindowScrollPositions: WindowScrollPositions;
+};
+type ViewWidgetProps = ObjProps & {
+	appearance: Appearance;
 	minH: number;
 	minW: number;
 	note: string;
@@ -29,15 +41,19 @@ type WindowBaseProps = ObjProps & {
 	snapToBlockSize: boolean;
 	presetPoolType: number;
 };
+type ViewWidget = Obj<
+	'ViewWidget',
+	ScreenContent | View,
+	ViewWidgetChildren[keyof ViewWidgetChildren],
+	ViewWidgetProps
+> &
+	ViewWidgetChildren[keyof ViewWidgetChildren][] &
+	ViewWidgetChildren &
+	ViewWidgetProps;
 
-interface WindowBase
-	extends Obj<string, ScreenContent | View, any, WindowBaseProps>, WindowBaseProps {
-	WindowAppearance: WindowAppearance;
-	WindowScrollPositions: WindowScrollPositions;
-}
-
-type WindowAppearance = Obj<string, WindowBase, never>;
-type WindowScrollPositions = Obj<string, WindowBase, never> & {
+type SelectionViewSettings = Obj<'SelectionViewSettings', ViewWidget, never>;
+type WindowAppearance = Obj<'WindowAppearance', ViewWidget, never>;
+type WindowScrollPositions = Obj<'WindowScrollPositions', ViewWidget, never> & {
 	/**
 	 * A string with 2 integer numbers separated by a comma.
 	 * The first number is the vertical scroll position.
@@ -52,7 +68,7 @@ type WindowScrollPositions = Obj<string, WindowBase, never> & {
 	scrollH: string;
 };
 
-interface WindowLayoutView extends WindowBase {
+interface WindowLayoutView extends ViewWidget {
 	name: 'WindowLayoutView';
 	LayoutViewSettings: LayoutViewSettings;
 }
@@ -67,21 +83,22 @@ interface LayoutViewSettingsProps {
 	PaddingBottom: number;
 	PaddingTop: number;
 }
-type LayoutViewSettings = Obj<string, WindowBase, never> & LayoutViewSettingsProps;
+type LayoutViewSettings = Obj<'LayoutViewSettings', ViewWidget, never> & LayoutViewSettingsProps;
 
 type ViewButtonScreenKey = `ViewButtonScreen ${number}`;
-type ViewButtonScreens = Obj<string, ScreenConfiguration, ViewButtonScreen> &
+type ViewButtonScreens = Obj<'ViewButtonScreens', ScreenConfig, ViewButtonScreen> &
 	Record<ViewButtonScreenKey, ViewButtonScreen>;
 
-type ViewButtonScreen = Obj<string, ViewButtonScreens, ViewButton>;
+type ViewButtonScreen = Obj<'ViewButtonScreen', ViewButtonScreens, ViewButton>;
 
-type ViewButton = Obj<string, ViewButtonScreen, never>;
+type ViewButton = Obj<'ViewButton', ViewButtonScreen, never>;
 
-interface WindowEncoderBar extends WindowBase {
+interface WindowEncoderBar extends ViewWidget {
 	name: 'WindowEncoderBar';
 	EncoderBarWindowSettings: EncoderBarWindowSettings;
 }
 interface EncoderBarWindowSettingsProps {
 	fadeEncoder: boolean;
 }
-type EncoderBarWindowSettings = Obj<string, WindowBase, never> & EncoderBarWindowSettingsProps;
+type EncoderBarWindowSettings = Obj<'EncoderBarWindowSettings', ViewWidget, never> &
+	EncoderBarWindowSettingsProps;

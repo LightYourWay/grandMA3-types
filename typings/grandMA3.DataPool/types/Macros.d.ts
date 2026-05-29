@@ -1,6 +1,6 @@
-type Macros = Obj<string, DataPool, Macro> & Macro[] & { [index: string]: Macro };
+type Macros = Obj<'Macros', Pool, Macro> & Macro[] & { [index: string]: Macro };
 
-type Macro = Obj<string, Layouts, MacroLine> &
+type Macro = Obj<'Macro', Layouts, MacroLine> &
 	MacroLine[] & { [index: string]: MacroLine } & {
 		appearance: Appearance;
 	};
@@ -13,4 +13,4 @@ type MacroLineProps = ObjProps & {
 	addToCmdLine: boolean;
 	execute: boolean;
 };
-type MacroLine = Obj<string, Macro, never> & MacroLineProps;
+type MacroLine = Obj<'MacroLine', Macro, never> & MacroLineProps;

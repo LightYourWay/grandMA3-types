@@ -1,4 +1,4 @@
-type MAtricks = Obj<string, DataPool, MAtrick> & MAtrick[] & { [index: string]: MAtrick };
+type MAtricks = Obj<'MAtricks', Pool, MAtrick> & MAtrick[] & { [index: string]: MAtrick };
 
 type MAtrickTransform = 'None' | 'Mirror';
 type MAtrickInvertStyle = 'Pan' | 'Tilt' | 'P+T' | 'All';

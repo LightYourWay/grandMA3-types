@@ -100,9 +100,9 @@ declare function CreateUndo(...args: any): UndoHandle;
 declare function CurrentEnvironment(): UserEnvironment;
 declare function CurrentExecPage(...args: any): Page;
 declare function CurrentProfile(): UserProfile;
-declare function CurrentScreenConfig(): ScreenConfiguration;
+declare function CurrentScreenConfig(): ScreenConfig;
 declare function CurrentUser(...args: any): any;
-declare function DataPool(): DataPool;
+declare function DataPool(): Pool;
 declare function DefaultDisplayPositions(...args: any): any;
 declare function DeleteIPAddress(...args: any): any;
 declare function DelVar(...args: any): any;
@@ -129,7 +129,7 @@ declare function FixtureType(...args: any): any;
  * This function should be called FromNativeAddr.
  * I acccepts the result of AddrNative() function.
  */
-declare function FromAddr(nativeAddr: string): Obj<string, any, any>;
+declare function FromAddr(nativeAddr: string): GenericObj | undefined;
 declare function GetAttributeByUIChannel(uiChannel: number): Attribute;
 declare function GetAttributeCount(): number;
 declare function GetAttributeIndex(attrName: string): number;
@@ -190,8 +190,8 @@ declare function GetUIChannels(
 declare function GetUIObjectAtPosition(...args: any): any;
 declare function GetVar(...args: any): string | undefined;
 declare function GlobalVars(...args: any): any;
-declare function HandleToInt(obj: Obj<string, any, any>): number;
-declare function HandleToStr(obj: Obj<string, any, any>): MAObjectHandleStr;
+declare function HandleToInt(obj: GenericObj): number;
+declare function HandleToStr(obj: GenericObj): MAObjectHandleStr;
 declare type HookIndex = number;
 /**
  * Register a listener for object changes.
@@ -202,7 +202,7 @@ declare type HookIndex = number;
  * @param obj
  * @param pluginHandle
  */
-declare function HookObjectChange<T extends Obj<string, any, any>>(
+declare function HookObjectChange<T extends GenericObj>(
 	callback: (obj: T, changeType: number) => void,
 	obj: T,
 	pluginHandle: any,
@@ -262,7 +262,7 @@ declare interface MessageBoxOptions {
 	titleTextColor?: string;
 	messageTextColor?: string;
 	message?: string;
-	display?: number | Obj<string, any, any>;
+	display?: number | Display;
 	commands: { value: number; name: string }[];
 	inputs?: MessageBoxInputOptions[];
 	states?: MessageBoxStateOptions[];
@@ -279,7 +279,7 @@ declare function MessageBox(options: MessageBoxOptions): MessageBoxResult;
 declare function Mouse(...args: any): any;
 declare function MouseObj(...args: any): any;
 declare const MultiLanguage: Array<[string, string]>;
-declare const Obj: Obj<string, any, any>;
+declare const Obj: GenericObj;
 declare function ObjectList<T extends GenericObj>(address: string): T[];
 declare function OverallDeviceCertificate(...args: any): any;
 declare function Patch(): Patch;
@@ -339,9 +339,7 @@ declare function ShowData(): ShowData;
 declare function ShowSettings(): any;
 declare function StartProgress(...args: any): any;
 declare function StopProgress(...args: any): any;
-declare function StrToHandle<T extends Obj<string, any, any> = Obj<string, any, any>>(
-	strHandle: MAObjectHandleStr,
-): T;
+declare function StrToHandle<T extends GenericObj = GenericObj>(strHandle: MAObjectHandleStr): T;
 declare function SyncFS(...args: any): any;
 declare function TextInput(...args: any): string;
 declare function Time(): number;
@@ -362,7 +360,7 @@ declare function Unhook(hookIndex: HookIndex): any;
  * @param obj
  * @return The number of removed hooks
  */
-declare function UnhookMultiple(callbackFn?: () => any, obj?: Obj<string, any, any>): number;
+declare function UnhookMultiple(callbackFn?: () => any, obj?: GenericObj): number;
 declare function UserVars(...args: any): any;
 type MAVersionString = `${number}.${number}.${number}.${number}`;
 /**

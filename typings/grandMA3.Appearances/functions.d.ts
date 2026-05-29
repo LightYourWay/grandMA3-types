@@ -1,28 +1,28 @@
-type Appearances = Obj<string, ShowData, Appearance> &
-	Appearance[] & { [index: string]: Appearance };
-
-type Appearance = Obj<string, Appearances, never, AppearanceProps> & AppearanceProps;
+type Appearances = Obj<'Appearances', ShowData, Appearance> &
+	(Appearance | undefined)[] &
+	Record<string, Appearance | undefined>;
 
 type AppearanceProps = ObjProps & {
-	BACKR: number;
-	BACKG: number;
-	BACKB: number;
-	BACKALPHA: number;
+	backR: number;
+	backG: number;
+	backB: number;
+	backAlpha: number;
 	image: UserImage;
-	IMAGER: number;
-	IMAGEG: number;
-	IMAGEB: number;
-	IMAGEALPHA: number;
+	imageR: number;
+	imageG: number;
+	imageB: number;
+	imageAlpha: number;
 };
+type Appearance = Obj<'Appearance', Appearances, never, AppearanceProps> & AppearanceProps;
 
 type ScribbleProps = ObjProps & {
 	scribble: string; // comma separated list of points and colors
 };
 
-type Scribbles = Obj<string, ShowData, Scribble> & Scribble[] & { [index: string]: Scribble };
-type Scribble = Obj<string, Appearances, never, ScribbleProps> & ScribbleProps;
+type Scribbles = Obj<'Scribbles', ShowData, Scribble> & Scribble[] & { [index: string]: Scribble };
+type Scribble = Obj<'Scribble', Scribbles, never, ScribbleProps> & ScribbleProps;
 
 type TagProps = ObjProps;
 
-type Tags = Obj<string, ShowData, Tag> & Tag[] & { [index: string]: Tag };
-type Tag = Obj<string, Tags, never, TagProps> & TagProps;
+type Tags = Obj<'Tags', ShowData, Tag> & Tag[] & { [index: string]: Tag };
+type Tag = Obj<'Tag', Tags, never, TagProps> & TagProps;

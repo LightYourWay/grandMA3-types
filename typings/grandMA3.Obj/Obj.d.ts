@@ -71,13 +71,13 @@ interface Obj<
 	 * @param name exact name of object. If undefined then only class will be matched.
 	 * @param className partial name of the class
 	 */
-	FindRecursive(name: string | undefined, className?: string): Obj<string, any, any>;
+	FindRecursive(name: string | undefined, className?: string): GenericObj | undefined;
 	FindWild(search: string): any;
 	Get<K extends keyof Props>(propName: K, role?: Enums.Roles): Props[K];
 	GetAssignedObj(...args: any): any;
 	/** Get the child class name */
 	GetChildClass(): string;
-	GetClass: () => ClassName;
+	GetClass(): ClassName;
 	GetDisplay(): Display;
 	GetDisplayIndex(index: number): Display;
 	GetExportFileName(...args: any): any;
@@ -122,7 +122,7 @@ interface Obj<
 	HasParent(...args: any): any;
 	HookDelete(...args: any): any;
 	Import(filePath: string, fileName: string): boolean;
-	Index: () => number;
+	Index(): number;
 	InputRun(...args: any): any;
 	InputSetAdditionalParameter(...args: any): any;
 	InputSetEditTitle(...args: any): any;
@@ -167,7 +167,7 @@ interface Obj<
 	 */
 	Remove(childIndex: number, undo?: UndoHandle): void;
 	RemoveListItem(...args: any): any;
-	Resize(...args: any): any;
+	Resize(size: number): void;
 	Save(...args: any): any;
 	ScrollDo(...args: any): any;
 	ScrollGetInfo(...args: any): any;

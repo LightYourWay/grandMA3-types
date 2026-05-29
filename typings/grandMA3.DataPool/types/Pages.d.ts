@@ -1,4 +1,4 @@
-type Pages = Obj<'Pages', DataPool, Page> & (Page | undefined)[] & Record<string, Page | undefined>;
+type Pages = Obj<'Pages', Pool, Page> & (Page | undefined)[] & Record<string, Page | undefined>;
 
 type Page = Obj<'Page', Pages, Executor | Proxy>;
 

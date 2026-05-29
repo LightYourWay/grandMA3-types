@@ -1,101 +1,126 @@
-type ColorDefCollect = Obj<string, Root> & {
-	Global: ColorDefGroupGlobal;
-	SheetColor: ColorDefGroup;
-	Playback: ColorDefGroup;
-	PoolDefault: ColorDefGroup;
+// ColorDefCollect
+type ColorDefCollectProperties = ObjProps & {
+	global: ColorDefGroupGlobal;
+	sheetColor: ColorDefGroup;
+	playback: ColorDefGroup;
+	poolDefault: ColorDefGroup;
 };
+type ColorDefCollect = Obj<
+	'ColorDefCollect',
+	ColorTheme,
+	ColorDefGroup,
+	ColorDefCollectProperties
+> &
+	(ColorDefGroup | undefined)[] &
+	Record<string, ColorDefGroup | undefined> &
+	ColorDefCollectProperties;
 
-type ColorDefGroup = Obj<string, ColorDefCollect, ColorDef>;
+// ColorDefGroup
+type ColorDefGroup = Obj<'ColorDefGroup', ColorDefCollect, ColorDef> &
+	(ColorDef | undefined)[] &
+	Record<string, ColorDef | undefined>;
 
-type ColorDef = Obj<string, ColorDefGroup, never> & {
-	RGBA: string;
+// ColorDefGroup > Global
+type ColorDefGroupGlobalProperties = ObjProps & {
+	text: ColorDef;
+	textDefault: ColorDef;
+	textDark: ColorDef;
+	background: ColorDef;
+	backgroundDark: ColorDef;
+	header: ColorDef;
+	altHeader: ColorDef;
+	defaultCellBackground: ColorDef;
+	defaultCellAltBackground: ColorDef;
+	selected: ColorDef;
+	selectedInverted: ColorDef;
+	selectedEdge: ColorDef;
+	invalidGridPosition: ColorDef;
+	mainMultiPatchSelected: ColorDef;
+	partlySelected: ColorDef;
+	selectedPreset: ColorDef;
+	partlySelectedPreset: ColorDef;
+	backgroundSelected: ColorDef;
+	backgroundInvalidGridPosition: ColorDef;
+	backgroundMainMultiPatchSelected: ColorDef;
+	backgroundSelectedInverted: ColorDef;
+	connected: ColorDef;
+	lasso: ColorDef;
+	focusFrame: ColorDef;
+	windowFocus: ColorDef;
+	hover: ColorDef;
+	selectedFrameBackground: ColorDef;
+	selectedRowBorder: ColorDef;
+	pressed: ColorDef;
+	buttonBackground: ColorDef;
+	activeIcon: ColorDef;
+	inactive: ColorDef;
+	bright: ColorDef;
+	titleGray: ColorDef;
+	labelText: ColorDef;
+	indicatorBar: ColorDef;
+	buttonBackgroundDarker: ColorDef;
+	propertyBackground: ColorDef;
+	propertyBackgroundActive: ColorDef;
+	fixed: ColorDef;
+	icon: ColorDef;
+	buttonIndicatorIcon: ColorDef;
+	iconHover: ColorDef;
+	redIndicator: ColorDef;
+	darkRedIndicator: ColorDef;
+	greenIndicator: ColorDef;
+	darkGreenIndicator: ColorDef;
+	yellowIndicator: ColorDef;
+	orangeIndicator: ColorDef;
+	cyanIndicator: ColorDef;
+	updateIndicator: ColorDef;
+	updateAddIndicator: ColorDef;
+	updateIntegrated: ColorDef;
+	updateAddIntegrated: ColorDef;
+	warning: ColorDef;
+	error: ColorDef;
+	alert: ColorDef;
+	success: ColorDef;
+	redBackground: ColorDef;
+	overlayBackground: ColorDef;
+	greenBackground: ColorDef;
+	shadow: ColorDef;
+	shadowDark: ColorDef;
+	deskLock: ColorDef;
+	disabled: ColorDef;
+	referenced: ColorDef;
+	afterGlow: ColorDef;
+	globalPreset: ColorDef;
+	selectivePreset: ColorDef;
+	universalPreset: ColorDef;
+	forSome: ColorDef;
+	forAll: ColorDef;
+	forNone: ColorDef;
+	lightened: ColorDef;
+	darkened: ColorDef;
+	transparent: ColorDef;
+	transparent25: ColorDef;
+	transparent50: ColorDef;
+	transparent75: ColorDef;
+	parked: ColorDef;
+	remoteInputLock: ColorDef;
+	textViewSelectedRow: ColorDef;
+	textViewBackground: ColorDef;
+	textViewFixedBackground: ColorDef;
+	collected: ColorDef;
+	userChanged: ColorDef;
 };
+type ColorDefGroupGlobal = Obj<
+	'ColorDefGroup',
+	ColorDefCollect,
+	ColorDef,
+	ColorDefGroupGlobalProperties
+> &
+	(ColorDef | undefined)[] &
+	Record<string, ColorDef | undefined> &
+	ColorDefGroupGlobalProperties;
 
-type ColorDefGroupGlobal = ColorDefGroup & {
-	Text: ColorDef;
-	TextDefault: ColorDef;
-	TextDark: ColorDef;
-	Background: ColorDef;
-	BackgroundDark: ColorDef;
-	Header: ColorDef;
-	AltHeader: ColorDef;
-	DefaultCellBackground: ColorDef;
-	DefaultCellAltBackground: ColorDef;
-	Selected: ColorDef;
-	SelectedInverted: ColorDef;
-	SelectedEdge: ColorDef;
-	InvalidGridPosition: ColorDef;
-	MainMultiPatchSelected: ColorDef;
-	PartlySelected: ColorDef;
-	SelectedPreset: ColorDef;
-	PartlySelectedPreset: ColorDef;
-	BackgroundSelected: ColorDef;
-	BackgroundInvalidGridPosition: ColorDef;
-	BackgroundMainMultiPatchSelected: ColorDef;
-	BackgroundSelectedInverted: ColorDef;
-	Connected: ColorDef;
-	Lasso: ColorDef;
-	FocusFrame: ColorDef;
-	WindowFocus: ColorDef;
-	Hover: ColorDef;
-	SelectedFrameBackground: ColorDef;
-	SelectedRowBorder: ColorDef;
-	Pressed: ColorDef;
-	ButtonBackground: ColorDef;
-	ActiveIcon: ColorDef;
-	Inactive: ColorDef;
-	Bright: ColorDef;
-	TitleGray: ColorDef;
-	LabelText: ColorDef;
-	IndicatorBar: ColorDef;
-	ButtonBackgroundDarker: ColorDef;
-	PropertyBackground: ColorDef;
-	PropertyBackgroundActive: ColorDef;
-	Fixed: ColorDef;
-	Icon: ColorDef;
-	ButtonIndicatorIcon: ColorDef;
-	IconHover: ColorDef;
-	RedIndicator: ColorDef;
-	DarkRedIndicator: ColorDef;
-	GreenIndicator: ColorDef;
-	DarkGreenIndicator: ColorDef;
-	YellowIndicator: ColorDef;
-	OrangeIndicator: ColorDef;
-	CyanIndicator: ColorDef;
-	UpdateIndicator: ColorDef;
-	UpdateAddIndicator: ColorDef;
-	UpdateIntegrated: ColorDef;
-	UpdateAddIntegrated: ColorDef;
-	Warning: ColorDef;
-	Error: ColorDef;
-	Alert: ColorDef;
-	Success: ColorDef;
-	RedBackground: ColorDef;
-	OverlayBackground: ColorDef;
-	GreenBackground: ColorDef;
-	Shadow: ColorDef;
-	ShadowDark: ColorDef;
-	DeskLock: ColorDef;
-	Disabled: ColorDef;
-	Referenced: ColorDef;
-	AfterGlow: ColorDef;
-	GlobalPreset: ColorDef;
-	SelectivePreset: ColorDef;
-	UniversalPreset: ColorDef;
-	ForSome: ColorDef;
-	ForAll: ColorDef;
-	ForNone: ColorDef;
-	Lightened: ColorDef;
-	Darkened: ColorDef;
-	Transparent: ColorDef;
-	Transparent25: ColorDef;
-	Transparent50: ColorDef;
-	Transparent75: ColorDef;
-	Parked: ColorDef;
-	RemoteInputLock: ColorDef;
-	TextViewSelectedRow: ColorDef;
-	TextViewBackground: ColorDef;
-	TextViewFixedBackground: ColorDef;
-	Collected: ColorDef;
-	UserChanged: ColorDef;
+// ColorDef
+type ColorDefProps = ObjProps & {
+	rgba: string;
 };
+type ColorDef = Obj<'ColorDef', ColorDefGroup, never, ColorDefProps> & ColorDefProps;

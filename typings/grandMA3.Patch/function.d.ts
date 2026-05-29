@@ -1,9 +1,9 @@
-type Patch = Obj<string, ShowData, any> &
+type Patch = Obj<'Patch', ShowData, any> &
 	any[] & { [index: string]: any } & {
 		FixtureTypes: FixtureTypes;
 	};
 
-type LivePatch = Obj<'LivePatch', ShowData, any> &
+type LivePatch = Obj<'Patch', ShowData, any> &
 	any[] & { [index: string]: any } & {
 		AttributeDefinitions: AttributeDefinitions;
 		FixtureTypes: FixtureTypes;
@@ -11,20 +11,20 @@ type LivePatch = Obj<'LivePatch', ShowData, any> &
 		UIChannels: UIChannels;
 	};
 
-type Stages = Obj<string, LivePatch | Patch, Stage> & { [index: number]: Stage };
+type Stages = Obj<'Stages', LivePatch | Patch, Stage> & { [index: number]: Stage };
 
-type Stage = Obj<string, Stages, any> & {
+type Stage = Obj<'Stage', Stages, any> & {
 	note: string;
 	Spaces: Spaces;
 	Fixtures: Fixtures;
 };
-type Spaces = Obj<string, Stage, any>;
-type Fixtures = Obj<string, Stage, Fixture>;
+type Spaces = Obj<'Spaces', Stage, any>;
+type Fixtures = Obj<'Fixtures', Stage, Fixture>;
 type DMXMultiAddrString =
 	| DMXAddrString
 	| `${DMXAddrString},${DMXAddrString}`
 	| `${DMXAddrString},${DMXAddrString},${DMXAddrString}`; // May be more ?
-type Fixture = Obj<string, Fixtures, Fixture | SubFixture> & {
+type Fixture = Obj<'Fixture', Fixtures, Fixture | SubFixture> & {
 	/**
 	 * If the fixture has a CID, then the index is the CID.
 	 * If not, it will be the 1-based index of the fixture within the Stage.
@@ -32,7 +32,7 @@ type Fixture = Obj<string, Fixtures, Fixture | SubFixture> & {
 	index: number;
 	fid: number | 'None';
 	cid: number | 'None';
-	fixtureType: FixtureTypeObj;
+	fixtureType: FixtureType;
 	/**
 	 * I saw one case where the Universal fixture has a child of class Fixture (Not Subfixture),
 	 * and it doesn't have any mode or modeDirect.
@@ -42,12 +42,12 @@ type Fixture = Obj<string, Fixtures, Fixture | SubFixture> & {
 	patch: DMXMultiAddrString | '';
 };
 
-type SubFixture = Obj<string, Fixtures, SubFixture> & {
+type SubFixture = Obj<'SubFixture', Fixtures, SubFixture> & {
 	fixture: Fixture;
 	stage: Stage;
 };
 
-type UIChannels = Obj<string, LivePatch | Patch, UIChannel> & UIChannel[];
+type UIChannels = Obj<'UIChannels', LivePatch | Patch, UIChannel> & UIChannel[];
 
 type UIChannelProps = ObjProps & {
 	logical_channel: LogicalChannel;
@@ -56,4 +56,4 @@ type UIChannelProps = ObjProps & {
 	subAttribute: AttributeName;
 };
 
-type UIChannel = Obj<string, UIChannels, never, UIChannelProps> & UIChannelProps;
+type UIChannel = Obj<'UIChannel', UIChannels, never, UIChannelProps> & UIChannelProps;

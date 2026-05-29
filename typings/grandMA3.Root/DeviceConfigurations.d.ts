@@ -1,38 +1,38 @@
-type DeviceConfigurations = Obj<string, Root, DMXProtocols> & {
+type DeviceConfigurations = Obj<'DeviceConfigurations', Root, DMXProtocols> & {
 	DMXProtocols: DMXProtocols;
 };
 
-type DMXProtocols = Obj<string, DeviceConfigurations, sACN | ArtNet> & {
+type DMXProtocols = Obj<'DMXProtocols', DeviceConfigurations, sACN | ArtNet> & {
 	sACN: sACN;
 	ArtNet: ArtNet;
 };
 
-type ArtNet = Obj<string, DMXProtocols, ArtNetDataCollect | ArtNetNodeCollect> & {
+type ArtNet = Obj<'ArtNet', DMXProtocols, ArtNetDataCollect | ArtNetNodeCollect> & {
 	ArtNetDataCollect: ArtNetDataCollect;
 	ArtNetNodeCollect: ArtNetNodeCollect;
 };
 
-type sACN = Obj<string, DMXProtocols, sACNDataCollect | sACNDiscoveryCollect> & {
+type sACN = Obj<'sACN', DMXProtocols, sACNDataCollect | sACNDiscoveryCollect> & {
 	sACNDataCollect: sACNDataCollect;
 	sACNDiscoveryCollect: sACNDiscoveryCollect;
 };
 
 // ArtNet
-type ArtNetDataCollect = Obj<string, ArtNet, ArtNetData>;
+type ArtNetDataCollect = Obj<'ArtNetDataCollect', ArtNet, ArtNetData>;
 type ArtNetDataProps = ObjProps & {
 	localUniverse: DMXUniverseNumber;
 	mode: Enums.ArtNetDataMode;
 };
-type ArtNetData = Obj<string, ArtNetDataCollect, never, ArtNetDataProps> & ArtNetDataProps;
+type ArtNetData = Obj<'Art-Net-Data', ArtNetDataCollect, never, ArtNetDataProps> & ArtNetDataProps;
 
-type ArtNetNodeCollect = Obj<string, ArtNet, ArtNetData>;
+type ArtNetNodeCollect = Obj<'ArtNetNodeCollect', ArtNet, ArtNetData>;
 
 // sACN
-type sACNDataCollect = Obj<string, sACN, sACNData>;
+type sACNDataCollect = Obj<'sACNDataCollect', sACN, sACNData>;
 type sACNDataProps = ObjProps & {
 	localUniverse: number;
 	mode: Enums.SacnDataMode;
 };
-type sACNData = Obj<string, sACNDataCollect, never, sACNDataProps> & sACNDataProps;
+type sACNData = Obj<'sACNData', sACNDataCollect, never, sACNDataProps> & sACNDataProps;
 
-type sACNDiscoveryCollect = Obj<string, sACN, never>;
+type sACNDiscoveryCollect = Obj<'sACNDiscoveryCollect', sACN, never>;

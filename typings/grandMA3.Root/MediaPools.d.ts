@@ -15,19 +15,19 @@ type MediaPools = Obj<
 	MediaPoolsChildren;
 
 type MediaObj = GoboImage | SymbolImage | UserImage | MeshImage | Video | Sound;
-type GoboImages = Obj<string, MediaPools, GoboImage>;
-type GoboImage = Obj<string, GoboImages, never>;
+type GoboImages = Obj<'GoboImages', MediaPools, GoboImage>;
+type GoboImage = Obj<'GoboImage', GoboImages, never>;
 
-type Symbols = Obj<string, MediaPools, SymbolImage>;
-type SymbolImage = Obj<string, Symbols, never>;
+type Symbols = Obj<'Symbols', MediaPools, SymbolImage>;
+type SymbolImage = Obj<'SymbolImage', Symbols, never>;
 
-type Images = Obj<string, MediaPools, UserImage> & UserImage[] & { [index: string]: UserImage };
-type UserImage = Obj<string, Images, never> & { note: string };
+type Images = Obj<'Images', MediaPools, UserImage> & UserImage[] & { [index: string]: UserImage };
+type UserImage = Obj<'UserImage', Images, never> & { note: string };
 
-type MeshImagePool = Obj<string, MediaPools, MeshImage>;
-type MeshImage = Obj<string, MeshImagePool, never>;
+type MeshImagePool = Obj<'MeshImagePool', MediaPools, MeshImage>;
+type MeshImage = Obj<'MeshImage', MeshImagePool, never>;
 
-type Videos = Obj<string, MediaPools, Video>;
-type Video = Obj<string, Videos, never>;
-type Sounds = Obj<string, MediaPools, Sound>;
-type Sound = Obj<string, Sounds, never>;
+type Videos = Obj<'Videos', MediaPools, Video>;
+type Video = Obj<'Video', Videos, never>;
+type Sounds = Obj<'Sounds', MediaPools, Sound>;
+type Sound = Obj<'Sound', Sounds, never>;

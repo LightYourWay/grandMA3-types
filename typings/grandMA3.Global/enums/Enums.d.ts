@@ -5768,6 +5768,10 @@ declare namespace Enums {
 		'BPM' = 1,
 		'Seconds' = 2,
 	}
+	/**
+	 * Mul - Multiple (Means multiply the bpm => faster)
+	 * Div - Divide (Means divide the bpm => slower)
+	 */
 	enum SpeedScale {
 		'Div256' = -8,
 		'Div128' = -7,

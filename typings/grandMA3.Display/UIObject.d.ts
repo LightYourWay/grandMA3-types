@@ -1,7 +1,7 @@
 type UIObjectProps = ObjProps & {
 	// Layout Props
 	anchors: Anchors;
-	backColor: MAColor | string;
+	backColor: Color | string;
 	padding: Padding;
 	margin: Margin;
 	maxSize: MAUISize;
@@ -30,12 +30,12 @@ type UIObjectProps = ObjProps & {
 	font: Font;
 	hasHover: YesNo;
 	icon: string; // texture name
-	iconColor: MAColor;
+	iconColor: Color;
 	iconAlignmentH: AlignmentH;
 	iconAlignmentV: AlignmentV;
 	text: string;
 	textAlignmentH: AlignmentH;
-	textColor: MAColor | string;
+	textColor: Color | string;
 	textShadow: number;
 	textShadowColor: unknown;
 	/**
@@ -58,7 +58,7 @@ type UIObjectSignals = {
 	focusLost: SignalId;
 };
 
-type UIObject = Obj<string, never, never, UIObjectProps> &
+type UIObject = Obj<'UIObject', never, never, UIObjectProps> &
 	UIObjectProps &
 	UIObjectSignals & {
 		readonly absRect: Rect;
@@ -66,7 +66,7 @@ type UIObject = Obj<string, never, never, UIObjectProps> &
 		GetOverlay(): Popup;
 	};
 
-type ScrollBox = Obj<string, never, never, UIObjectProps> &
+type ScrollBox = Obj<'ScrollBox', never, never, UIObjectProps> &
 	UIObjectProps &
 	UIObjectSignals & {
 		readonly absRect: Rect;

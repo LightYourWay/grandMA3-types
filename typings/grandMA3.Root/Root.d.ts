@@ -1,17 +1,17 @@
-type Root = Obj<string, never, any> & { [index: string]: any } & {
+type Root = Obj<'Root', never, any> & { [index: string]: any } & {
 	ShowData: ShowData;
 	ColorTheme: ColorTheme;
 	DeviceConfigurations: DeviceConfigurations;
 	GraphicsRoot: GraphicsRoot;
 	MANetSocket: MANetSocket;
 	UsbNotifier: UsbNotifier;
-	Temp: RootTemp;
+	Temp: Temp;
 };
 
-type UsbNotifier = Obj<string, Root, StorageDevice> & {
-	StorageDevice: StorageDevice;
+type UsbNotifier = Obj<'UsbNotifier', Root, Storage> & {
+	StorageDevice: Storage;
 };
-type StorageDevice = Obj<string, UsbNotifier, USBDeviceStorage> & USBDeviceStorage[];
+type Storage = Obj<'Storage', UsbNotifier, USBDeviceStorage> & USBDeviceStorage[];
 type USBDeviceStorageProps = ObjProps & {
 	connected: boolean;
 	connectedCount: any;
@@ -20,11 +20,11 @@ type USBDeviceStorageProps = ObjProps & {
 };
 type USBDeviceStorage = Obj<'USBDeviceStorage', USBDeviceStorage, never, USBDeviceStorageProps>;
 
-type RootTemp = Obj<string, Root, any> & {
+type Temp = Obj<'Temp', Root, any> & {
 	DriveCollect: DriveCollect;
 };
 
-type DriveCollect = Obj<string, RootTemp, Drive>;
+type DriveCollect = Obj<'DriveCollect', Temp, Drive>;
 type Drive = Obj<'Drive', DriveCollect, never, DriveProps> & DriveProps;
 type DriveProps = ObjProps & {
 	driveType: 'Removeable' | 'Internal' | 'OldVersion';

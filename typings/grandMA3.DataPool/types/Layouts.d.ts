@@ -1,8 +1,7 @@
-type Layouts = Obj<string, DataPool, Layout> & Layout[] & { [index: string]: Layout };
+type Layouts = Obj<'Layouts', Pool, Layout> & Layout[] & { [index: string]: Layout };
 
-type Layout = Obj<string, Layouts, Element> & Element[] & { [index: string]: Element };
+type Layout = Obj<'Layout', Layouts, Element> & Element[] & { [index: string]: Element };
 
-type LayoutElementCustomTextSize = 'Default' | 10 | 12 | 14 | 16 | 18 | 20 | 24 | 28 | 32;
 type ElementProps = ObjProps & {
 	assignType: number;
 	action: Enums.AssignmentButtonFunctionsSequence;
@@ -12,9 +11,9 @@ type ElementProps = ObjProps & {
 	borderColor: string;
 	/** 8 character hex string RGBA */
 	customTextColor: string;
-	customTextAlignmentH: 'Center' | 'Left' | 'Right';
-	customTextAlignmentV: 'Center' | 'Top' | 'Bottom' | 'Above';
-	customTextSize: LayoutElementCustomTextSize;
+	customTextAlignmentH: Enums.LayoutElementAlignmentH;
+	customTextAlignmentV: Enums.LayoutElementAlignmentV;
+	customTextSize: Enums.SelectionViewFontSize;
 	customTextText: string;
 	fullResolution: boolean;
 	height: number;
@@ -36,8 +35,7 @@ type ElementProps = ObjProps & {
 	posY: number;
 	width: number;
 };
-
-type Element = Obj<string, Layout, never> &
+type Element = Obj<'Element', Layout, never> &
 	ElementProps & {
 		object: GenericObj;
 		note: string;

@@ -1,16 +1,5 @@
-type DataPoolChildren =
-	| Filters
-	| PresetPools
-	| Groups
-	| Sequences
-	| Plugins
-	| Macros
-	| MAtricks
-	| Pages
-	| Layouts
-	| Timecodes;
-
-type DataPool = Obj<string, DataPools, DataPoolChildren> & {
+// Pool
+type PoolChildren = {
 	Filters: Filters;
 	PresetPools: PresetPools;
 	Groups: Groups;
@@ -22,13 +11,19 @@ type DataPool = Obj<string, DataPools, DataPoolChildren> & {
 	Layouts: Layouts;
 	Timecodes: Timecodes;
 };
+type Pool = Obj<'Pool', DataPools, PoolChildren[keyof PoolChildren]> &
+	PoolChildren[keyof PoolChildren][] &
+	PoolChildren;
 
-type Groups = Obj<string, DataPool, Group> & {
-	Resize: (size: number) => void;
-};
-type Group = Obj<string, Groups, any> & {
+// Groups
+type Groups = Obj<'Groups', Pool, Group> &
+	(Group | undefined)[] &
+	Record<string, Group | undefined>;
+
+type Group = Obj<'Group', Groups, any> & {
 	selectionData: FixtureSelectionData[];
 };
+
 type FixtureSelectionData = {
 	grid: {
 		inv: number;
@@ -42,157 +37,69 @@ type FixtureSelectionData = {
 	sf_index: number;
 };
 
-type Filters = Obj<string, DataPool, Filter>;
+type Filters = Obj<'Filters', Pool, Filter>;
 type FilterProps = ObjProps;
-type Filter = Obj<string, Filters, any, FilterProps>;
+type Filter = Obj<'Filter', Filters, any, FilterProps>;
 
 type RecipeProps = ObjProps;
 
-type Recipe = Obj<string, Part, never, RecipeProps> & {
+type Recipe = Obj<'Recipe', Part, never, RecipeProps> & {
 	selection: Group;
 	values: Preset;
 	matricks?: MAtrick;
 	filter: Filter;
 };
 
-type Timecodes = Obj<string, DataPool, Timecode> & Record<string, Timecode>;
-type Timecode = Obj<string, Timecodes, Triggers> & { Triggers: Triggers };
+// Timecodes
+type Timecodes = Obj<'Timecodes', Pool, Timecode> &
+	(Timecode | undefined)[] &
+	Record<string, Timecode | undefined> &
+	ObjProps;
 
-type Triggers = Obj<string, Timecode, Track> & Record<string, Track>;
-type Track = Obj<string, Triggers, TimeRange>;
-type TimeRange = Obj<string, Track, CmdSubTrack>;
-type CmdSubTrack = Obj<string, TimeRange, CmdSubTrackEvent>;
-type CmdSubTrackEventProps = ObjProps & {
+// Timecode
+type Timecode = Obj<'Timecode', Timecodes, TrackGroup> &
+	(TrackGroup | undefined)[] &
+	Record<string, TrackGroup | undefined> &
+	ObjProps;
+
+// TrackGroup
+type TrackGroupProperties = ObjProps & {
+	readonly Marker: MarkerTrack;
+};
+type TrackGroup = Obj<'TrackGroup', Timecode, MarkerTrack | Track, TrackGroupProperties> &
+	(MarkerTrack | Track | undefined)[] &
+	Record<string, MarkerTrack | Track | undefined> &
+	TrackGroupProperties;
+
+// MarkerTrack
+type MarkerTrack = Obj<'MarkerTrack', TrackGroup, Marker> &
+	(Marker | undefined)[] &
+	Record<string, Marker | undefined> &
+	ObjProps;
+
+// Marker
+type Marker = Obj<'Marker', MarkerTrack, never>;
+
+// Track
+type Track = Obj<'Track', TrackGroup, TimeRange> &
+	(TimeRange | undefined)[] &
+	Record<string, TimeRange | undefined> &
+	ObjProps;
+
+// TimeRange
+type TimeRange = Obj<'TimeRange', Track, CmdSubTrack> &
+	(CmdSubTrack | undefined)[] &
+	Record<string, CmdSubTrack | undefined> &
+	ObjProps;
+
+// CmdSubTrack
+type CmdSubTrack = Obj<'CmdSubTrack', TimeRange, CmdEvent> &
+	(CmdEvent | undefined)[] &
+	Record<string, CmdEvent | undefined> &
+	ObjProps;
+
+// CmdEvent
+type CmdEventProps = ObjProps & {
 	rawTime: number;
 };
-type CmdSubTrackEvent = Obj<string, TimeRange, never, CmdSubTrackEventProps> & ObjProps;
-
-type DataPoolIndex =
-	| 1
-	| 2
-	| 3
-	| 4
-	| 5
-	| 6
-	| 7
-	| 8
-	| 9
-	| 10
-	| 11
-	| 12
-	| 13
-	| 14
-	| 15
-	| 16
-	| 17
-	| 18
-	| 19
-	| 20
-	| 21
-	| 22
-	| 23
-	| 24
-	| 25
-	| 26
-	| 27
-	| 28
-	| 29
-	| 30
-	| 31
-	| 32
-	| 33
-	| 34
-	| 35
-	| 36
-	| 37
-	| 38
-	| 39
-	| 40
-	| 41
-	| 42
-	| 43
-	| 44
-	| 45
-	| 46
-	| 47
-	| 48
-	| 49
-	| 50
-	| 51
-	| 52
-	| 53
-	| 54
-	| 55
-	| 56
-	| 57
-	| 58
-	| 59
-	| 60
-	| 61
-	| 62
-	| 63
-	| 64
-	| 65
-	| 66
-	| 67
-	| 68
-	| 69
-	| 70
-	| 71
-	| 72
-	| 73
-	| 74
-	| 75
-	| 76
-	| 77
-	| 78
-	| 79
-	| 80
-	| 81
-	| 82
-	| 83
-	| 84
-	| 85
-	| 86
-	| 87
-	| 88
-	| 89
-	| 90
-	| 91
-	| 92
-	| 93
-	| 94
-	| 95
-	| 96
-	| 97
-	| 98
-	| 99
-	| 100
-	| 101
-	| 102
-	| 103
-	| 104
-	| 105
-	| 106
-	| 107
-	| 108
-	| 109
-	| 110
-	| 111
-	| 112
-	| 113
-	| 114
-	| 115
-	| 116
-	| 117
-	| 118
-	| 119
-	| 120
-	| 121
-	| 122
-	| 123
-	| 124
-	| 125
-	| 126
-	| 127
-	| 128;
+type CmdEvent = Obj<'CmdEvent', TimeRange, never, CmdEventProps> & CmdEventProps;

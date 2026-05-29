@@ -1,4 +1,4 @@
-type Remotes = Obj<string, ShowData, MIDIRemotes | DCRemotes | DmxRemotes> & {
+type Remotes = Obj<'Remotes', ShowData, MIDIRemotes | DCRemotes | DmxRemotes> & {
 	DCRemotes: DCRemotes;
 	MIDIRemotes: MIDIRemotes;
 	DmxRemotes: DmxRemotes;
@@ -8,15 +8,15 @@ type DmxRemotesProps = ObjProps & {
 	enabled: boolean;
 };
 
-type DCRemotes = Obj<string, ShowData, any>;
-type DmxRemotes = Obj<string, ShowData, any> & DmxRemotesProps & { [key: string]: DmxRemote };
+type DCRemotes = Obj<'DCRemotes', ShowData, any>;
+type DmxRemotes = Obj<'DmxRemotes', ShowData, any> & DmxRemotesProps & { [key: string]: DmxRemote };
 
 type MIDIRemotesProps = ObjProps & {
 	enabled: boolean;
 	feedbackInput: boolean;
 };
 
-type MIDIRemotes = Obj<string, ShowData, MIDIRemote> & {
+type MIDIRemotes = Obj<'MIDIRemotes', ShowData, MIDIRemote> & {
 	Image: UserImage;
 } & MIDIRemotesProps;
 
@@ -50,7 +50,7 @@ type MIDIMidiType = 'Note' | 'NoteAttack' | 'NoteAttackDecay' | 'Control';
 type RemoteLockType = '' | 'Yes';
 type MIDIRemoteProps = ObjProps & {
 	lock: RemoteLockType;
-	target: Obj<string, any, any>;
+	target: GenericObj;
 	fader: RemoteFaderType;
 	key: RemoteKeyType;
 	outFrom: number;
@@ -67,12 +67,12 @@ type MIDIRemoteProps = ObjProps & {
 	midiType: MIDIMidiType;
 };
 
-type MIDIRemote = Obj<string, MIDIRemotes, never, MIDIRemoteProps>;
+type MIDIRemote = Obj<'MIDIRemote', MIDIRemotes, never, MIDIRemoteProps>;
 
 type DmxRemoteResolution = '8bit' | '16bit' | '24bit';
 type DmxRemoteProps = ObjProps & {
 	lock: RemoteLockType;
-	target: Obj<string, any, any>;
+	target: GenericObj;
 	fader: RemoteFaderType;
 	key: RemoteKeyType;
 	outFrom: number;
@@ -88,4 +88,4 @@ type DmxRemoteProps = ObjProps & {
 	resolution: DmxRemoteResolution;
 };
 
-type DmxRemote = Obj<string, DmxRemotes, never, DmxRemoteProps>;
+type DmxRemote = Obj<'DmxRemote', DmxRemotes, never, DmxRemoteProps>;

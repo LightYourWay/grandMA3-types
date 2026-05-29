@@ -1,19 +1,19 @@
-type FixtureTypes = Obj<string, Patch, FixtureTypeObj> &
-	FixtureTypeObj[] & { [index: string]: FixtureTypeObj };
+type FixtureTypes = Obj<'FixtureTypes', Patch, FixtureType> &
+	FixtureType[] & { [index: string]: FixtureType };
 
-type FixtureTypeObj = Obj<string, FixtureTypes, any> &
+type FixtureType = Obj<'FixtureType', FixtureTypes, any> &
 	any[] & { [index: string]: any } & {
 		DMXModes: DMXModes;
 		Wheels: Wheels;
 		AttributeDefinitions: AttributeDefinitions;
 	};
 
-type DMXModes = Obj<string, FixtureTypeObj, DMXMode> &
+type DMXModes = Obj<'DMXModes', FixtureType, DMXMode> &
 	DMXMode[] & { [index: string]: DMXMode } & {
 		Default: DMXMode;
 	};
 
-type DMXMode = Obj<string, DMXModes, any> &
+type DMXMode = Obj<'DMXMode', DMXModes, any> &
 	any[] & { [index: string]: any } & {
 		DMXChannels: DMXChannels;
 		Relations: Relations;
@@ -21,7 +21,7 @@ type DMXMode = Obj<string, DMXModes, any> &
 		totalFootPrint: number; // Number of DMX Channels
 	};
 
-type DMXChannels = Obj<string, DMXMode, DMXChannel> &
+type DMXChannels = Obj<'DMXChannels', DMXMode, DMXChannel> &
 	DMXChannel[] & { [index: string]: DMXChannel };
 
 type DMXChannelProps = ObjProps & {
@@ -34,7 +34,7 @@ type DMXChannelProps = ObjProps & {
 	lowLight: number;
 };
 
-type DMXChannel = Obj<string, DMXChannels, LogicalChannel, DMXChannelProps> &
+type DMXChannel = Obj<'DMXChannel', DMXChannels, LogicalChannel, DMXChannelProps> &
 	DMXChannelProps &
 	LogicalChannel[] & { [index: string]: LogicalChannel };
 
@@ -45,7 +45,7 @@ type LogicalChannelProps = ObjProps & {
 	physicalFrom: number;
 	physicalTo: number;
 };
-type LogicalChannel = Obj<string, DMXChannel, ChannelFunction, LogicalChannelProps> &
+type LogicalChannel = Obj<'LogicalChannel', DMXChannel, ChannelFunction, LogicalChannelProps> &
 	LogicalChannelProps & {
 		ChannelFunction: ChannelFunction;
 	};
@@ -59,7 +59,7 @@ type ChannelFunctionProps = ObjProps & {
 	wheel: Wheel;
 	dmxInvert: boolean;
 };
-type ChannelFunction = Obj<string, LogicalChannel, ChannelSet, ChannelFunctionProps> &
+type ChannelFunction = Obj<'ChannelFunction', LogicalChannel, ChannelSet, ChannelFunctionProps> &
 	ChannelFunctionProps & {
 		wheel: Wheel;
 	};
@@ -69,26 +69,26 @@ type ChannelSetProps = ObjProps & {
 	DMXto: number;
 	wheelSlotIndex: number;
 };
-type ChannelSet = Obj<string, ChannelFunction, any, ChannelSetProps> & ChannelSetProps;
+type ChannelSet = Obj<'ChannelSet', ChannelFunction, any, ChannelSetProps> & ChannelSetProps;
 
-type Wheels = Obj<string, FixtureTypeObj, Wheel> & Wheel[] & { [index: string]: Wheel };
+type Wheels = Obj<'Wheels', FixtureType, Wheel> & Wheel[] & { [index: string]: Wheel };
 
-type Wheel = Obj<string, Wheels, Slot> & Slot[];
+type Wheel = Obj<'Wheel', Wheels, Slot> & Slot[];
 
-type Slot = Obj<string, Wheel, any> & {
+type Slot = Obj<'Slot', Wheel, any> & {
 	color: string; // R,G,B,A : normalized 0-1
 	image: GoboImage;
 };
 
-type AttributeDefinitions = Obj<string, FixtureTypeObj, any> & {
+type AttributeDefinitions = Obj<'AttributeDefinitions', FixtureType, any> & {
 	FeatureGroups: FeatureGroups;
 	Attributes: Attributes;
 };
 
-type FeatureGroups = Obj<string, AttributeDefinitions, FeatureGroup>;
-type FeatureGroup = Obj<string, FeatureGroups, Feature> & { [key: string]: Feature };
+type FeatureGroups = Obj<'FeatureGroups', AttributeDefinitions, FeatureGroup>;
+type FeatureGroup = Obj<'FeatureGroup', FeatureGroups, Feature> & { [key: string]: Feature };
 
-type Feature = Obj<string, FeatureGroup, any>;
+type Feature = Obj<'Feature', FeatureGroup, any>;
 
 /**
  * NOTE: Using attributes.Children() doesn't give all attributes.
@@ -98,15 +98,17 @@ type Feature = Obj<string, FeatureGroup, any>;
  *
  * GetAttributeCount() is not the same as GetUIChannelCount().
  */
-type Attributes = Obj<string, AttributeDefinitions, any> & { [key: string]: Attribute };
+type Attributes = Obj<'Attributes', AttributeDefinitions, any> & { [key: string]: Attribute };
 
-type Attribute = Obj<string, Attributes, any> & {
+type Attribute = Obj<'Attribute', Attributes, any> & {
 	Feature: Feature;
 	Color: any;
 };
 
-type Relations = Obj<string, DMXMode, any> & { [key: string]: any };
+type Relations = Obj<'Relations', DMXMode, any> & { [key: string]: any };
 
-type SubfixtureOverview = Obj<string, DMXMode, FTSubfixture> & { [key: number]: FTSubfixture };
+type SubfixtureOverview = Obj<'SubfixtureOverview', DMXMode, FTSubfixture> & {
+	[key: number]: FTSubfixture;
+};
 
-type FTSubfixture = Obj<string, SubfixtureOverview, any> & any[];
+type FTSubfixture = Obj<'FTSubfixture', SubfixtureOverview, any> & any[];

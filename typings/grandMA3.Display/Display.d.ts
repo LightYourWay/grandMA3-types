@@ -1,4 +1,4 @@
-type DisplayCollect = Obj<string, Pult, Display>;
+type DisplayCollect = Obj<'DisplayCollect', Pult, Display>;
 type Display = GenericObj &
 	UILayoutGrid & {
 		CmdLineSection: CmdLineSection;
@@ -28,12 +28,12 @@ type MainMenuCnt = GenericObj;
 type ScrollIndicatorBox = GenericObj;
 type ViewBar = GenericObj;
 type EncoderBarContainer = GenericObj;
-// type ScreenOverlay = Obj<string, Display, any> &
+// type ScreenOverlay = Obj<unknown, Display, any> &
 // 	UILayoutGrid & {
 // 		ClearUIChildren(): void;
 // 		Close(): void;
 // 	};
-// type ModalOverlay = Obj<string, Display, any> &
+// type ModalOverlay = Obj<unknown, Display, any> &
 // 	UILayoutGrid & {
 // 		ClearUIChildren(): void;
 // 	};
