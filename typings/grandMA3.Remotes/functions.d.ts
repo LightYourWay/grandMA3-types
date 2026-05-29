@@ -1,24 +1,32 @@
-type Remotes = Obj<'Remotes', ShowData, MIDIRemotes | DCRemotes | DmxRemotes> & {
+type RemotesChildren = {
 	DCRemotes: DCRemotes;
 	MIDIRemotes: MIDIRemotes;
 	DmxRemotes: DmxRemotes;
 };
+type Remotes = Obj<'Remotes', ShowData, RemotesChildren[keyof RemotesChildren]> &
+	RemotesChildren[keyof RemotesChildren][] &
+	RemotesChildren;
 
-type DmxRemotesProps = ObjProps & {
+type DmxRemotesProperties = ObjProps & {
 	enabled: boolean;
 };
 
-type DCRemotes = Obj<'DCRemotes', ShowData, any>;
-type DmxRemotes = Obj<'DmxRemotes', ShowData, any> & DmxRemotesProps & { [key: string]: DmxRemote };
+type DCRemotes = Obj<'DCRemotes', Remotes, never>;
+type DmxRemotes = Obj<'DmxRemotes', Remotes, DmxRemote, DmxRemotesProperties> &
+	(DmxRemote | undefined)[] &
+	Record<string, DmxRemote | undefined> &
+	DmxRemotesProperties;
 
-type MIDIRemotesProps = ObjProps & {
+type MIDIRemotesProperties = ObjProps & {
 	enabled: boolean;
 	feedbackInput: boolean;
+	Image: UserImage;
 };
 
-type MIDIRemotes = Obj<'MIDIRemotes', ShowData, MIDIRemote> & {
-	Image: UserImage;
-} & MIDIRemotesProps;
+type MIDIRemotes = Obj<'MIDIRemotes', Remotes, MIDIRemote, MIDIRemotesProperties> &
+	(MIDIRemote | undefined)[] &
+	Record<string, MIDIRemote | undefined> &
+	MIDIRemotesProperties;
 
 type RemoteFaderType = '' | 'Master' | 'X' | 'XA' | 'XB' | 'Temp' | 'Rate' | 'Speed' | 'Time';
 type RemoteKeyType =
@@ -48,7 +56,7 @@ type RemoteKeyType =
 	| 'Top';
 type MIDIMidiType = 'Note' | 'NoteAttack' | 'NoteAttackDecay' | 'Control';
 type RemoteLockType = '' | 'Yes';
-type MIDIRemoteProps = ObjProps & {
+type MIDIRemoteProperties = ObjProps & {
 	lock: RemoteLockType;
 	target: GenericObj;
 	fader: RemoteFaderType;
@@ -67,10 +75,11 @@ type MIDIRemoteProps = ObjProps & {
 	midiType: MIDIMidiType;
 };
 
-type MIDIRemote = Obj<'MIDIRemote', MIDIRemotes, never, MIDIRemoteProps>;
+type MIDIRemote = Obj<'MIDIRemote', MIDIRemotes, never, MIDIRemoteProperties> &
+	MIDIRemoteProperties;
 
 type DmxRemoteResolution = '8bit' | '16bit' | '24bit';
-type DmxRemoteProps = ObjProps & {
+type DmxRemoteProperties = ObjProps & {
 	lock: RemoteLockType;
 	target: GenericObj;
 	fader: RemoteFaderType;
@@ -88,4 +97,4 @@ type DmxRemoteProps = ObjProps & {
 	resolution: DmxRemoteResolution;
 };
 
-type DmxRemote = Obj<'DmxRemote', DmxRemotes, never, DmxRemoteProps>;
+type DmxRemote = Obj<'DmxRemote', DmxRemotes, never, DmxRemoteProperties> & DmxRemoteProperties;

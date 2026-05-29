@@ -20,9 +20,10 @@ type Groups = Obj<'Groups', Pool, Group> &
 	(Group | undefined)[] &
 	Record<string, Group | undefined>;
 
-type Group = Obj<'Group', Groups, any> & {
+type GroupProperties = ObjProps & {
 	selectionData: FixtureSelectionData[];
 };
+type Group = Obj<'Group', Groups, never, GroupProperties> & GroupProperties;
 
 type FixtureSelectionData = {
 	grid: {
@@ -37,30 +38,33 @@ type FixtureSelectionData = {
 	sf_index: number;
 };
 
-type Filters = Obj<'Filters', Pool, Filter>;
-type FilterProps = ObjProps;
-type Filter = Obj<'Filter', Filters, any, FilterProps>;
+type Filters = Obj<'Filters', Pool, Filter> &
+	(Filter | undefined)[] &
+	Record<string, Filter | undefined>;
+type FilterProperties = ObjProps;
+type Filter = Obj<'Filter', Filters, never, FilterProperties> & FilterProperties;
 
-type RecipeProps = ObjProps;
-
-type Recipe = Obj<'Recipe', Part, never, RecipeProps> & {
+type RecipeProperties = ObjProps & {
 	selection: Group;
 	values: Preset;
 	matricks?: MAtrick;
 	filter: Filter;
 };
+type Recipe = Obj<'Recipe', Part, never, RecipeProperties> & RecipeProperties;
 
 // Timecodes
-type Timecodes = Obj<'Timecodes', Pool, Timecode> &
+type TimecodesProperties = ObjProps;
+type Timecodes = Obj<'Timecodes', Pool, Timecode, TimecodesProperties> &
 	(Timecode | undefined)[] &
 	Record<string, Timecode | undefined> &
-	ObjProps;
+	TimecodesProperties;
 
 // Timecode
-type Timecode = Obj<'Timecode', Timecodes, TrackGroup> &
+type TimecodeProperties = ObjProps;
+type Timecode = Obj<'Timecode', Timecodes, TrackGroup, TimecodeProperties> &
 	(TrackGroup | undefined)[] &
 	Record<string, TrackGroup | undefined> &
-	ObjProps;
+	TimecodeProperties;
 
 // TrackGroup
 type TrackGroupProperties = ObjProps & {
@@ -72,34 +76,38 @@ type TrackGroup = Obj<'TrackGroup', Timecode, MarkerTrack | Track, TrackGroupPro
 	TrackGroupProperties;
 
 // MarkerTrack
-type MarkerTrack = Obj<'MarkerTrack', TrackGroup, Marker> &
+type MarkerTrackProperties = ObjProps;
+type MarkerTrack = Obj<'MarkerTrack', TrackGroup, Marker, MarkerTrackProperties> &
 	(Marker | undefined)[] &
 	Record<string, Marker | undefined> &
-	ObjProps;
+	MarkerTrackProperties;
 
 // Marker
 type Marker = Obj<'Marker', MarkerTrack, never>;
 
 // Track
-type Track = Obj<'Track', TrackGroup, TimeRange> &
+type TrackProperties = ObjProps;
+type Track = Obj<'Track', TrackGroup, TimeRange, TrackProperties> &
 	(TimeRange | undefined)[] &
 	Record<string, TimeRange | undefined> &
-	ObjProps;
+	TrackProperties;
 
 // TimeRange
-type TimeRange = Obj<'TimeRange', Track, CmdSubTrack> &
+type TimeRangeProperties = ObjProps;
+type TimeRange = Obj<'TimeRange', Track, CmdSubTrack, TimeRangeProperties> &
 	(CmdSubTrack | undefined)[] &
 	Record<string, CmdSubTrack | undefined> &
-	ObjProps;
+	TimeRangeProperties;
 
 // CmdSubTrack
-type CmdSubTrack = Obj<'CmdSubTrack', TimeRange, CmdEvent> &
+type CmdSubTrackProperties = ObjProps;
+type CmdSubTrack = Obj<'CmdSubTrack', TimeRange, CmdEvent, CmdSubTrackProperties> &
 	(CmdEvent | undefined)[] &
 	Record<string, CmdEvent | undefined> &
-	ObjProps;
+	CmdSubTrackProperties;
 
 // CmdEvent
-type CmdEventProps = ObjProps & {
+type CmdEventProperties = ObjProps & {
 	rawTime: number;
 };
-type CmdEvent = Obj<'CmdEvent', TimeRange, never, CmdEventProps> & CmdEventProps;
+type CmdEvent = Obj<'CmdEvent', CmdSubTrack, never, CmdEventProperties> & CmdEventProperties;

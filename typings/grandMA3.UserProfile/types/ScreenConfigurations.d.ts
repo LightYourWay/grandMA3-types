@@ -1,17 +1,27 @@
-type ScreenConfigurations = Obj<'ScreenConfigurations', UserProfile, ScreenConfig> &
-	ScreenConfig[] & {
-		Default: ScreenConfig;
-		[index: string]: ScreenConfig;
-	};
+type ScreenConfigurationsProperties = ObjProps & {
+	Default: ScreenConfig;
+};
+type ScreenConfigurations = Obj<
+	'ScreenConfigurations',
+	UserProfile,
+	ScreenConfig,
+	ScreenConfigurationsProperties
+> &
+	(ScreenConfig | undefined)[] &
+	Record<string, ScreenConfig | undefined> &
+	ScreenConfigurationsProperties;
 
-type ScreenConfig = Obj<
-	'ScreenConfig',
-	ScreenConfigurations,
-	ScreenContents | ViewButtonScreens
-> & {
+type ScreenConfigChildren = {
 	ScreenContents: ScreenContents;
 	'ViewButtonScreens 2': ViewButtonScreens;
 };
+type ScreenConfig = Obj<
+	'ScreenConfig',
+	ScreenConfigurations,
+	ScreenConfigChildren[keyof ScreenConfigChildren]
+> &
+	ScreenConfigChildren[keyof ScreenConfigChildren][] &
+	ScreenConfigChildren;
 
 type ScreenNumber = number;
 type ScreenContentKey = `ScreenContent ${ScreenNumber}`;
@@ -28,7 +38,7 @@ type ViewWidgetChildren = {
 	WindowAppearance: WindowAppearance;
 	WindowScrollPositions: WindowScrollPositions;
 };
-type ViewWidgetProps = ObjProps & {
+type ViewWidgetProperties = ObjProps & {
 	appearance: Appearance;
 	minH: number;
 	minW: number;
@@ -45,15 +55,15 @@ type ViewWidget = Obj<
 	'ViewWidget',
 	ScreenContent | View,
 	ViewWidgetChildren[keyof ViewWidgetChildren],
-	ViewWidgetProps
+	ViewWidgetProperties
 > &
 	ViewWidgetChildren[keyof ViewWidgetChildren][] &
 	ViewWidgetChildren &
-	ViewWidgetProps;
+	ViewWidgetProperties;
 
 type SelectionViewSettings = Obj<'SelectionViewSettings', ViewWidget, never>;
 type WindowAppearance = Obj<'WindowAppearance', ViewWidget, never>;
-type WindowScrollPositions = Obj<'WindowScrollPositions', ViewWidget, never> & {
+type WindowScrollPositionsProperties = ObjProps & {
 	/**
 	 * A string with 2 integer numbers separated by a comma.
 	 * The first number is the vertical scroll position.
@@ -67,13 +77,20 @@ type WindowScrollPositions = Obj<'WindowScrollPositions', ViewWidget, never> & {
 	 */
 	scrollH: string;
 };
+type WindowScrollPositions = Obj<
+	'WindowScrollPositions',
+	ViewWidget,
+	never,
+	WindowScrollPositionsProperties
+> &
+	WindowScrollPositionsProperties;
 
 interface WindowLayoutView extends ViewWidget {
 	name: 'WindowLayoutView';
 	LayoutViewSettings: LayoutViewSettings;
 }
 
-interface LayoutViewSettingsProps {
+type LayoutViewSettingsProperties = ObjProps & {
 	Layout: Layout;
 	FitType: 'Elements' | 'Canvas' | 'Both';
 	ShowTitleBar: boolean;
@@ -82,14 +99,23 @@ interface LayoutViewSettingsProps {
 	PaddingRight: number;
 	PaddingBottom: number;
 	PaddingTop: number;
-}
-type LayoutViewSettings = Obj<'LayoutViewSettings', ViewWidget, never> & LayoutViewSettingsProps;
+};
+type LayoutViewSettings = Obj<
+	'LayoutViewSettings',
+	ViewWidget,
+	never,
+	LayoutViewSettingsProperties
+> &
+	LayoutViewSettingsProperties;
 
 type ViewButtonScreenKey = `ViewButtonScreen ${number}`;
 type ViewButtonScreens = Obj<'ViewButtonScreens', ScreenConfig, ViewButtonScreen> &
-	Record<ViewButtonScreenKey, ViewButtonScreen>;
+	(ViewButtonScreen | undefined)[] &
+	Record<ViewButtonScreenKey, ViewButtonScreen | undefined>;
 
-type ViewButtonScreen = Obj<'ViewButtonScreen', ViewButtonScreens, ViewButton>;
+type ViewButtonScreen = Obj<'ViewButtonScreen', ViewButtonScreens, ViewButton> &
+	(ViewButton | undefined)[] &
+	Record<string, ViewButton | undefined>;
 
 type ViewButton = Obj<'ViewButton', ViewButtonScreen, never>;
 
@@ -97,8 +123,13 @@ interface WindowEncoderBar extends ViewWidget {
 	name: 'WindowEncoderBar';
 	EncoderBarWindowSettings: EncoderBarWindowSettings;
 }
-interface EncoderBarWindowSettingsProps {
+type EncoderBarWindowSettingsProperties = ObjProps & {
 	fadeEncoder: boolean;
-}
-type EncoderBarWindowSettings = Obj<'EncoderBarWindowSettings', ViewWidget, never> &
-	EncoderBarWindowSettingsProps;
+};
+type EncoderBarWindowSettings = Obj<
+	'EncoderBarWindowSettings',
+	ViewWidget,
+	never,
+	EncoderBarWindowSettingsProperties
+> &
+	EncoderBarWindowSettingsProperties;

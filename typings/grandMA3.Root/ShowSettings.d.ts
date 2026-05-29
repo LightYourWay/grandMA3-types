@@ -1,7 +1,5 @@
 type ShowSettingsChildren = {
 	AddonVariables: AddonVariables;
-	[index: string]: unknown;
-	[index: number]: unknown;
 };
 
 type ShowSettings = Obj<
@@ -10,8 +8,11 @@ type ShowSettings = Obj<
 	ShowSettingsChildren[keyof ShowSettingsChildren]
 > &
 	ShowSettingsChildren[keyof ShowSettingsChildren][] &
+	Record<string, ShowSettingsChildren[keyof ShowSettingsChildren] | undefined> &
 	ShowSettingsChildren;
 
-type AddonVariables = Obj<'AddonVariables', ShowSettings, Variables> & Record<string, Variables>;
+type AddonVariables = Obj<'AddonVariables', ShowSettings, Variables> &
+	(Variables | undefined)[] &
+	Record<string, Variables | undefined>;
 
 type Variables = Obj<'Variables', AddonVariables, never>;

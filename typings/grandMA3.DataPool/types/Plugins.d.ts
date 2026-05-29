@@ -1,17 +1,22 @@
-type Plugins = Obj<'Plugins', Pool, UserPlugin> & { [index: string]: UserPlugin | undefined };
+type Plugins = Obj<'Plugins', Pool, UserPlugin> &
+	(UserPlugin | undefined)[] &
+	Record<string, UserPlugin | undefined>;
 
-type UserPluginProps = ObjProps & {
+type UserPluginProperties = ObjProps & {
 	scribble: Scribble;
 	appearance: Appearance;
 	author: string;
 	version: string;
 	path: string;
 	userRights: string;
+	note: string;
 };
-type UserPlugin = Obj<'UserPlugin', Plugins, LuaComponent, UserPluginProps> &
-	UserPluginProps & { note: string } & { [index: string]: LuaComponent | undefined };
+type UserPlugin = Obj<'UserPlugin', Plugins, LuaComponent, UserPluginProperties> &
+	(LuaComponent | undefined)[] &
+	Record<string, LuaComponent | undefined> &
+	UserPluginProperties;
 
-type LuaComponentProps = ObjProps & {
+type LuaComponentProperties = ObjProps & {
 	fileName: string;
 	filePath: string;
 	fileSize: number;
@@ -19,6 +24,5 @@ type LuaComponentProps = ObjProps & {
 	inStream: boolean;
 	installed: boolean;
 };
-type LuaComponent = Obj<'LuaComponent', UserPlugin, never, LuaComponentProps> & {
-	[index: string]: undefined;
-};
+type LuaComponent = Obj<'LuaComponent', UserPlugin, never, LuaComponentProperties> &
+	LuaComponentProperties;
