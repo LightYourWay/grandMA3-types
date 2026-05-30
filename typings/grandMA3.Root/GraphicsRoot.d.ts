@@ -5,7 +5,6 @@ type GraphicsRootChildren = {
 };
 type GraphicsRoot = Obj<'GraphicsRoot', Root, GraphicsRootChildren[keyof GraphicsRootChildren]> &
 	GraphicsRootChildren[keyof GraphicsRootChildren][] &
-	Record<string, GraphicsRootChildren[keyof GraphicsRootChildren] | undefined> &
 	GraphicsRootChildren;
 
 // TextureCollect
@@ -40,7 +39,9 @@ type PultCollect = Obj<'PultCollect', GraphicsRoot, Pult> &
 
 // Pult
 type PultChildren = Devices | DisplayCollect;
-type Pult = Obj<'Pult', PultCollect, PultChildren> & PultChildren[];
+type Pult = Obj<'Pult', PultCollect, PultChildren> &
+	(PultChildren | undefined)[] &
+	Record<string, PultChildren | undefined>;
 
 // Devices
 type Devices = Obj<'Devices', Pult, never>;

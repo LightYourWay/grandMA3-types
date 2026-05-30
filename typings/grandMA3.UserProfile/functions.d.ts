@@ -10,7 +10,6 @@ type UserProfileChildren = {
 type UserProfileProperties = ObjProps & {
 	encoderUIStyle: Enums.EncoderUIStyle;
 	autoRemoveGaps: boolean;
-	Name: string;
 };
 type UserProfile = Obj<
 	'UserProfile',
@@ -19,7 +18,6 @@ type UserProfile = Obj<
 	UserProfileProperties
 > &
 	UserProfileChildren[keyof UserProfileChildren][] &
-	Record<string, UserProfileChildren[keyof UserProfileChildren] | undefined> &
 	UserProfileChildren &
 	UserProfileProperties;
 

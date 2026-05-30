@@ -8,7 +8,6 @@ type ShowSettings = Obj<
 	ShowSettingsChildren[keyof ShowSettingsChildren]
 > &
 	ShowSettingsChildren[keyof ShowSettingsChildren][] &
-	Record<string, ShowSettingsChildren[keyof ShowSettingsChildren] | undefined> &
 	ShowSettingsChildren;
 
 // AddonVariables

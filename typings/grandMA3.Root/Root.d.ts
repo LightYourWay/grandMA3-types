@@ -10,7 +10,6 @@ type RootChildren = {
 };
 type Root = Obj<'Root', never, RootChildren[keyof RootChildren]> &
 	RootChildren[keyof RootChildren][] &
-	Record<string, RootChildren[keyof RootChildren] | undefined> &
 	RootChildren;
 
 // UsbNotifier

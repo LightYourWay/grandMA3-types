@@ -16,7 +16,6 @@ type LivePatchChildren = {
 };
 type LivePatch = Obj<'Patch', ShowData, LivePatchChildren[keyof LivePatchChildren]> &
 	LivePatchChildren[keyof LivePatchChildren][] &
-	Record<string, LivePatchChildren[keyof LivePatchChildren] | undefined> &
 	LivePatchChildren;
 
 // Stages
