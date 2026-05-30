@@ -6,8 +6,13 @@
 	"scripts": {
 		"lint:check": "prettier --check \"typings/**/*.ts\"",
 		"lint:fix": "prettier --write \"typings/**/*.ts\"",
-		"tsc": "tsc --watch"
+		"tsc": "tsc --watch",
+		"tsc:check": "tsc --noEmit"
 	},
+	"files": [
+		"index.d.ts",
+		"typings/"
+	],
 	"prettier": {
 		"printWidth": 100,
 		"proseWrap": "never",

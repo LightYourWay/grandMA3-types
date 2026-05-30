@@ -1,0 +1,28 @@
+{
+  "name": "grandma3-types-docs",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "data": "node scripts/generate-docs-data.mjs",
+    "build": "vite build",
+    "build:full": "node scripts/generate-docs-data.mjs && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.4.8",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "@humanspeak/svelte-markdown": "^1.5.3",
+    "fuse.js": "^7.0.0",
+    "highlight.js": "^11.11.1"
+  }
+}
