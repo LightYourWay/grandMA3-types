@@ -12,7 +12,7 @@ interface Obj<
 	ChildType extends Obj<string, any, any> | unknown | never = never,
 	Props extends ObjProps = ObjProps,
 > {
-	readonly lock: '' | 'Yes' | 'SS';
+	readonly lock: Enums.LockTypes;
 
 	name: string;
 	nameAndApp: string;
