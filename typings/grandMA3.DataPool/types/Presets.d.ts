@@ -1,6 +1,7 @@
 type PresetFamilyType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 21 | 22 | 23 | 24 | 25;
 
-type PresetPools = Obj<'PresetPools', Pool, Presets> & {
+// PresetPools
+type PresetPoolsChildren = {
 	Dimmer: Presets;
 	Position: Presets;
 	Gobo: Presets;
@@ -16,13 +17,23 @@ type PresetPools = Obj<'PresetPools', Pool, Presets> & {
 	'All 4': Presets;
 	'All 5': Presets;
 };
-type Presets = Obj<'Presets', PresetPools, Preset>;
+type PresetPools = Obj<'PresetPools', Pool, PresetPoolsChildren[keyof PresetPoolsChildren]> &
+	PresetPoolsChildren[keyof PresetPoolsChildren][] &
+	PresetPoolsChildren;
+
+// Presets
+type Presets = Obj<'Presets', PresetPools, Preset> &
+	(Preset | undefined)[] &
+	Record<string, Preset | undefined>;
+
 type PresetMode = 'Universal' | 'Global' | 'Selective';
-type PresetProps = ObjProps & {
+
+// Preset
+type PresetProperties = ObjProps & {
 	appearance: Appearance;
 	scribble: Scribble;
 	readonly storedData: PresetMode;
 	readonly presetMode: Enums.PresetMode;
 	presetModeInternal: PresetMode;
-} & MAtrickOnlyProps;
-type Preset = Obj<'Preset', PresetPools, Recipe, PresetProps> & PresetProps;
+} & MAtrickOnlyProperties;
+type Preset = Obj<'Preset', Presets, Recipe, PresetProperties> & PresetProperties;

@@ -1,8 +1,15 @@
-type Layouts = Obj<'Layouts', Pool, Layout> & Layout[] & { [index: string]: Layout };
+// Layouts
+type Layouts = Obj<'Layouts', Pool, Layout> &
+	(Layout | undefined)[] &
+	Record<string, Layout | undefined>;
 
-type Layout = Obj<'Layout', Layouts, Element> & Element[] & { [index: string]: Element };
+// Layout
+type Layout = Obj<'Layout', Layouts, Element> &
+	(Element | undefined)[] &
+	Record<string, Element | undefined>;
 
-type ElementProps = ObjProps & {
+// Element
+type ElementProperties = ObjProps & {
 	assignType: number;
 	action: Enums.AssignmentButtonFunctionsSequence;
 	appearance: Appearance;
@@ -34,9 +41,7 @@ type ElementProps = ObjProps & {
 	posX: number;
 	posY: number;
 	width: number;
+	object: GenericObj;
+	note: string;
 };
-type Element = Obj<'Element', Layout, never> &
-	ElementProps & {
-		object: GenericObj;
-		note: string;
-	};
+type Element = Obj<'Element', Layout, never, ElementProperties> & ElementProperties;

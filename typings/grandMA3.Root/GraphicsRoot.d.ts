@@ -1,25 +1,47 @@
-type GraphicsRoot = Obj<'GraphicsRoot', Root, any> &
-	any[] & { [index: string]: any } & {
-		TextureCollect: TextureCollect;
-		PultCollect: PultCollect;
-	};
+// GraphicsRoot
+type GraphicsRootChildren = {
+	TextureCollect: TextureCollect;
+	PultCollect: PultCollect;
+};
+type GraphicsRoot = Obj<'GraphicsRoot', Root, GraphicsRootChildren[keyof GraphicsRootChildren]> &
+	GraphicsRootChildren[keyof GraphicsRootChildren][] &
+	GraphicsRootChildren;
 
-type TextureCollect = Obj<'TextureCollect', GraphicsRoot, Textures> & {
+// TextureCollect
+type TextureCollectChildren = {
 	Textures: Textures;
 };
-type Textures = Obj<'Textures', TextureCollect, Texture> & {
-	[name: string]: Texture;
-};
-type TextureProps = ObjProps & {
+type TextureCollect = Obj<
+	'TextureCollect',
+	GraphicsRoot,
+	TextureCollectChildren[keyof TextureCollectChildren]
+> &
+	TextureCollectChildren[keyof TextureCollectChildren][] &
+	TextureCollectChildren;
+
+// Textures
+type Textures = Obj<'Textures', TextureCollect, Texture> &
+	(Texture | undefined)[] &
+	Record<string, Texture | undefined>;
+
+// Texture
+type TextureProperties = ObjProps & {
 	fileName: string;
 	textureRect: { h: number; w: number; x: number; y: number };
 	textureIndex: number;
 };
-type Texture = Obj<'Texture', Textures, never, TextureProps> & TextureProps;
+type Texture = Obj<'Texture', Textures, never, TextureProperties> & TextureProperties;
 
-type PultCollect = Obj<'PultCollect', GraphicsRoot, Pult> & {
-	[name: string]: Pult;
-};
-type Pult = Obj<'Pult', PultCollect, Devices | DisplayCollect, PultProps> & PultProps;
-type PultProps = ObjProps;
-type Devices = Obj<'Devices', Pult, any>;
+// PultCollect
+type PultCollect = Obj<'PultCollect', GraphicsRoot, Pult> &
+	(Pult | undefined)[] &
+	Record<string, Pult | undefined>;
+
+// Pult
+type PultChildren = Devices | DisplayCollect;
+type Pult = Obj<'Pult', PultCollect, PultChildren> &
+	(PultChildren | undefined)[] &
+	Record<string, PultChildren | undefined>;
+
+// Devices
+type Devices = Obj<'Devices', Pult, never>;

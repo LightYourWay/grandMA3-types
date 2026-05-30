@@ -1,30 +1,56 @@
-type Patch = Obj<'Patch', ShowData, any> &
-	any[] & { [index: string]: any } & {
-		FixtureTypes: FixtureTypes;
-	};
+// Patch
+type PatchChildren = {
+	FixtureTypes: FixtureTypes;
+};
+type Patch = Obj<'Patch', ShowData, PatchChildren[keyof PatchChildren]> &
+	PatchChildren[keyof PatchChildren][] &
+	Record<string, PatchChildren[keyof PatchChildren] | undefined> &
+	PatchChildren;
 
-type LivePatch = Obj<'Patch', ShowData, any> &
-	any[] & { [index: string]: any } & {
-		AttributeDefinitions: AttributeDefinitions;
-		FixtureTypes: FixtureTypes;
-		Stages: Stages;
-		UIChannels: UIChannels;
-	};
+// LivePatch
+type LivePatchChildren = {
+	AttributeDefinitions: AttributeDefinitions;
+	FixtureTypes: FixtureTypes;
+	Stages: Stages;
+	UIChannels: UIChannels;
+};
+type LivePatch = Obj<'Patch', ShowData, LivePatchChildren[keyof LivePatchChildren]> &
+	LivePatchChildren[keyof LivePatchChildren][] &
+	LivePatchChildren;
 
-type Stages = Obj<'Stages', LivePatch | Patch, Stage> & { [index: number]: Stage };
+// Stages
+type Stages = Obj<'Stages', LivePatch | Patch, Stage> &
+	(Stage | undefined)[] &
+	Record<number, Stage | undefined>;
 
-type Stage = Obj<'Stage', Stages, any> & {
-	note: string;
+// Stage
+type StageChildren = {
 	Spaces: Spaces;
 	Fixtures: Fixtures;
 };
-type Spaces = Obj<'Spaces', Stage, any>;
-type Fixtures = Obj<'Fixtures', Stage, Fixture>;
+type StageProperties = ObjProps & {
+	note: string;
+};
+type Stage = Obj<'Stage', Stages, StageChildren[keyof StageChildren], StageProperties> &
+	StageChildren[keyof StageChildren][] &
+	StageChildren &
+	StageProperties;
+
+// Spaces
+type Spaces = Obj<'Spaces', Stage, never>;
+
+// Fixtures
+type Fixtures = Obj<'Fixtures', Stage, Fixture> &
+	(Fixture | undefined)[] &
+	Record<string, Fixture | undefined>;
+
 type DMXMultiAddrString =
 	| DMXAddrString
 	| `${DMXAddrString},${DMXAddrString}`
 	| `${DMXAddrString},${DMXAddrString},${DMXAddrString}`; // May be more ?
-type Fixture = Obj<'Fixture', Fixtures, Fixture | SubFixture> & {
+
+// Fixture
+type FixtureProperties = ObjProps & {
 	/**
 	 * If the fixture has a CID, then the index is the CID.
 	 * If not, it will be the 1-based index of the fixture within the Stage.
@@ -41,19 +67,25 @@ type Fixture = Obj<'Fixture', Fixtures, Fixture | SubFixture> & {
 	modeDirect?: DMXMode;
 	patch: DMXMultiAddrString | '';
 };
+type Fixture = Obj<'Fixture', Fixtures, any, FixtureProperties> & FixtureProperties;
 
-type SubFixture = Obj<'SubFixture', Fixtures, SubFixture> & {
+// SubFixture
+type SubFixtureProperties = ObjProps & {
 	fixture: Fixture;
 	stage: Stage;
 };
+type SubFixture = Obj<'SubFixture', Fixtures, any, SubFixtureProperties> & SubFixtureProperties;
 
-type UIChannels = Obj<'UIChannels', LivePatch | Patch, UIChannel> & UIChannel[];
+// UIChannels
+type UIChannels = Obj<'UIChannels', LivePatch | Patch, UIChannel> &
+	(UIChannel | undefined)[] &
+	Record<string, UIChannel | undefined>;
 
-type UIChannelProps = ObjProps & {
+// UIChannel
+type UIChannelProperties = ObjProps & {
 	logical_channel: LogicalChannel;
 	attr_index: number;
 	rt_index: number;
 	subAttribute: AttributeName;
 };
-
-type UIChannel = Obj<'UIChannel', UIChannels, never, UIChannelProps> & UIChannelProps;
+type UIChannel = Obj<'UIChannel', UIChannels, never, UIChannelProperties> & UIChannelProperties;

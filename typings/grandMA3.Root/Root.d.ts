@@ -1,4 +1,5 @@
-type Root = Obj<'Root', never, any> & { [index: string]: any } & {
+// Root
+type RootChildren = {
 	ShowData: ShowData;
 	ColorTheme: ColorTheme;
 	DeviceConfigurations: DeviceConfigurations;
@@ -7,32 +8,55 @@ type Root = Obj<'Root', never, any> & { [index: string]: any } & {
 	UsbNotifier: UsbNotifier;
 	Temp: Temp;
 };
+type Root = Obj<'Root', never, RootChildren[keyof RootChildren]> &
+	RootChildren[keyof RootChildren][] &
+	RootChildren;
 
-type UsbNotifier = Obj<'UsbNotifier', Root, Storage> & {
+// UsbNotifier
+type UsbNotifierChildren = {
 	StorageDevice: Storage;
 };
-type Storage = Obj<'Storage', UsbNotifier, USBDeviceStorage> & USBDeviceStorage[];
-type USBDeviceStorageProps = ObjProps & {
+type UsbNotifier = Obj<'UsbNotifier', Root, UsbNotifierChildren[keyof UsbNotifierChildren]> &
+	UsbNotifierChildren[keyof UsbNotifierChildren][] &
+	UsbNotifierChildren;
+
+// Storage
+type Storage = Obj<'Storage', UsbNotifier, USBDeviceStorage> &
+	(USBDeviceStorage | undefined)[] &
+	Record<string, USBDeviceStorage | undefined>;
+
+// USBDeviceStorage
+type USBDeviceStorageProperties = ObjProps & {
 	connected: boolean;
 	connectedCount: any;
 	ip: any;
 	mountPoint: any;
 };
-type USBDeviceStorage = Obj<'USBDeviceStorage', USBDeviceStorage, never, USBDeviceStorageProps>;
+type USBDeviceStorage = Obj<'USBDeviceStorage', Storage, never, USBDeviceStorageProperties> &
+	USBDeviceStorageProperties;
 
-type Temp = Obj<'Temp', Root, any> & {
+// Temp
+type TempChildren = {
 	DriveCollect: DriveCollect;
 };
+type Temp = Obj<'Temp', Root, TempChildren[keyof TempChildren]> &
+	TempChildren[keyof TempChildren][] &
+	TempChildren;
 
-type DriveCollect = Obj<'DriveCollect', Temp, Drive>;
-type Drive = Obj<'Drive', DriveCollect, never, DriveProps> & DriveProps;
-type DriveProps = ObjProps & {
+// DriveCollect
+type DriveCollect = Obj<'DriveCollect', Temp, Drive> &
+	(Drive | undefined)[] &
+	Record<string, Drive | undefined>;
+
+// Drive
+type DriveProperties = ObjProps & {
 	driveType: 'Removeable' | 'Internal' | 'OldVersion';
 	path: string;
 };
+type Drive = Obj<'Drive', DriveCollect, never, DriveProperties> & DriveProperties;
 
-type MANetSocket = Obj<'MAnetSocket', Root, never, MANetSocketProps> & MANetSocketProps;
-type MANetSocketProps = ObjProps & {
+// MANetSocket
+type MANetSocketProperties = ObjProps & {
 	hostName: string;
 	readonly primaryIp: string;
 	session: string;
@@ -40,3 +64,4 @@ type MANetSocketProps = ObjProps & {
 	readonly status: 'IdleMaster' | string;
 	readonly sessionManager: 'Yes' | 'No';
 };
+type MANetSocket = Obj<'MAnetSocket', Root, never, MANetSocketProperties> & MANetSocketProperties;
