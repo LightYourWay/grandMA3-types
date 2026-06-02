@@ -10,9 +10,9 @@ type UILayoutGridProps = UIObjectProps & {
 	defaultMargin: `${number}`;
 };
 
-type ItemCollectColumns = GenericObj & Record<number, Item>;
+type ItemCollectColumns = GenericContainerObj & Record<number, Item>;
 
-type ItemCollectRows = GenericObj & Record<number, Item>;
+type ItemCollectRows = GenericContainerObj & Record<number, Item>;
 
 type ItemPropsFixed = {
 	sizePolicy: 'Fixed';
@@ -36,4 +36,4 @@ type ItemProps = {
 	size?: number;
 	minSize?: MAUISize;
 };
-type Item = GenericObj & ItemProps;
+type Item = GenericContainerObj & ItemProps;

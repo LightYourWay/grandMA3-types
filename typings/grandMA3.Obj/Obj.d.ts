@@ -1,5 +1,15 @@
-type GenericObj = Obj<string, unknown, unknown> &
-	unknown[] & { [index: string]: unknown } & ObjProps;
+/**
+ * Supertype of every `Obj<>`-derived class. Use this wherever any grandMA3
+ * object can appear.
+ */
+type GenericObj = Obj<string, unknown, unknown>;
+
+/**
+ * Supertype of container-style grandMA3 objects.
+ * Adds the array index signature and arbitrary string-key access used to
+ * reach children by number or name.
+ */
+type GenericContainerObj = GenericObj & unknown[] & { [index: string]: unknown };
 
 type ObjProps = {
 	name: string;
