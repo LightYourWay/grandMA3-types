@@ -25,7 +25,7 @@
 		"url": "git+https://github.com/LightYourWay/grandMA3-types.git"
 	},
 	"author": "Lukas Runge",
-	"license": "MIT",
+	"license": "LGPL-3.0-or-later",
 	"bugs": {
 		"url": "https://github.com/LightYourWay/grandMA3-types/issues"
 	},
