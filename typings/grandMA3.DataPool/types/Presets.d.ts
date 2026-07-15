@@ -29,8 +29,7 @@ type Presets = Obj<'Presets', PresetPools, Preset> &
 type PresetMode = 'Universal' | 'Global' | 'Selective';
 
 // Preset
-type PresetProperties = ObjProps & {
-	appearance: Appearance;
+type PresetProperties = PoolItemProperties & {
 	scribble: Scribble;
 	readonly storedData: PresetMode;
 	readonly presetMode: Enums.PresetMode;

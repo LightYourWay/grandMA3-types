@@ -2,9 +2,10 @@
 type Pages = Obj<'Pages', Pool, Page> & (Page | undefined)[] & Record<string, Page | undefined>;
 
 // Page
-type Page = Obj<'Page', Pages, Executor | Proxy> &
+type Page = Obj<'Page', Pages, Executor | Proxy, PoolItemProperties> &
 	(Executor | Proxy | undefined)[] &
-	Record<string, Executor | Proxy | undefined>;
+	Record<string, Executor | Proxy | undefined> &
+	PoolItemProperties;
 
 type ExecutorProxyProperties = {
 	fader: 'Master' | 'Temp'; //...

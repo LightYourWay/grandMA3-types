@@ -11,9 +11,10 @@ type PoolChildren = {
 	Layouts: Layouts;
 	Timecodes: Timecodes;
 };
-type Pool = Obj<'Pool', DataPools, PoolChildren[keyof PoolChildren]> &
+type Pool = Obj<'Pool', DataPools, PoolChildren[keyof PoolChildren], PoolItemProperties> &
 	PoolChildren[keyof PoolChildren][] &
-	PoolChildren;
+	PoolChildren &
+	PoolItemProperties;
 
 // Groups
 type Groups = Obj<'Groups', Pool, Group> &
@@ -21,7 +22,7 @@ type Groups = Obj<'Groups', Pool, Group> &
 	Record<string, Group | undefined>;
 
 // Group
-type GroupProperties = ObjProps & {
+type GroupProperties = PoolItemProperties & {
 	selectionData: FixtureSelectionData[];
 };
 type Group = Obj<'Group', Groups, never, GroupProperties> & GroupProperties;
@@ -45,7 +46,7 @@ type Filters = Obj<'Filters', Pool, Filter> &
 	Record<string, Filter | undefined>;
 
 // Filter
-type Filter = Obj<'Filter', Filters, never>;
+type Filter = Obj<'Filter', Filters, never, PoolItemProperties> & PoolItemProperties;
 
 // Recipe
 type RecipeProperties = ObjProps & {
@@ -62,9 +63,10 @@ type Timecodes = Obj<'Timecodes', Pool, Timecode> &
 	Record<string, Timecode | undefined>;
 
 // Timecode
-type Timecode = Obj<'Timecode', Timecodes, TrackGroup> &
+type Timecode = Obj<'Timecode', Timecodes, TrackGroup, PoolItemProperties> &
 	(TrackGroup | undefined)[] &
-	Record<string, TrackGroup | undefined>;
+	Record<string, TrackGroup | undefined> &
+	PoolItemProperties;
 
 // TrackGroup
 type TrackGroupProperties = ObjProps & {

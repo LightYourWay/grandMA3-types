@@ -63,8 +63,5 @@ type MAtrickOnlyProperties = {
 	phaseFromZ: number | 'None';
 	phaseToZ: number | 'None';
 };
-type MAtrickProperties = ObjProps &
-	MAtrickOnlyProperties & {
-		appearance: Appearance;
-	};
+type MAtrickProperties = PoolItemProperties & MAtrickOnlyProperties;
 type MAtrick = Obj<'MAtrick', MAtricks, never, MAtrickProperties> & MAtrickProperties;

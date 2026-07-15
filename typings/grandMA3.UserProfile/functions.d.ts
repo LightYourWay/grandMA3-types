@@ -39,9 +39,10 @@ type Views = Obj<'Views', UserProfile, View> &
 	Record<string, View | undefined>;
 
 // View
-type View = Obj<'View', Views, ViewWidget> &
+type View = Obj<'View', Views, ViewWidget, PoolItemProperties> &
 	(ViewWidget | undefined)[] &
-	Record<string, ViewWidget | undefined>;
+	Record<string, ViewWidget | undefined> &
+	PoolItemProperties;
 
 // UserAttributePreferences
 type UserAttributePreferences = Obj<'UserAttributePreferences', UserProfile, UserAttribute> &

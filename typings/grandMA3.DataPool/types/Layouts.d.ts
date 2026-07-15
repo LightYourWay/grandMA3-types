@@ -4,9 +4,10 @@ type Layouts = Obj<'Layouts', Pool, Layout> &
 	Record<string, Layout | undefined>;
 
 // Layout
-type Layout = Obj<'Layout', Layouts, Element> &
+type Layout = Obj<'Layout', Layouts, Element, PoolItemProperties> &
 	(Element | undefined)[] &
-	Record<string, Element | undefined>;
+	Record<string, Element | undefined> &
+	PoolItemProperties;
 
 // Element
 type ElementProperties = ObjProps & {

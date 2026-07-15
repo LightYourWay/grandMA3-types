@@ -19,7 +19,7 @@ type GoboImages = Obj<'GoboImages', MediaPools, GoboImage> &
 	Record<string, GoboImage | undefined>;
 
 // GoboImage
-type GoboImage = Obj<'GoboImage', GoboImages, never>;
+type GoboImage = Obj<'GoboImage', GoboImages, never, PoolItemProperties> & PoolItemProperties;
 
 // Symbols
 type Symbols = Obj<'Symbols', MediaPools, SymbolImage> &
@@ -27,7 +27,7 @@ type Symbols = Obj<'Symbols', MediaPools, SymbolImage> &
 	Record<string, SymbolImage | undefined>;
 
 // SymbolImage
-type SymbolImage = Obj<'SymbolImage', Symbols, never>;
+type SymbolImage = Obj<'SymbolImage', Symbols, never, PoolItemProperties> & PoolItemProperties;
 
 // Images
 type Images = Obj<'Images', MediaPools, UserImage> &
@@ -35,7 +35,7 @@ type Images = Obj<'Images', MediaPools, UserImage> &
 	Record<string, UserImage | undefined>;
 
 // UserImage
-type UserImageProperties = ObjProps & { note: string };
+type UserImageProperties = PoolItemProperties & { note: string };
 type UserImage = Obj<'UserImage', Images, never, UserImageProperties> & UserImageProperties;
 
 // MeshImagePool
@@ -44,7 +44,7 @@ type MeshImagePool = Obj<'MeshImagePool', MediaPools, MeshImage> &
 	Record<string, MeshImage | undefined>;
 
 // MeshImage
-type MeshImage = Obj<'MeshImage', MeshImagePool, never>;
+type MeshImage = Obj<'MeshImage', MeshImagePool, never, PoolItemProperties> & PoolItemProperties;
 
 // Videos
 type Videos = Obj<'Videos', MediaPools, Video> &
@@ -52,7 +52,7 @@ type Videos = Obj<'Videos', MediaPools, Video> &
 	Record<string, Video | undefined>;
 
 // Video
-type Video = Obj<'Video', Videos, never>;
+type Video = Obj<'Video', Videos, never, PoolItemProperties> & PoolItemProperties;
 
 // Sounds
 type Sounds = Obj<'Sounds', MediaPools, Sound> &
@@ -60,4 +60,4 @@ type Sounds = Obj<'Sounds', MediaPools, Sound> &
 	Record<string, Sound | undefined>;
 
 // Sound
-type Sound = Obj<'Sound', Sounds, never>;
+type Sound = Obj<'Sound', Sounds, never, PoolItemProperties> & PoolItemProperties;

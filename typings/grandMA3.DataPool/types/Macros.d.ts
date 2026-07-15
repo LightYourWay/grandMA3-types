@@ -4,9 +4,7 @@ type Macros = Obj<'Macros', Pool, Macro> &
 	Record<string, Macro | undefined>;
 
 // Macro
-type MacroProperties = ObjProps & {
-	appearance: Appearance;
-};
+type MacroProperties = PoolItemProperties;
 type Macro = Obj<'Macro', Macros, MacroLine, MacroProperties> &
 	(MacroLine | undefined)[] &
 	Record<string, MacroLine | undefined> &
