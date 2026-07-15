@@ -11,14 +11,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "@sveltejs/vite-plugin-svelte": "^7.2.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "svelte": "^5.0.0",
     "svelte-check": "^4.4.8",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
-    "vite": "^5.4.11"
+    "vite": "^8.1.4"
   },
   "dependencies": {
     "@humanspeak/svelte-markdown": "^1.5.3",
