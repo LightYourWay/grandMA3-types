@@ -11,9 +11,10 @@ type PoolChildren = {
 	Layouts: Layouts;
 	Timecodes: Timecodes;
 };
-type Pool = Obj<'Pool', DataPools, PoolChildren[keyof PoolChildren]> &
+type Pool = Obj<'Pool', DataPools, PoolChildren[keyof PoolChildren], PoolItemProperties> &
 	PoolChildren[keyof PoolChildren][] &
-	PoolChildren;
+	PoolChildren &
+	PoolItemProperties;
 
 // Groups
 type Groups = Obj<'Groups', Pool, Group> &
