@@ -4,9 +4,8 @@ type Plugins = Obj<'Plugins', Pool, UserPlugin> &
 	Record<string, UserPlugin | undefined>;
 
 // UserPlugin
-type UserPluginProperties = ObjProps & {
+type UserPluginProperties = PoolItemProperties & {
 	scribble: Scribble;
-	appearance: Appearance;
 	author: string;
 	version: string;
 	path: string;

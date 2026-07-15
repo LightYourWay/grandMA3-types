@@ -2,7 +2,7 @@ type Sequences = Obj<'Sequences', Pool, Sequence> &
 	(Sequence | undefined)[] &
 	Record<string, Sequence | undefined>;
 
-type SequenceProps = ObjProps & {
+type SequenceProps = PoolItemProperties & {
 	autoStart: boolean;
 	autoStop: boolean;
 	autoFix: boolean;
