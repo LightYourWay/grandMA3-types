@@ -22,7 +22,12 @@ type PresetPools = Obj<'PresetPools', Pool, PresetPoolsChildren[keyof PresetPool
 	PresetPoolsChildren;
 
 // Presets
-type Presets = Obj<'Presets', PresetPools, Preset> &
+type PresetsProperties = ObjProps & {
+	/** Preset pool number as used on the command line, e.g. `4` for `Preset 4.x`, `21` for "All 1". */
+	no: number;
+};
+type Presets = Obj<'Presets', PresetPools, Preset, PresetsProperties> &
+	PresetsProperties &
 	(Preset | undefined)[] &
 	Record<string, Preset | undefined>;
 

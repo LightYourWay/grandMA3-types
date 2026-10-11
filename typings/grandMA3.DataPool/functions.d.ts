@@ -50,12 +50,19 @@ type Filter = Obj<'Filter', Filters, never, PoolItemProperties> & PoolItemProper
 
 // Recipe
 type RecipeProperties = ObjProps & {
-	selection: Group;
-	values: Preset;
+	/** Group of the recipe line; `undefined` when no group is assigned. */
+	selection?: Group;
+	/** Preset of the recipe line; `undefined` when no preset is assigned. */
+	values?: Preset;
 	matricks?: MAtrick;
-	filter: Filter;
+	filter?: Filter;
+	note: string;
 };
-type Recipe = Obj<'Recipe', Part, never, RecipeProperties> & RecipeProperties;
+/**
+ * A recipe line of a cue part. `GetClass()` reports `'StandardRecipe'` (grandMA3 2.4).
+ * An unnamed recipe reports a default `name` of `<class> <index>`, e.g. `"StandardRecipe 2"`.
+ */
+type Recipe = Obj<'StandardRecipe', Part, never, RecipeProperties> & RecipeProperties;
 
 // Timecodes
 type Timecodes = Obj<'Timecodes', Pool, Timecode> &
