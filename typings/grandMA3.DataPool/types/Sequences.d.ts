@@ -44,6 +44,9 @@ type CueProperties = ObjProps & {
 	 * e.g. Cue number 5.1 is 5100
 	 * This should be used as a cue identifier and NOT the "index" property which is
 	 * an integer and for cue numbers 5.1 and 5.2 , both indexes will be 5.
+	 *
+	 * Every sequence also contains the internal cues "OffCue" (no number, `no` is `undefined`)
+	 * and "CueZero" (`no` is `0`), both returned by `Children()`.
 	 */
 	no: number;
 };

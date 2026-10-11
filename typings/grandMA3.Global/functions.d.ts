@@ -264,6 +264,7 @@ declare interface MessageBoxOptions {
 	message?: string;
 	display?: number | Display;
 	commands: { value: number; name: string }[];
+	/** Displayed sorted alphabetically by `name`, not in array order. */
 	inputs?: MessageBoxInputOptions[];
 	states?: MessageBoxStateOptions[];
 	selectors?: MessageBoxSelectorOptions[];

@@ -59,6 +59,12 @@ interface Obj<
 	CommandDelete(...args: any): any;
 	CommandStore(...args: any): any;
 	Compare(...args: any): any;
+	/**
+	 * Copies all properties of `source` into this object: `target.Copy(source, undo)`.
+	 *
+	 * Note (grandMA3 2.4): the change is not recorded in the undo handle, so `Oops` doesn't
+	 * revert it. Use a command via `Cmd(..., undo)` when the change must be undoable.
+	 */
 	Copy(...args: any): any;
 	Count(...args: any): any;
 	/**
@@ -69,6 +75,14 @@ interface Obj<
 	 */
 	Create(childIndex: number, className?: string, undo?: UndoHandle): ChildType;
 	CurrentChild(): ChildType | undefined;
+	/**
+	 * Delete the child at the given index.
+	 *
+	 * Note (grandMA3 2.4): the deletion is not recorded in the undo handle, so `Oops` doesn't
+	 * revert it. Use a command via `Cmd(..., undo)` when the change must be undoable.
+	 * @param childIndex 1-based
+	 * @param undo
+	 */
 	Delete(childIndex: number, undo?: UndoHandle): void;
 	Dump(): string;
 	Export(...args: any): any;
